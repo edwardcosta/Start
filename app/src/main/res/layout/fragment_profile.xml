@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="200sp"
+        android:layout_height="200sp"
+        app:cardElevation="10sp"
+        android:id="@+id/user_photo"
+        android:layout_gravity="center"
+        app:cardCornerRadius="4dp"
+        android:layout_centerHorizontal="true">
+        <ImageView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/imageView1"
+            android:src="@drawable/com_facebook_profile_picture_blank_square"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+        </ImageView>
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/user_class"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20sp"
+        android:text="HACKER"
+        android:textSize="30sp"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40sp"
+        android:layout_marginBottom="20sp"
+        android:text="Nome do Fulano" />
+
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40sp"
+        android:layout_marginBottom="20sp"
+        android:text="lorem@ipsum.com" />
+
+    <TextView
+        android:id="@+id/user_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40sp"
+        android:layout_marginBottom="20sp"
+        android:text="(11) 4002 8922" />
+</LinearLayout>

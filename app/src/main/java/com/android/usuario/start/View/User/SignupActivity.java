@@ -37,14 +37,13 @@ public class SignupActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private LoginButton _loginFacebookButton;
+
     private EditText _emailText;
     private EditText _passwordText;
     private EditText _rPasswordText;
     private Button _signupButton;
     private TextView _loginLink;
     private ProgressDialog progressDialog;
-    private CallbackManager mCallbackManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,35 +67,11 @@ public class SignupActivity extends AppCompatActivity {
             }
         };
 
-
-        //_loginFacebookButton = (LoginButton) findViewById(R.id.activity_signup_facebok_login_button);
         _emailText = (EditText) findViewById(R.id.activity_signup_input_email);
         _passwordText = (EditText) findViewById(R.id.activity_signup_input_password);
         _rPasswordText = (EditText) findViewById(R.id.activity_signup_input_retype_password);
         _signupButton = (Button) findViewById(R.id.activity_signup_btn_signup);
         _loginLink = (TextView) findViewById(R.id.activity_signup_link_login);
-
-        mCallbackManager = CallbackManager.Factory.create();
-        _loginFacebookButton.setReadPermissions("email", "public_profile");
-        _loginFacebookButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
-                // ...
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-                // ...
-            }
-        });
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,30 +87,6 @@ public class SignupActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    private void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
-
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
-                            Toast.makeText(SignupActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                        // ...
-                    }
-                });
     }
 
     public void signup() {

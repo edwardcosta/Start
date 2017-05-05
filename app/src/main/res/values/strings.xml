@@ -11,6 +11,16 @@
     <string name="action_signup">Sign Up</string>
     <string name="action_login_signup">Already have an account? Login</string>
 
+    <!-- Login -->
+    <string name="prompt_login_email">Email</string>
+    <string name="prompt_login_password">Password</string>
+    <string name="action_login_login">Login</string>
+    <string name="action_sign_up_login">Doesn\'t have account? Singup</string>
+    <string name="login_failed">Login Falied</string>
+
     <!-- Facebook -->
     <string name="facebook_app_id">399182203786737</string>
+    
+    <!-- Google -->
+    <string name="default_web_client_id">963890185441-3lqg5qccdeo5mf4delvhulv9cshiqbc5.apps.googleusercontent.com</string>
 </resources>

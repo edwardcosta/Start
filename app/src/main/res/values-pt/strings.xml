@@ -5,4 +5,7 @@
     <string name="prompt_signup_password">Senha</string>
     <string name="prompt_retype_password_signup">Reescreva a Senha</string>
     <string name="action_signup">Cadastrar</string>
+    <string name="title_profile">Perfil</string>
+    <string name="action_sign_up_login">Não tem conta? Cadastre-se</string>
+    <string name="action_login_signup">Já tem conta? Faça Login</string>
 </resources>

@@ -3,6 +3,7 @@
     <string name="title_home" translatable="false">Home</string>
     <string name="title_dashboard" translatable="false">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
 
     <!-- Signup -->
     <string name="prompt_signup_email" translatable="false">Email</string>
@@ -14,7 +15,7 @@
     <!-- Login -->
     <string name="prompt_login_email">Email</string>
     <string name="prompt_login_password">Password</string>
-    <string name="action_login_login">Login</string>
+    <string name="action_login_login" translatable="false">Login</string>
     <string name="action_sign_up_login">Doesn\'t have account? Singup</string>
     <string name="login_failed">Login Falied</string>
 

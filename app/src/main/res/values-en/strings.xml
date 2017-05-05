@@ -5,4 +5,6 @@
     <string name="prompt_signup_password">Password</string>
     <string name="prompt_retype_password_signup">Retype Password</string>
     <string name="action_signup">Sign Up</string>
+    <string name="action_sign_up_login">Doesn\'t have account? Singup</string>
+    <string name="action_login_signup">Already have an account? Login</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.android.usuario.start.View;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -12,8 +11,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.android.usuario.start.R;
-import com.android.usuario.start.View.User.LoginActivity;
-import com.android.usuario.start.View.User.Profile;
+import com.android.usuario.start.View.User.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_profile:
-                    fragment = new Profile();
+                    fragment = new ProfileFragment();
                     fragmentTransaction.add(R.id.content,fragment).commit();
                     return true;
             }

@@ -62,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Intent login = new Intent(this, LoginActivity.class);
-        startActivity(login);
+        fragmentManager = getSupportFragmentManager();
     }
 
 }

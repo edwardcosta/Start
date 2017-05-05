@@ -20,7 +20,5 @@
 
     <!-- Facebook -->
     <string name="facebook_app_id">399182203786737</string>
-    
-    <!-- Google -->
-    <string name="default_web_client_id">963890185441-3lqg5qccdeo5mf4delvhulv9cshiqbc5.apps.googleusercontent.com</string>
+
 </resources>

@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         };
 
         _loginFacebookButton = (LoginButton) findViewById(R.id.activity_login_facebok_login_button);
-        _loginGoogleButton = (SignInButton) findViewById(R.id.activity_signup_google_signup_button);
+        _loginGoogleButton = (SignInButton) findViewById(R.id.activity_login_google_login_button);
         _emailText = (EditText) findViewById(R.id.activity_login_input_email);
         _passwordText = (EditText) findViewById(R.id.activity_login_input_password);
         _loginButton = (Button) findViewById(R.id.activity_login_btn_login);
@@ -168,12 +168,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            onLoginFailed();
                         }
 
-                        // ...
+                        onLoginSuccess();
                     }
                 });
     }
@@ -192,11 +190,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            onLoginFailed();
                         }
-                        // ...
+                        onLoginSuccess();
                     }
                 });
     }
@@ -246,18 +242,19 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 this.finish();
-            }else if (requestCode == RC_SIGN_IN) { // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-                GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-                if (result.isSuccess()) {
-                    // Google Sign In was successful, authenticate with Firebase
-                    GoogleSignInAccount account = result.getSignInAccount();
-                    firebaseAuthWithGoogle(account);
-                } else {
-                    // Google Sign In failed, update UI appropriately
-                    // ...
-                }
             }
-
+        } else if (requestCode == RC_SIGN_IN) { // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = result.getSignInAccount();
+                firebaseAuthWithGoogle(account);
+                onLoginSuccess();
+            } else {
+                // Google Sign In failed, update UI appropriately
+                // ...
+                onLoginFailed();
+            }
         }
     }
 

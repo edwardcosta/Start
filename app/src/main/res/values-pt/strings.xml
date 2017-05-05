@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Start</string>
+    <string name="title_notifications">Notificações</string>
+    <string name="prompt_signup_password">Senha</string>
+    <string name="prompt_retype_password_signup">Reescreva a Senha</string>
+    <string name="action_signup">Cadastrar</string>
+</resources>

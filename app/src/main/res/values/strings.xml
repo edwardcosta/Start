@@ -1,6 +1,16 @@
 <resources>
-    <string name="app_name">Start</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="app_name" translatable="false">Start</string>
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- Signup -->
+    <string name="prompt_signup_email" translatable="false">Email</string>
+    <string name="prompt_signup_password">Password</string>
+    <string name="prompt_retype_password_signup">Retype Password</string>
+    <string name="action_signup">Sign Up</string>
+    <string name="action_login_signup">Already have an account? Login</string>
+    
+    <!-- Facebook -->
+    <string name="facebook_app_id">399182203786737</string>
 </resources>

@@ -69,7 +69,7 @@ public class SignupActivity extends AppCompatActivity {
         };
 
 
-        _loginFacebookButton = (LoginButton) findViewById(R.id.activity_signup_facebok_login_button);
+        //_loginFacebookButton = (LoginButton) findViewById(R.id.activity_signup_facebok_login_button);
         _emailText = (EditText) findViewById(R.id.activity_signup_input_email);
         _passwordText = (EditText) findViewById(R.id.activity_signup_input_password);
         _rPasswordText = (EditText) findViewById(R.id.activity_signup_input_retype_password);

@@ -10,7 +10,7 @@
     <string name="prompt_retype_password_signup">Retype Password</string>
     <string name="action_signup">Sign Up</string>
     <string name="action_login_signup">Already have an account? Login</string>
-    
+
     <!-- Facebook -->
     <string name="facebook_app_id">399182203786737</string>
 </resources>

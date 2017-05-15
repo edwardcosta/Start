@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Start</string>
     <string name="title_notifications">Notifications</string>
     <string name="prompt_signup_password">Password</string>
     <string name="prompt_retype_password_signup">Retype Password</string>
     <string name="action_signup">Sign Up</string>
     <string name="action_sign_up_login">Doesn\'t have account? Singup</string>
     <string name="action_login_signup">Already have an account? Login</string>
+    <string name="login_failed">Login Failed</string>
+    <string name="prompt_login_password">Password</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_search">Search</string>
+    <string name="title_star" translatable="false">Star</string>
+    <string name="title_create">Create</string>
 </resources>

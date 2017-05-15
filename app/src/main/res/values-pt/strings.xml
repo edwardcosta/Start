@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Start</string>
     <string name="title_notifications">Notificações</string>
     <string name="prompt_signup_password">Senha</string>
     <string name="prompt_retype_password_signup">Reescreva a Senha</string>
@@ -8,4 +7,9 @@
     <string name="title_profile">Perfil</string>
     <string name="action_sign_up_login">Não tem conta? Cadastre-se</string>
     <string name="action_login_signup">Já tem conta? Faça Login</string>
+    <string name="login_failed">Falha no Login</string>
+    <string name="prompt_login_password">Senha</string>
+    <string name="title_search">Pesquisa</string>
+    <string name="title_star">Favoritos</string>
+    <string name="title_create">Criar</string>
 </resources>

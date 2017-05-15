@@ -1,6 +1,5 @@
 package com.android.usuario.start.View;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,16 +8,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.android.usuario.start.R;
-import com.android.usuario.start.View.Group.Home;
-import com.android.usuario.start.View.User.LoginActivity;
-import com.android.usuario.start.View.User.Profile;
+import com.android.usuario.start.View.User.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
     private FragmentManager fragmentManager;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -36,17 +31,25 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    fragment = new Home();
+
+                case R.id.navigation_search:
+                    fragment = new SearchView();
+                    fragmentTransaction.add(R.id.content,fragment).commit();
+                    return true;
+                case R.id.navigation_star:
+                    fragment = new FavoriteView();
+                    fragmentTransaction.add(R.id.content,fragment).commit();
+                    return true;
+                case R.id.navigation_create:
+                    fragment = new CreateProjectView();
                     fragmentTransaction.add(R.id.content,fragment).commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    fragment = new DashboardView();
+                    fragmentTransaction.add(R.id.content,fragment).commit();
                     return true;
                 case R.id.navigation_profile:
-                    fragment = new Profile();
+                    fragment = new ProfileFragment();
                     fragmentTransaction.add(R.id.content,fragment).commit();
                     return true;
             }
@@ -60,12 +63,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Intent login = new Intent(this, LoginActivity.class);
-        startActivity(login);
+        fragmentManager = getSupportFragmentManager();
     }
 
 }

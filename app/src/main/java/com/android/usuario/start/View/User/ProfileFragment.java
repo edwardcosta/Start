@@ -12,7 +12,7 @@ import com.android.usuario.start.R;
  * Created by tulio on 05/05/2017.
  */
 
-public class Profile extends Fragment {
+public class ProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

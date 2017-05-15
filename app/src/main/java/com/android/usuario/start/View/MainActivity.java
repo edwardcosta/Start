@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.android.usuario.start.R;
+import com.android.usuario.start.View.Group.Home;
 import com.android.usuario.start.View.User.LoginActivity;
 import com.android.usuario.start.View.User.Profile;
 
@@ -35,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    fragment = new Home();
+                    fragmentTransaction.add(R.id.content,fragment).commit();
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);

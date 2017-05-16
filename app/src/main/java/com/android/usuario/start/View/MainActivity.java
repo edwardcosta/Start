@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-
                 case R.id.navigation_search:
                     fragment = new SearchView();
                     fragmentTransaction.add(R.id.content,fragment).commit();

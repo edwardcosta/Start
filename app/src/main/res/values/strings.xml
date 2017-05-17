@@ -18,7 +18,7 @@
     <string name="prompt_login_password">Password</string>
     <string name="action_login_login" translatable="false">Login</string>
     <string name="action_sign_up_login">Doesn\'t have account? Singup</string>
-    <string name="login_failed">Login Falied</string>
+    <string name="login_failed">Login Failed</string>
 
     <!-- Facebook -->
     <string name="facebook_app_id" translatable="false">399182203786737</string>

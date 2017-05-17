@@ -1,13 +1,13 @@
-package com.android.usuario.start.View.Group;
+package com.android.usuario.start.View.Project;
 
 
-class ProjectCard {
+public class Project {
 
     private String name = "Teste";
     private String description = "Projeto de teste.";
     private String author = "Anonymous";
 
-    public ProjectCard(String name, String description, String author) {
+    public Project(String name, String description, String author) {
         this.name = name;
         this.description = description;
         this.author = author;

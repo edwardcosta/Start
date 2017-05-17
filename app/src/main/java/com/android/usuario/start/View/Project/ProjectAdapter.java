@@ -1,4 +1,4 @@
-package com.android.usuario.start.View.Group;
+package com.android.usuario.start.View.Project;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,8 +16,8 @@ import java.util.List;
  * Created by tulio on 15/05/2017.
  */
 
-public class ProjectAdapter extends ArrayAdapter<ProjectCard> {
-    public ProjectAdapter(Context context, int resource, List<ProjectCard> objects) {
+public class ProjectAdapter extends ArrayAdapter<Project> {
+    public ProjectAdapter(Context context, int resource, List<Project> objects) {
         super(context, resource, objects);
     }
 
@@ -32,7 +32,7 @@ public class ProjectAdapter extends ArrayAdapter<ProjectCard> {
         TextView description = (TextView) convertView.findViewById(R.id.description);
         TextView authorName = (TextView) convertView.findViewById(R.id.authorName);
 
-        ProjectCard project = getItem(position);
+        Project project = getItem(position);
 
         projectName.setText(project.getName());
         description.setText(project.getDescription());

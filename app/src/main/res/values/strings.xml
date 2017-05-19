@@ -23,4 +23,7 @@
     <!-- Facebook -->
     <string name="facebook_app_id" translatable="false">399182203786737</string>
 
+    <!-- Util -->
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis porttitor arcu. Etiam ut lorem eget elit tristique vestibulum eget.</string>
+
 </resources>

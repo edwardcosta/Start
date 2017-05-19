@@ -1,18 +1,25 @@
 package com.android.usuario.start.View;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.android.usuario.start.Communication.Database;
 import com.android.usuario.start.R;
 import com.android.usuario.start.View.Project.ProjectAdapter;
 import com.android.usuario.start.View.Project.Project;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +34,11 @@ public class SearchView extends Fragment {
     private ProjectAdapter mProjectAdapter;
     private Project mProject;
     private View view;
+
+    // Firebase instance variables
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mProjectsDatabaseReference;
+    private ChildEventListener mChildEventListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +55,10 @@ public class SearchView extends Fragment {
 
         mProjectListView = (ListView) view.findViewById(R.id.projectListView);
 
+        // Initialize Firebase components
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mProjectsDatabaseReference = Database.getProjectsReference();
+
 
         // Initialize message ListView and its adapter
         List<Project> projects = new ArrayList<>();
@@ -50,14 +66,60 @@ public class SearchView extends Fragment {
         mProjectListView.setAdapter(mProjectAdapter);
 
         //Populando com projetos ficticios
-        mProject = new Project("TP1", "Disciplina optativa", "Wilson");
-        mProjectAdapter.add(mProject);
-        mProjectAdapter.add(mProject);
-        mProjectAdapter.add(mProject);
-        mProjectAdapter.add(mProject);
-        mProjectAdapter.add(mProject);
-        mProjectAdapter.add(mProject);
-        mProjectAdapter.add(mProject);
-        mProjectAdapter.add(mProject);
+        //databasePopulate();
+
+        mProjectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                //Abre visualização do projeto.
+                Project project = (Project) adapterView.getItemAtPosition(position);
+                Toast.makeText(getActivity(), project.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        attachDatabaseReadListener();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mProjectAdapter.clear();
+        detachDatabaseReadListener();
+    }
+
+    private void attachDatabaseReadListener() {
+        if (mChildEventListener == null) {
+            mChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    Project project = dataSnapshot.getValue(Project.class);
+                    mProjectAdapter.add(project);
+                }
+
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                public void onChildRemoved(DataSnapshot dataSnapshot) {}
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+                public void onCancelled(DatabaseError databaseError) {}
+            };
+            mProjectsDatabaseReference.addChildEventListener(mChildEventListener);
+        }
+    }
+
+    private void detachDatabaseReadListener() {
+        if (mChildEventListener != null) {
+            mProjectsDatabaseReference.removeEventListener(mChildEventListener);
+            mChildEventListener = null;
+        }
+    }
+
+    private void databasePopulate() {
+        for (int i = 0; i<10; i++) {
+            mProject = new Project("TP" + i, "Disciplina optativa", "Wilson");
+            mProjectsDatabaseReference.push().setValue(mProject);
+        }
     }
 }

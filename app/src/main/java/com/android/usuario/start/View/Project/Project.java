@@ -7,6 +7,8 @@ public class Project {
     private String description = "Projeto de teste.";
     private String author = "Anonymous";
 
+    public Project() {}
+
     public Project(String name, String description, String author) {
         this.name = name;
         this.description = description;

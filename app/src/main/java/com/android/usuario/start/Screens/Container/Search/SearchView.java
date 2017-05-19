@@ -70,7 +70,7 @@ public class SearchView extends Fragment {
         mProjectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //Abre visualização do projeto.
+                //TODO Abre visualização do projeto.
                 Project project = (Project) adapterView.getItemAtPosition(position);
                 Toast.makeText(getActivity(), project.getName(), Toast.LENGTH_SHORT).show();
             }

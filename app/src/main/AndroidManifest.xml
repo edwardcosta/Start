@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Screens.ProfileChooser.ScreenSlidePagerActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name"/>
+        <activity
             android:name=".Screens.Container.MainActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>

@@ -16,11 +16,17 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
 
+    private int lastSelected;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            if(lastSelected == item.getItemId()){
+                return true;
+            }
             FragmentTransaction fragmentTransaction;
             fragmentTransaction = fragmentManager.beginTransaction();
             Fragment fragment = fragmentManager.findFragmentById(R.id.content);
@@ -28,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
             if(fragment != null){
                 fragmentTransaction.remove(fragment);
             }
+
+            lastSelected = item.getItemId();
 
             switch (item.getItemId()) {
                 case R.id.navigation_search:
@@ -65,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         fragmentManager = getSupportFragmentManager();
+
+        navigation.setSelectedItemId(R.id.navigation_search);
     }
 
 }

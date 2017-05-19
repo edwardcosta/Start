@@ -1,4 +1,4 @@
-package com.android.usuario.start.View.User;
+package com.android.usuario.start.Screens.Profile;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

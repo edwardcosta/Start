@@ -1,4 +1,4 @@
-package com.android.usuario.start.View.User;
+package com.android.usuario.start.Screens.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.android.usuario.start.R;
-import com.android.usuario.start.View.MainActivity;
+import com.android.usuario.start.Screens.Container.MainActivity;
 
 /**
  * Created by tulio on 19/05/2017.

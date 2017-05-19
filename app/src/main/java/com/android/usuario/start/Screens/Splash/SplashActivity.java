@@ -1,11 +1,12 @@
-package com.android.usuario.start.View;
+package com.android.usuario.start.Screens.Splash;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.android.usuario.start.View.User.LoginActivity;
+import com.android.usuario.start.Screens.Auth.LoginActivity;
+import com.android.usuario.start.Screens.Container.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

@@ -1,4 +1,4 @@
-package com.android.usuario.start.View.User;
+package com.android.usuario.start.Screens.Auth;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.usuario.start.R;
-import com.android.usuario.start.View.MainActivity;
+import com.android.usuario.start.Screens.Container.MainActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;

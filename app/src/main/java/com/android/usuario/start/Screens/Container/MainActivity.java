@@ -1,4 +1,4 @@
-package com.android.usuario.start.View;
+package com.android.usuario.start.Screens.Container;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,7 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.android.usuario.start.R;
-import com.android.usuario.start.View.User.ProfileFragment;
+import com.android.usuario.start.Screens.Container.CreateProject.CreateProjectView;
+import com.android.usuario.start.Screens.Container.Profile.ProfileFragment;
+import com.android.usuario.start.Screens.Container.Search.SearchView;
+import com.android.usuario.start.Screens.Container.Star.FavoriteView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.add(R.id.content,fragment).commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    fragment = new DashboardView();
+                    fragment = new CreateProjectView();
                     fragmentTransaction.add(R.id.content,fragment).commit();
                     return true;
                 case R.id.navigation_profile:

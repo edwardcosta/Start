@@ -1,6 +1,6 @@
-package com.android.usuario.start.Communication;
+package com.android.usuario.start.RequestManager;
 
-import com.android.usuario.start.Singleton;
+import com.android.usuario.start.Util.Singleton;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 

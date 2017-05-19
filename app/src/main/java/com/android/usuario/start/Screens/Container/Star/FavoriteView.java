@@ -1,4 +1,4 @@
-package com.android.usuario.start.View;
+package com.android.usuario.start.Screens.Container.Star;
 
 import android.support.v4.app.Fragment;
 
@@ -7,4 +7,6 @@ import android.support.v4.app.Fragment;
  */
 
 public class FavoriteView extends Fragment {
+
 }
+

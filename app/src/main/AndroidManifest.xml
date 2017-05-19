@@ -16,7 +16,7 @@
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
-        <activity android:name=".View.SplashActivity"
+        <activity android:name=".Screens.Splash.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" >
             <intent-filter>
@@ -26,19 +26,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".View.User.ScreenSlidePagerActivity"
+            android:name=".Screens.Profile.ScreenSlidePagerActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
         <activity
-            android:name=".View.MainActivity"
+            android:name=".Screens.Container.MainActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"/>
         <activity
-            android:name=".View.User.LoginActivity"
+            android:name=".Screens.Auth.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".View.User.SignupActivity"
+            android:name=".Screens.Auth.SignupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>

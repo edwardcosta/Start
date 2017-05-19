@@ -1,4 +1,4 @@
-package com.android.usuario.start.Screens.Profile;
+package com.android.usuario.start.Screens.ProfileChooser;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

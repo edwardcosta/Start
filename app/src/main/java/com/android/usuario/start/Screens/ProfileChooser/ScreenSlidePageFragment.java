@@ -1,4 +1,4 @@
-package com.android.usuario.start.Screens.Profile;
+package com.android.usuario.start.Screens.ProfileChooser;
 
 import android.content.Intent;
 import android.os.Bundle;

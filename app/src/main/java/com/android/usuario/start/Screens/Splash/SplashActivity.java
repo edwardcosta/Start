@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.android.usuario.start.Screens.Auth.LoginActivity;
 import com.android.usuario.start.Screens.Container.MainActivity;
+import com.android.usuario.start.Screens.ProfileChooser.ScreenSlidePagerActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -26,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }else{
-            Intent intent = new Intent(this,MainActivity.class);
+            Intent intent = new Intent(this, ScreenSlidePagerActivity.class);
             startActivity(intent);
             finish();
         }

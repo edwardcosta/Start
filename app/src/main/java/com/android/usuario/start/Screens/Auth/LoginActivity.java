@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.android.usuario.start.R;
 import com.android.usuario.start.Screens.Container.MainActivity;
+import com.android.usuario.start.Screens.ProfileChooser.ScreenSlidePagerActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -269,7 +270,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void onLoginSuccess() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ScreenSlidePagerActivity.class);
         startActivity(intent);
         finish();
     }

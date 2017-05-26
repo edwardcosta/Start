@@ -1,4 +1,4 @@
-package com.android.usuario.start.Screens.Container.MyProjects;
+package com.android.usuario.start.Screens.Container.Search;
 
 import android.app.Activity;
 import android.content.Context;

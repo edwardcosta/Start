@@ -1,7 +1,9 @@
-package com.android.usuario.start.Screens.Container.MyProjects;
+package com.android.usuario.start.Screens.Container.Search;
 
 
-public class Project {
+import java.io.Serializable;
+
+public class Project implements Serializable{
 
     private String name = "Teste";
     private String description = "Projeto de teste.";

@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import com.android.usuario.start.RequestManager.Database;
 import com.android.usuario.start.R;
-import com.android.usuario.start.Screens.Container.MyProjects.ProjectAdapter;
-import com.android.usuario.start.Screens.Container.MyProjects.Project;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

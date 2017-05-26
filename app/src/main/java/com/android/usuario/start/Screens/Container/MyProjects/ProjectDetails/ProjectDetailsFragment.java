@@ -7,12 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.android.usuario.start.R;
+import com.android.usuario.start.Screens.Container.Search.Project;
 
 import org.w3c.dom.Text;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ProjectDetailsFragment extends Fragment {
 
@@ -23,8 +27,36 @@ public class ProjectDetailsFragment extends Fragment {
 
         VideoView videoView = (VideoView) view.findViewById(R.id.proj_details_video_view);
         TextView projectTitle = (TextView) view.findViewById(R.id.proj_details_proj_title);
+        TextView projectPeriod = (TextView) view.findViewById(R.id.proj_details_period_duration);
+        TextView projectStartDate = (TextView) view.findViewById(R.id.proj_details_start_date);
+        TextView projectParticipantsNumber = (TextView) view.findViewById(R.id.proj_details_participants);
+        TextView projectDescription = (TextView) view.findViewById(R.id.proj_details_description);
 
+        Button projectIn = (Button) view.findViewById(R.id.proj_details_button);
+        projectIn.setOnClickListener(signInOnClickListener);
+
+        Bundle bundle = getArguments();
+        Project project = (Project) bundle.getSerializable("project");
+
+        projectTitle.setText(project.getName());
 
         return view;
     }
+
+    View.OnClickListener signInOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Good job!")
+                    .setContentText("You clicked the button!")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            sweetAlertDialog.dismiss();
+                            getFragmentManager().popBackStack();
+                        }
+                    })
+                    .show();
+        }
+    };
 }

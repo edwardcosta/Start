@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.android.usuario.start.RequestManager.Database;
 import com.android.usuario.start.R;
+import com.android.usuario.start.Screens.Container.MyProjects.ProjectDetails.ProjectDetailsFragment;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -68,9 +69,19 @@ public class SearchView extends Fragment {
         mProjectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //TODO Abre visualização do projeto.
+
                 Project project = (Project) adapterView.getItemAtPosition(position);
-                Toast.makeText(getActivity(), project.getName(), Toast.LENGTH_SHORT).show();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("project", project);
+
+                ProjectDetailsFragment detailsFragment = new ProjectDetailsFragment();
+                detailsFragment.setArguments(bundle);
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.content, detailsFragment, "details")
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }

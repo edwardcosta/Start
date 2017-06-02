@@ -28,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-            if(lastSelected == item.getItemId()){
+            if (lastSelected == item.getItemId()) {
                 return true;
             }
             FragmentTransaction fragmentTransaction;
             fragmentTransaction = fragmentManager.beginTransaction();
             Fragment fragment = fragmentManager.findFragmentById(R.id.content);
 
-            if(fragment != null){
+            if (fragment != null) {
                 fragmentTransaction.remove(fragment);
             }
 
@@ -44,23 +44,23 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_search:
                     fragment = new SearchView();
-                    fragmentTransaction.add(R.id.content,fragment).commit();
+                    fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
                 case R.id.navigation_star:
                     fragment = new FavoriteView();
-                    fragmentTransaction.add(R.id.content,fragment).commit();
+                    fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
                 case R.id.navigation_create:
                     fragment = new CreateProjectView();
-                    fragmentTransaction.add(R.id.content,fragment).commit();
+                    fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
                 case R.id.navigation_dashboard:
                     fragment = new CreateProjectView();
-                    fragmentTransaction.add(R.id.content,fragment).commit();
+                    fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
                 case R.id.navigation_profile:
                     fragment = new ProfileFragment();
-                    fragmentTransaction.add(R.id.content,fragment).commit();
+                    fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
             }
             return false;
@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton projectCreate = (FloatingActionButton) findViewById(R.id.projectCreate);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -81,7 +80,5 @@ public class MainActivity extends AppCompatActivity {
 
         navigation.setSelectedItemId(R.id.navigation_search);
 
-        projectCreate.bringToFront();
     }
-
 }

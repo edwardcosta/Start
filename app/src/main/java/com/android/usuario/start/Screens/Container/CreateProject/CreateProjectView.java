@@ -1,21 +1,35 @@
 package com.android.usuario.start.Screens.Container.CreateProject;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.usuario.start.R;
+
+import java.util.Calendar;
 
 /**
  * Created by eduar on 15/05/2017.
  */
 
 public class CreateProjectView extends Fragment {
+
+    private View view;
+
+    private Calendar calendar;
+    private TextView datePicker;
+    private int year, month, day;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,12 +42,16 @@ public class CreateProjectView extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Spinner spinner = (Spinner) getView().findViewById(R.id.spinner);
-//        Spinner spinner = (Spinner) view.findViewById(R.id.);
-        Integer[] items = new Integer[]{1,2,3,4,5};
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this.getActivity(),
-                android.R.layout.simple_spinner_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        view = getView();
+
+        datePicker = (TextView) view.findViewById(R.id.datePicker);
+        datePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getFragmentManager(), "datePicker");
+            }
+        });
+
     }
 }

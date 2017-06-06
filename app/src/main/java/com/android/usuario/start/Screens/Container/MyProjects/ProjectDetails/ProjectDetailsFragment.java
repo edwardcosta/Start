@@ -12,9 +12,7 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.android.usuario.start.R;
-import com.android.usuario.start.Screens.Container.Search.Project;
-
-import org.w3c.dom.Text;
+import com.android.usuario.start.DataObject.Project;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 

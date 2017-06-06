@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.R;
 
 import java.util.List;

@@ -12,6 +12,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <HorizontalScrollView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/projectImages"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp">
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:maxWidth="90dp"
+                android:minWidth="90dp"
+                android:layout_height="130dp"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+        </HorizontalScrollView>
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
@@ -19,7 +42,7 @@
             android:layout_marginTop="14dp"
             android:text="Data de Início"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
+            android:textSize="17sp"
             app:layout_constraintLeft_toLeftOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -30,7 +53,7 @@
             android:layout_marginTop="20dp"
             android:text="Dificuldade"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
+            android:textSize="17sp"
             app:layout_constraintLeft_toLeftOf="@+id/editText4"
             app:layout_constraintTop_toBottomOf="@+id/editText4" />
 
@@ -41,7 +64,7 @@
             android:layout_marginTop="20dp"
             android:text="Duração"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
+            android:textSize="17sp"
             app:layout_constraintLeft_toLeftOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -50,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nº participantes"
-            android:textSize="18sp"
+            android:textSize="17sp"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             app:layout_constraintLeft_toLeftOf="@+id/textView2"
             android:layout_marginTop="21dp" />
@@ -59,55 +82,60 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:text="Descrição"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             app:layout_constraintLeft_toLeftOf="@+id/textView4"
             android:layout_marginTop="21dp" />
 
         <TextView
-            android:id="@+id/datePicker"
+            android:id="@+id/dateInit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:text="02/06/17"
             app:layout_constraintTop_toTopOf="@+id/textView3"
-            android:layout_marginRight="0dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginEnd="33dp"/>
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintRight_toRightOf="parent" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="170dp"
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="15sp"
             android:text="Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:layout_constraintLeft_toLeftOf="@+id/textView5"
-            android:layout_marginTop="9dp" />
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="16dp"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <Button
             android:id="@+id/create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Finalizar"
+            android:text="FINALIZAR"
             android:textSize="14sp"
-            app:layout_constraintRight_toRightOf="@+id/editText3"
-            android:layout_marginRight="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp" />
+            app:layout_constraintTop_toBottomOf="@+id/description"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="33dp"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="32dp"
             android:text="Nome do projeto"
             android:textColor="@color/colorPrimary"
-            android:textSize="25sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton4" />
+            android:textSize="17sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/projectImages"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView
             android:id="@+id/textView"
@@ -116,70 +144,62 @@
             android:layout_marginTop="20dp"
             android:text="#Hashtags"
             android:textColor="@color/colorPrimary"
-            android:textSize="24dp"
-            app:layout_constraintLeft_toLeftOf="@+id/editText"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            android:textSize="17sp"
+            app:layout_constraintLeft_toLeftOf="@+id/projectName"
+            app:layout_constraintTop_toBottomOf="@+id/projectName" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floatingActionButton4"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/duracao"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="14dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="14dp"
-            android:layout_marginTop="79dp"
-            android:clickable="true"
-            app:backgroundTint="@color/colorPrimary"
-            app:elevation="8dp"
-            app:fabSize="normal"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/com_facebook_tooltip_blue_xout"
-            app:layout_constraintHorizontal_bias="0.52"
-            android:layout_marginStart="8dp" />
+            android:textSize="15sp"
+            android:inputType="number"
+            android:text="0"
+            app:layout_constraintRight_toRightOf="@+id/dateInit"
+            android:layout_marginRight="0dp"
+            app:layout_constraintTop_toTopOf="@+id/textView2"
+            android:layout_marginTop="0dp" />
 
         <EditText
-            android:id="@+id/editText2"
-            android:layout_width="103dp"
-            android:layout_height="29dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
-            app:layout_constraintRight_toRightOf="@+id/datePicker"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
-
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="103dp"
-            android:layout_height="29dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
-            app:layout_constraintRight_toRightOf="@+id/editText2"
-            app:layout_constraintTop_toTopOf="@+id/textView4" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
+            android:id="@+id/projectName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Nome"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
-            app:layout_constraintLeft_toLeftOf="@+id/textView7" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="1.0" />
 
         <EditText
             android:id="@+id/editText4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="#partiu"
-            app:layout_constraintLeft_toLeftOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <EditText
+            android:id="@+id/nParticipant"
+            android:layout_width="103dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-24dp"
+            android:layout_marginTop="15dp"
+            android:inputType="number"
+            android:text="0"
+            android:textSize="15sp"
+            app:layout_constraintRight_toRightOf="@+id/duracao"
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
 
 
     </android.support.constraint.ConstraintLayout>

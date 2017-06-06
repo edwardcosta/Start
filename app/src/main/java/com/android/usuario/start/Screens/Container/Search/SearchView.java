@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.RequestManager.Database;
 import com.android.usuario.start.R;
 import com.android.usuario.start.Screens.Container.MyProjects.ProjectDetails.ProjectDetailsFragment;
@@ -126,7 +126,7 @@ public class SearchView extends Fragment {
 
     private void databasePopulate() {
         for (int i = 0; i<10; i++) {
-            mProject = new Project("TP" + i, "Disciplina optativa", "Wilson");
+            mProject = new Project("TP" + i, "Disciplina optativa", "Wilson", null, 0);
             mProjectsDatabaseReference.push().setValue(mProject);
         }
     }

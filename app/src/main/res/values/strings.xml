@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Start</string>
+    <string name="app_name" translatable="false">Starty</string>
     <string name="title_star">Star</string>
     <string name="title_dashboard" translatable="false">Dashboard</string>
     <string name="title_create">Create</string>

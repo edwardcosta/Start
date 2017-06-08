@@ -47,11 +47,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    private LoginButton _loginFacebookButton;
-    private SignInButton _loginGoogleButton;
+    //private LoginButton _loginFacebookButton;
+    //private SignInButton _loginGoogleButton;
     private EditText _emailText;
     private EditText _passwordText;
-    private Button _loginButton;
+    private TextView _loginButton;
     private ProgressDialog progressDialog;
     private TextView _signupLink;
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -93,17 +93,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         };
 
-        _loginFacebookButton = (LoginButton) findViewById(R.id.activity_login_facebok_login_button);
-        _loginGoogleButton = (SignInButton) findViewById(R.id.activity_login_google_login_button);
+        //_loginFacebookButton = (LoginButton) findViewById(R.id.activity_login_facebok_login_button);
+        //_loginGoogleButton = (SignInButton) findViewById(R.id.activity_login_google_login_button);
         _emailText = (EditText) findViewById(R.id.activity_login_input_email);
         _passwordText = (EditText) findViewById(R.id.activity_login_input_password);
-        _loginButton = (Button) findViewById(R.id.activity_login_btn_login);
+        _loginButton = (TextView) findViewById(R.id.activity_login_btn_login);
         _signupLink = (TextView) findViewById(R.id.activity_login_link_signup);
 
         mCallbackManager = CallbackManager.Factory.create();
-        _loginFacebookButton.setReadPermissions("email", "public_profile");
-        _loginFacebookButton.setTextSize(20f);
-        _loginFacebookButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+        //_loginFacebookButton.setReadPermissions("email", "public_profile");
+        //_loginFacebookButton.setTextSize(20f);
+        /*_loginFacebookButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
-        });
+        });*/
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 

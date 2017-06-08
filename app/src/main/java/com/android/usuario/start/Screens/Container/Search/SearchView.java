@@ -60,7 +60,7 @@ public class SearchView extends Fragment {
 
         // Initialize message ListView and its adapter
         List<Project> projects = new ArrayList<>();
-        mProjectAdapter = new ProjectAdapter(getActivity(), R.layout.project_card, projects);
+        mProjectAdapter = new ProjectAdapter(getActivity(), R.layout.card_project, projects);
         mProjectListView.setAdapter(mProjectAdapter);
 
         //Populando com projetos ficticios

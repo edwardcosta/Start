@@ -124,10 +124,11 @@ public class CreateProjectView extends Fragment {
         mProject.setStartMonth(pMonth);
         mProject.setStartYear(pYear);
         mProject.setDuration(Integer.parseInt(duration.getText().toString()));
-        mProject.setnHackers(Integer.parseInt(nHackersInput.getText().toString()));
-        mProject.setnHippies(Integer.parseInt(nHippiesInput.getText().toString()));
-        mProject.setnHustlers(Integer.parseInt(nHustlersInput.getText().toString()));
+        mProject.setMaxHackers(Integer.parseInt(nHackersInput.getText().toString()));
+        mProject.setMaxHippies(Integer.parseInt(nHippiesInput.getText().toString()));
+        mProject.setMaxHustlers(Integer.parseInt(nHustlersInput.getText().toString()));
         mProject.setDifficulty(difficulty_spinner.getSelectedItemPosition());
+        //TODO difficulty (int) to string
         //TODO get hashtags
         //Send to Firebase
         mProjectsDatabaseReference.push().setValue(mProject);

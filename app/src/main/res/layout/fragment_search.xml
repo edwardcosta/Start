@@ -38,6 +38,6 @@
         android:layout_below="@+id/linearLayout"
         android:divider="@android:color/transparent"
         android:transcriptMode="alwaysScroll"
-        tools:listitem="@layout/project_card"/>
+        tools:listitem="@layout/card_project"/>
 
 </RelativeLayout>

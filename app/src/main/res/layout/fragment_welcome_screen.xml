@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@drawable/img_welcome_screen_background">
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"/>
+
+    <ImageView
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="166dp"
+        android:layout_height="166dp" />
+
+    <TextView
+        android:id="@+id/fragment_welcome_screen_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="57.3sp"
+        android:textColor="@color/colorTextSecondary"
+        android:text="Starty" />
+
+    <TextView
+        android:paddingTop="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19.8sp"
+        android:textColor="@color/colorTextWelcomeScreen"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Seja bem vindo ao STARTY!" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19.8sp"
+        android:textColor="@color/colorTextWelcomeScreen"
+        android:fontFamily="sans-serif-condensed"
+        android:text="O aplicativo feito para unir" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19.8sp"
+        android:textColor="@color/colorTextWelcomeScreen"
+        android:fontFamily="sans-serif-condensed"
+        android:text="ideias e formar equipes!" />
+
+</LinearLayout>

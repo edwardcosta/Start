@@ -7,6 +7,9 @@
     <color name="colorAccentDark">#875a85</color>
     <color name="colorAccentLight">#eab8e7</color>
 
+    <color name="colorTextSecondary">#d0d0d0</color>
+    <color name="colorTextWelcomeScreen">#98a6c4</color>
+
     <color name="material_green_50">#E8F5E9</color>
     <color name="material_green_500">#4CAF50</color>
     <color name="material_green_700">#388E3C</color>

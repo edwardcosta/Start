@@ -19,6 +19,9 @@ public class Project implements Serializable{
     private int nHackers;
     private int nHustlers;
     private int nHippies;
+    private int maxHackers;
+    private int maxHustlers;
+    private int maxHippies;
 
     public Project() {}
 
@@ -123,5 +126,29 @@ public class Project implements Serializable{
 
     public void setStartYear(int startYear) {
         this.startYear = startYear;
+    }
+
+    public int getMaxHackers() {
+        return maxHackers;
+    }
+
+    public void setMaxHackers(int maxHackers) {
+        this.maxHackers = maxHackers;
+    }
+
+    public int getMaxHustlers() {
+        return maxHustlers;
+    }
+
+    public void setMaxHustlers(int maxHustlers) {
+        this.maxHustlers = maxHustlers;
+    }
+
+    public int getMaxHippies() {
+        return maxHippies;
+    }
+
+    public void setMaxHippies(int maxHippies) {
+        this.maxHippies = maxHippies;
     }
 }

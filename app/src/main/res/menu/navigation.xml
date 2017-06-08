@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/navigation_create"
-        android:icon="@drawable/ic_add"
+        android:icon="@mipmap/ic_launcher"
         android:title="@string/title_create" />
 
     <item

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.usuario.start.R;
-import com.android.usuario.start.Screens.Auth.Login.LoginActivity;
+import com.android.usuario.start.Screens.Auth.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**

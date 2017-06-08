@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.usuario.start.R;
+import com.android.usuario.start.Screens.Auth.LoginActivity;
 import com.android.usuario.start.Screens.Auth.SignupActivity;
 import com.android.usuario.start.Screens.ProfileChooser.ScreenSlidePagerActivity;
 import com.facebook.AccessToken;

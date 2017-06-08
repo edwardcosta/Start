@@ -1,4 +1,4 @@
-package com.android.usuario.start.Screens.Auth.Login;
+package com.android.usuario.start.Screens.Auth;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.android.usuario.start.R;
+import com.android.usuario.start.Screens.Auth.Login.LoginFragmet;
+import com.android.usuario.start.Screens.Auth.Login.WelcomeFragmet;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 

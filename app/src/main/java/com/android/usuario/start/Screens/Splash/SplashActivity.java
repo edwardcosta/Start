@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.android.usuario.start.Screens.Auth.Login.LoginActivity;
+import com.android.usuario.start.Screens.Auth.LoginActivity;
 import com.android.usuario.start.Screens.ProfileChooser.ScreenSlidePagerActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

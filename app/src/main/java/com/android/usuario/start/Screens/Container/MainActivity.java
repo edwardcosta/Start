@@ -47,27 +47,22 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_search:
                     fragment = new SearchView();
                     fragmentTransaction.add(R.id.content, fragment).commit();
-                    toolbar.setTitle("Search");
                     return true;
                 case R.id.navigation_star:
                     fragment = new FavoriteView();
                     fragmentTransaction.add(R.id.content, fragment).commit();
-                    toolbar.setTitle("Star");
                     return true;
                 case R.id.navigation_create:
                     fragment = new CreateProjectView();
                     fragmentTransaction.add(R.id.content, fragment).commit();
-                    toolbar.setTitle("Create");
                     return true;
                 case R.id.navigation_dashboard:
                     fragment = new CreateProjectView();
                     fragmentTransaction.add(R.id.content, fragment).commit();
-                    toolbar.setTitle("Dashboard");
                     return true;
                 case R.id.navigation_profile:
                     fragment = new ProfileFragment();
                     fragmentTransaction.add(R.id.content, fragment).commit();
-                    toolbar.setTitle("Profile");
                     return true;
             }
             return false;
@@ -82,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("");
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

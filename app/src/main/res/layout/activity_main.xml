@@ -14,10 +14,38 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
+            android:title=""
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:padding="8dp"
+                    android:layout_weight="10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_search"
+                    android:background="@drawable/white_rounded"
+                    android:hint="Pesquise por tema"
+                    android:textColorHint="@color/gray_btn_bg_color"
+                    android:drawableRight="@drawable/ic_search" />
+
+                <TextView
+                    android:paddingLeft="8dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15.6sp"
+                    android:textColor="#d8d8d8"
+                    android:text="Filtro"/>
+            </LinearLayout>
+
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 

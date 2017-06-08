@@ -2,6 +2,7 @@ package com.android.usuario.start.DataObject;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Project implements Serializable{
@@ -9,17 +10,31 @@ public class Project implements Serializable{
     private String name = "Teste";
     private String description = "Projeto de teste.";
     private String author = "Anonymous";
-    private Calendar startDate = Calendar.getInstance();
-    private int duracao = 0;
+    private ArrayList<String> hashtags = new ArrayList<>();
+    private int startDay;
+    private int startMonth;
+    private int startYear;
+    private int duration = 0;
+    private int difficulty;
+    private int nHackers;
+    private int nHustlers;
+    private int nHippies;
 
     public Project() {}
 
-    public Project(String name, String description, String author, Calendar startDate, int duracao) {
+    public Project(String name, String description, String author, int day, int month, int year, int duration, int difficulty, ArrayList<String> hashtags, int nHackers, int nHustlers, int nHippies) {
         this.name = name;
         this.description = description;
         this.author = author;
-        this.startDate = startDate;
-        this.duracao = duracao;
+        this.startDay = day;
+        this.startMonth = month;
+        this.startYear = year;
+        this.duration = duration;
+        this.hashtags = hashtags;
+        this.difficulty = difficulty;
+        this.nHackers = nHackers;
+        this.nHippies = nHippies;
+        this.nHustlers = nHustlers;
     }
 
     public String getName() {
@@ -46,19 +61,67 @@ public class Project implements Serializable{
         this.author = author;
     }
 
-    public Calendar getStartDate() {
-        return startDate;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setStartDate(Calendar startDate) {
-        this.startDate = startDate;
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+    
+    public int getnHackers() {
+        return nHackers;
     }
 
-    public int getDuracao() {
-        return duracao;
+    public void setnHackers(int nHackers) {
+        this.nHackers = nHackers;
     }
 
-    public void setDuracao(int duracao) {
-        this.duracao = duracao;
+    public int getnHippies() {
+        return nHippies;
+    }
+
+    public void setnHippies(int nHippies) {
+        this.nHippies = nHippies;
+    }
+
+    public int getnHustlers() {
+        return nHustlers;
+    }
+
+    public void setnHustlers(int nHustlers) {
+        this.nHustlers = nHustlers;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public int getStartDay() {
+        return startDay;
+    }
+
+    public void setStartDay(int startDay) {
+        this.startDay = startDay;
+    }
+
+    public int getStartMonth() {
+        return startMonth;
+    }
+
+    public void setStartMonth(int startMonth) {
+        this.startMonth = startMonth;
+    }
+
+    public int getStartYear() {
+        return startYear;
+    }
+
+    public void setStartYear(int startYear) {
+        this.startYear = startYear;
     }
 }

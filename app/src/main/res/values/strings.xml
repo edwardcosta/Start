@@ -6,6 +6,12 @@
     <string name="title_profile">Profile</string>
     <string name="title_search">Search</string>
 
+    <string-array name="difficulty_array">
+        <item>Fácil</item>
+        <item>Médio</item>
+        <item>Difícil</item>
+    </string-array>
+
     <!-- Signup -->
     <string name="prompt_signup_email" translatable="false">Email</string>
     <string name="prompt_signup_password">Password</string>

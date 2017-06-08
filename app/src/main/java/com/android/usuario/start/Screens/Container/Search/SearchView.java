@@ -126,7 +126,7 @@ public class SearchView extends Fragment {
 
     private void databasePopulate() {
         for (int i = 0; i<10; i++) {
-            mProject = new Project("TP" + i, "Disciplina optativa", "Wilson", null, 0);
+            mProject = new Project();
             mProjectsDatabaseReference.push().setValue(mProject);
         }
     }

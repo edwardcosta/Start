@@ -33,6 +33,7 @@
                     android:drawableEnd="@drawable/ic_search"
                     android:background="@drawable/white_rounded"
                     android:hint="Pesquise por tema"
+                    android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/gray_btn_bg_color"
                     android:drawableRight="@drawable/ic_search" />
 

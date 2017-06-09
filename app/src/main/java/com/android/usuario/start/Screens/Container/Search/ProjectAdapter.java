@@ -18,6 +18,7 @@ import com.android.usuario.start.R;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by tulio on 15/05/2017.
@@ -36,6 +37,7 @@ public class ProjectAdapter extends ArrayAdapter<Project> {
         }
 
         final ImageView _favoriteProject = (ImageView) convertView.findViewById(R.id.card_project_favorit_heart);
+        ImageView _imagCard = (ImageView) convertView.findViewById(R.id.card_project_img);
 
         TextView _projectName = (TextView) convertView.findViewById(R.id.card_project_title);
         TextView _duration = (TextView) convertView.findViewById(R.id.card_project_duration);
@@ -82,6 +84,30 @@ public class ProjectAdapter extends ArrayAdapter<Project> {
             _hustler.setText(project.getnHustlers() + "/" + project.getMaxHustlers());
             _hacker.setText(project.getnHackers() + "/" + project.getMaxHackers());
             _hippie.setText(project.getnHippies() + "/" + project.getMaxHippies());
+
+            Random random = new Random();
+            int i1 = (random.nextInt(5));
+
+            switch (i1){
+                case 0:
+                    _imagCard.setImageResource(R.drawable.img_card_project_placeholder_1);
+                    break;
+                case 1:
+                    _imagCard.setImageResource(R.drawable.img_card_project_placeholder_2);
+                    break;
+                case 2:
+                    _imagCard.setImageResource(R.drawable.img_card_project_placeholder_3);
+                    break;
+                case 3:
+                    _imagCard.setImageResource(R.drawable.img_card_project_placeholder_4);
+                    break;
+                case 4:
+                    _imagCard.setImageResource(R.drawable.img_card_project_placeholder_5);
+                    break;
+                case 5:
+                    _imagCard.setImageResource(R.drawable.img_card_project_placeholder_6);
+                    break;
+            }
 
             _favoriteProject.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -29,8 +29,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:layout_width="wrap_content"
-                android:layout_height="209dp"
-                android:src="@drawable/img_card_placeholder"/>
+                android:layout_height="209dp" />
 
             <ImageView
                 android:id="@+id/card_project_favorit_heart"

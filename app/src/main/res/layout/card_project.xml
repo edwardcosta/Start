@@ -103,7 +103,8 @@
                         android:max="100"
                         android:progress="0"
                         style="?android:attr/progressBarStyleHorizontal"
-                        android:progressDrawable="@drawable/circle_shape"
+                        android:progressDrawable="@drawable/circular_progress_bar"
+                        android:background="@drawable/circle_shape"
                         android:indeterminate="false"/>
 
                     <TextView
@@ -139,7 +140,8 @@
                         android:max="100"
                         android:progress="0"
                         style="?android:attr/progressBarStyleHorizontal"
-                        android:progressDrawable="@drawable/circle_shape"
+                        android:progressDrawable="@drawable/circular_progress_bar"
+                        android:background="@drawable/circle_shape"
                         android:indeterminate="false"/>
 
                     <TextView
@@ -175,7 +177,8 @@
                         android:max="100"
                         android:progress="0"
                         style="?android:attr/progressBarStyleHorizontal"
-                        android:progressDrawable="@drawable/circle_shape"
+                        android:progressDrawable="@drawable/circular_progress_bar"
+                        android:background="@drawable/circle_shape"
                         android:indeterminate="false"/>
 
                     <TextView

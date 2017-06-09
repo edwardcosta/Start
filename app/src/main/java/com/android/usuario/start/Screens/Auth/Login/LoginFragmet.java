@@ -16,7 +16,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
+import com.android.usuario.start.RequestManager.Database;
 import com.android.usuario.start.Screens.Auth.LoginActivity;
 import com.android.usuario.start.Screens.Auth.SignupActivity;
 import com.android.usuario.start.Screens.ProfileChooser.ScreenSlidePagerActivity;
@@ -38,6 +40,10 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -53,6 +59,8 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    private DatabaseReference userDatabaseReference;
 
     //private LoginButton _loginFacebookButton;
     //private SignInButton _loginGoogleButton;
@@ -89,6 +97,7 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN,savedInstanceState);
+        userDatabaseReference = Database.getUsersReference();
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -191,8 +200,6 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
                         if (!task.isSuccessful()) {
                             onLoginFailed();
                         }
-
-                        onLoginSuccess();
                     }
                 });
     }
@@ -213,7 +220,6 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
                         if (!task.isSuccessful()) {
                             onLoginFailed();
                         }
-                        onLoginSuccess();
                     }
                 });
     }

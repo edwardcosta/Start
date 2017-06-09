@@ -1,11 +1,13 @@
 package com.android.usuario.start.Screens.Auth.Login;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.android.usuario.start.R;
 
@@ -22,6 +24,11 @@ public class WelcomeFragmet extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         parentView = inflater.inflate(R.layout.fragment_welcome_screen,container,false);
+
+        TextView _logo = (TextView) parentView.findViewById(R.id.fragment_welcome_screen_logo);
+
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/BebasNeue Bold.ttf");
+        _logo.setTypeface(type);
 
         return parentView;
     }

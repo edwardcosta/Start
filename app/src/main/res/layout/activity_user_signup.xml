@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
                 app:counterMaxLength="35"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp">
                 <EditText android:id="@+id/activity_signup_input_name"
                     android:layout_width="match_parent"
@@ -116,7 +116,7 @@
                 <EditText android:id="@+id/activity_signup_input_phonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:hint="Telefone" />
             </android.support.design.widget.TextInputLayout>
 

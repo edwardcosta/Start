@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="9dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        android:text="Editar"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,23 +26,37 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
-
+            
             <android.support.v7.widget.CardView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                app:elevation="12dp"
-                android:id="@+id/user_photo"
+                android:layout_width="154dp"
+                android:layout_height="154dp"
+                app:elevation="0dp"
                 android:layout_gravity="center"
                 android:shape="ring"
                 android:thicknessRatio="1.9"
-                app:cardCornerRadius="40dp"
-                android:innerRadius="0dp">
-                <ImageView
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:id="@+id/imageView1"
-                    android:src="@drawable/img_profile_placeholder">
-                </ImageView>
+                app:cardCornerRadius="77dp"
+                android:innerRadius="0dp"
+                app:cardBackgroundColor="@color/colorPrimary">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="152dp"
+                    android:layout_height="152dp"
+                    android:id="@+id/user_photo"
+                    app:elevation="0dp"
+                    android:layout_gravity="center"
+                    android:shape="ring"
+                    android:thicknessRatio="1.9"
+                    app:cardCornerRadius="76dp"
+                    android:innerRadius="0dp">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/edit_profile_user_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:placeholderImage="@drawable/img_profile_placeholder" />
+
+                </android.support.v7.widget.CardView>
+
 
             </android.support.v7.widget.CardView>
 
@@ -40,8 +64,8 @@
                 android:id="@+id/user_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="HACKER"
+                android:layout_marginTop="15dp"
+                android:text="Hacker"
                 android:textSize="30sp"
                 android:textAlignment="center"/>
 
@@ -58,16 +82,17 @@
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="19sp"
+                android:textSize="18sp"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:text="Nome do Fulano" />
 
             <TextView
-                android:paddingTop="8dp"
+                android:paddingTop="17dp"
+                android:textColor="#747474"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
+                android:textSize="14sp"
                 android:text="@string/lorem_ipsum"/>
 
         </LinearLayout>
@@ -90,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Projetos"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"/>
 
@@ -108,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contato"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"/>
 
@@ -117,14 +142,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="lorem@ipsum.com"
-                android:textSize="17sp"/>
+                android:textSize="14sp"
+                android:textColor="#747474"/>
 
             <TextView
                 android:id="@+id/user_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="(11) 4002 8922"
-                android:textSize="17sp"/>
+                android:textSize="14sp"
+                android:textColor="#747474"/>
 
 
         </LinearLayout>

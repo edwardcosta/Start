@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.R;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.w3c.dom.Text;
 
@@ -39,7 +40,7 @@ public class ProjectAdapter extends ArrayAdapter<Project> {
         }
 
         final ImageView _favoriteProject = (ImageView) convertView.findViewById(R.id.card_project_favorit_heart);
-        ImageView _imagCard = (ImageView) convertView.findViewById(R.id.card_project_img);
+        SimpleDraweeView _imagCard = (SimpleDraweeView) convertView.findViewById(R.id.card_project_img);
 
         TextView _projectName = (TextView) convertView.findViewById(R.id.card_project_title);
         TextView _duration = (TextView) convertView.findViewById(R.id.card_project_duration);
@@ -81,7 +82,7 @@ public class ProjectAdapter extends ArrayAdapter<Project> {
             }
             _projectName.setText(project.getName());
             _duration.setText(project.getDuration() + " dias");
-            _date.setText(project.getStartDay() + "/" + (project.getStartMonth() + 1) + "/" + project.getStartYear());
+            _date.setText(project.getStartDay() + "/" + (project.getStartMonth() + 1));
             _difficulty.setText(String.valueOf(project.getDifficulty()));
             _hustler.setText(project.getnHustlers() + "/" + project.getMaxHustlers());
             _hacker.setText(project.getnHackers() + "/" + project.getMaxHackers());

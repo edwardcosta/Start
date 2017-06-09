@@ -132,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences|textMultiLine"
-                    android:hint="Descriçãos" />
+                    android:hint="Descrição" />
             </android.support.design.widget.TextInputLayout>
 
 

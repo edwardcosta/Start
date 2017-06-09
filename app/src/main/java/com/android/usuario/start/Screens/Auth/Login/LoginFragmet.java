@@ -127,7 +127,7 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
         _signupLink = (TextView) parentView.findViewById(R.id.activity_login_link_signup);
 
 
-        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/BebasNeue Bold.ttf");
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/BebasNeue-Bold.ttf");
         _logo.setTypeface(type);
 
         mCallbackManager = CallbackManager.Factory.create();

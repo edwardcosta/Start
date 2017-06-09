@@ -55,8 +55,8 @@
             android:text="Dificuldade"
             android:textColor="@color/colorPrimary"
             android:textSize="14sp"
-            app:layout_constraintLeft_toLeftOf="@+id/editText4"
-            app:layout_constraintTop_toBottomOf="@+id/editText4" />
+            app:layout_constraintLeft_toLeftOf="@+id/fragment_create_project_hashtags"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_create_project_hashtags" />
 
         <TextView
             android:id="@+id/textView2"
@@ -120,7 +120,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:text="Descreva seu projeto"
+            android:hint="Descreva seu projeto"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="16dp"
@@ -175,7 +175,7 @@
             android:layout_height="39dp"
             android:textSize="15sp"
             android:inputType="number"
-            android:text="0"
+            android:hint="0"
             app:layout_constraintTop_toTopOf="@+id/textView2"
             android:layout_marginTop="0dp"
             app:layout_constraintRight_toLeftOf="@+id/textView6"
@@ -192,14 +192,14 @@
             android:layout_marginTop="5dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Nome"
+            android:hint="Nome"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/fragment_create_project_hashtags"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -207,7 +207,7 @@
             android:layout_marginRight="16dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="#partiu"
+            android:hint="#partiu"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -221,14 +221,14 @@
             app:layout_constraintTop_toTopOf="@+id/textView8"
             android:layout_marginTop="0dp"
             android:layout_marginRight="0dp"
-            app:layout_constraintRight_toRightOf="@+id/editText4"/>
+            app:layout_constraintRight_toRightOf="@+id/fragment_create_project_hashtags"/>
 
         <EditText
             android:id="@+id/nHackers"
             android:layout_width="46dp"
             android:layout_height="35dp"
             android:inputType="number"
-            android:text="0"
+            android:hint="0"
             android:textSize="15sp"
             android:layout_marginTop="17dp"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
@@ -242,7 +242,7 @@
             android:layout_marginLeft="36dp"
             android:layout_marginTop="0dp"
             android:inputType="number"
-            android:text="0"
+            android:hint="0"
             android:textSize="15sp"
             app:layout_constraintLeft_toRightOf="@+id/nHippies"
             app:layout_constraintTop_toTopOf="@+id/nHippies" />
@@ -252,7 +252,7 @@
             android:layout_width="48dp"
             android:layout_height="36dp"
             android:inputType="number"
-            android:text="0"
+            android:hint="0"
             android:textSize="15sp"
             app:layout_constraintTop_toTopOf="@+id/nHackers"
             android:layout_marginTop="0dp"

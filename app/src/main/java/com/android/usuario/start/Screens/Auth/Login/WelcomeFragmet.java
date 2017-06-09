@@ -27,7 +27,7 @@ public class WelcomeFragmet extends Fragment {
 
         TextView _logo = (TextView) parentView.findViewById(R.id.fragment_welcome_screen_logo);
 
-        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/BebasNeue Bold.ttf");
+        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/BebasNeue-Bold.ttf");
         _logo.setTypeface(type);
 
         return parentView;

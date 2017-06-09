@@ -13,9 +13,11 @@ import android.view.MenuItem;
 
 import com.android.usuario.start.R;
 import com.android.usuario.start.Screens.Container.CreateProject.CreateProjectView;
+import com.android.usuario.start.Screens.Container.MyProjects.MyProjectsView;
 import com.android.usuario.start.Screens.Container.Profile.ProfileFragment;
 import com.android.usuario.start.Screens.Container.Search.SearchView;
 import com.android.usuario.start.Screens.Container.Star.FavoriteView;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new CreateProjectView();
                     fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
-                case R.id.navigation_dashboard:
-                    fragment = new CreateProjectView();
+                case R.id.navigation_my_projects:
+                    fragment = new MyProjectsView();
                     fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
                 case R.id.navigation_profile:
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Fresco.initialize(this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

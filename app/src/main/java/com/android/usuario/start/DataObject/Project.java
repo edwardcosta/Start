@@ -4,13 +4,16 @@ package com.android.usuario.start.DataObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.UUID;
 
 public class Project implements Serializable{
 
+    private String id;
     private String name = "Teste";
     private String description = "Projeto de teste.";
     private String author = "Anonymous";
-    private ArrayList<String> hashtags = new ArrayList<>();
+    private List<String> hashtags = new ArrayList<>();
     private int startDay;
     private int startMonth;
     private int startYear;
@@ -22,6 +25,8 @@ public class Project implements Serializable{
     private int maxHackers;
     private int maxHustlers;
     private int maxHippies;
+
+    private List<String> images;
 
     public Project() {}
 
@@ -150,5 +155,29 @@ public class Project implements Serializable{
 
     public void setMaxHippies(int maxHippies) {
         this.maxHippies = maxHippies;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<String> getHashtags() {
+        return hashtags;
+    }
+
+    public void setHashtags(List<String> hashtags) {
+        this.hashtags = hashtags;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }

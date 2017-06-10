@@ -2,6 +2,7 @@ package com.android.usuario.start.Screens.Container.CreateProject;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,9 +18,21 @@ import android.widget.TextView;
 import com.android.usuario.start.R;
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.RequestManager.Database;
+import com.android.usuario.start.Screens.Container.Search.SearchView;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by eduar on 15/05/2017.
@@ -31,13 +44,19 @@ public class CreateProjectView extends Fragment {
 
     private DatabaseReference mProjectsDatabaseReference;
 
-    private Project mProject;
+    private int tries;
+    private int tries2;
+
+    private SweetAlertDialog creatingProject;
+
+    private Project mProject = new Project();
     private int pYear;
     private int pDay;
     private int pMonth;
     private Calendar today = Calendar.getInstance();
     private int dificuldade;
 
+    private EditText _hashtags;
     private EditText projectName;
     private EditText description;
     private EditText duration;
@@ -51,6 +70,7 @@ public class CreateProjectView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        verifyID();
         return inflater.inflate(R.layout.fragment_create_project, container, false);
     }
 
@@ -66,6 +86,7 @@ public class CreateProjectView extends Fragment {
         pMonth = today.get(Calendar.MONTH);
         pYear = today.get(Calendar.YEAR);
 
+        _hashtags = (EditText) view.findViewById(R.id.fragment_create_project_hashtags);
         projectName = (EditText) view.findViewById(R.id.projectName);
         description = (EditText) view.findViewById(R.id.description);
         duration = (EditText) view.findViewById(R.id.duration);
@@ -116,7 +137,16 @@ public class CreateProjectView extends Fragment {
     }
 
     private void createProject () {
-        mProject = new Project();
+        creatingProject = new SweetAlertDialog(getContext(),SweetAlertDialog.PROGRESS_TYPE);
+        creatingProject.setTitleText("Criando Projeto");
+        creatingProject.setCancelable(false);
+        creatingProject.show();
+
+        List<String> hs = new ArrayList<>();
+        String hashtagsAux = _hashtags.getText().toString().trim();
+        String[] hashtags = hashtagsAux.split(" ");
+        Collections.addAll(hs,hashtags);
+
         mProject.setName(projectName.getText().toString());
         //TODO get User name
         mProject.setDescription(description.getText().toString());
@@ -128,9 +158,121 @@ public class CreateProjectView extends Fragment {
         mProject.setMaxHippies(Integer.parseInt(nHippiesInput.getText().toString()));
         mProject.setMaxHustlers(Integer.parseInt(nHustlersInput.getText().toString()));
         mProject.setDifficulty(difficulty_spinner.getSelectedItemPosition());
+        mProject.setHashtags(hs);
         //TODO difficulty (int) to string
-        //TODO get hashtags
         //Send to Firebase
-        mProjectsDatabaseReference.push().setValue(mProject);
+        sendToFirebase();
+    }
+
+    private void sendToFirebase(){
+        mProjectsDatabaseReference.child(mProject.getId()).setValue(mProject).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                creatingProject.dismiss();
+                new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("Tudo Certo")
+                        .setContentText("Projeto Criado com Sucesso")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismissWithAnimation();
+                                getFragmentManager().beginTransaction()
+                                        .replace(R.id.content, new SearchView())
+                                        .commit();
+                            }
+                        })
+                        .show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                tries2++;
+                if(tries2 < 5){
+                    new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Falha ao tentar criar o projeto!")
+                            .setContentText("Gostaria de tentar novamente?")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                    sendToFirebase();
+
+                                }
+                            }).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                    creatingProject.dismiss();
+                                    getFragmentManager().beginTransaction()
+                                            .replace(R.id.content, new SearchView())
+                                            .commit();
+                                }
+                    }).show();
+                }else{
+                    new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Erro")
+                            .setContentText("Aparentemente você tentou criar varias cezes o projeto."+
+                                    "Por favor, tente novamente mais tarde.")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                    creatingProject.dismiss();
+
+                                }
+                            }).show();
+                }
+            }
+        });
+    }
+
+    private void verifyID(){
+        final String id = UUID.randomUUID().toString();
+        DatabaseReference projects = Database.getProjectsReference();
+        projects.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Project p = dataSnapshot.getValue(Project.class);
+                tries = 0;
+                if(p == null){
+                    mProject.setId(id);
+                }else {
+                    verifyID();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                tries++;
+                if(tries < 5){
+                    verifyID();
+                }else{
+                    if(creatingProject != null && creatingProject.isShowing()){
+                        creatingProject.dismiss();
+                    }
+                    new SweetAlertDialog(getContext(),SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Falha ao tentar criar projeto!")
+                            .setContentText("Por algum motivo não conseguimos conectar com nossos servidores," +
+                                    " e por, esse motivo, não conseguiremos criar seu projeto. :(\n" +
+                                    " Deseja continuar e que tentemos novamente?")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismissWithAnimation();
+                                    tries = 0;
+                                    verifyID();
+                                }
+                            }).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                    getFragmentManager().beginTransaction()
+                                            .replace(R.id.content, new SearchView())
+                                            .commit();
+                                    }
+                    }).show();
+                }
+            }
+        });
     }
 }

@@ -6,13 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.android.usuario.start.Screens.Container.MainActivity">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="56dp"
         android:id="@+id/projectListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="8sp"
-        android:transcriptMode="alwaysScroll"
+        android:layout_height="wrap_content"
         tools:listitem="@layout/card_project"/>
 
 </RelativeLayout>

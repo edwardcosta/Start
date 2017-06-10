@@ -1,4 +1,4 @@
-package com.android.usuario.start.Screens.Container.MyProjects.ProjectDetails;
+package com.android.usuario.start.Screens.Container.Search.ProjectDetails;
 
 
 import android.os.Bundle;

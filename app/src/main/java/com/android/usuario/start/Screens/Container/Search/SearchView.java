@@ -3,16 +3,15 @@ package com.android.usuario.start.Screens.Container.Search;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.RequestManager.Database;
 import com.android.usuario.start.R;
-import com.android.usuario.start.Screens.Container.MyProjects.ProjectDetails.ProjectDetailsFragment;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,10 +27,11 @@ import java.util.List;
 
 public class SearchView extends Fragment {
 
-    private ListView mProjectListView;
-    private ProjectAdapter mProjectAdapter;
+    private RecyclerView mRecyclerView;
+    private ProjectRecyclerViewAdapter mProjectAdapter;
     private Project mProject;
     private View view;
+    List<Project> projects;
 
     // Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
@@ -51,39 +51,22 @@ public class SearchView extends Fragment {
 
         view = getView();
 
-        mProjectListView = (ListView) view.findViewById(R.id.projectListView);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.projectListView);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        mRecyclerView.setLayoutManager(layoutManager);
 
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mProjectsDatabaseReference = Database.getProjectsReference();
 
-
         // Initialize message ListView and its adapter
-        List<Project> projects = new ArrayList<>();
-        mProjectAdapter = new ProjectAdapter(getActivity(), R.layout.card_project, projects);
-        mProjectListView.setAdapter(mProjectAdapter);
+        projects = new ArrayList<>();
+        mProjectAdapter = new ProjectRecyclerViewAdapter(this, projects);
+        mRecyclerView.setAdapter(mProjectAdapter);
 
         //Populando com projetos ficticios
         //databasePopulate();
-
-        mProjectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-                Project project = (Project) adapterView.getItemAtPosition(position);
-
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("project", project);
-
-                ProjectDetailsFragment detailsFragment = new ProjectDetailsFragment();
-                detailsFragment.setArguments(bundle);
-
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.content, detailsFragment, "details")
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
     }
 
     @Override
@@ -95,7 +78,6 @@ public class SearchView extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        mProjectAdapter.clear();
         detachDatabaseReadListener();
     }
 
@@ -105,7 +87,8 @@ public class SearchView extends Fragment {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Project project = dataSnapshot.getValue(Project.class);
-                    mProjectAdapter.add(project);
+                    projects.add(project);
+                    mProjectAdapter.notifyDataSetChanged();
                 }
 
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {}

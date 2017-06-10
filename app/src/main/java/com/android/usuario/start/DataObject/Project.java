@@ -26,6 +26,8 @@ public class Project implements Serializable{
     private int maxHustlers;
     private int maxHippies;
 
+    private List<String> images;
+
     public Project() {}
 
     public Project(String name, String description, String author, int day, int month, int year, int duration, int difficulty, ArrayList<String> hashtags, int nHackers, int nHustlers, int nHippies) {
@@ -169,5 +171,13 @@ public class Project implements Serializable{
 
     public void setHashtags(List<String> hashtags) {
         this.hashtags = hashtags;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }

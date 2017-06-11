@@ -40,7 +40,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private EditText _name;
     private EditText _emailText;
-    private EditText _birthday;
+    private TextView _birthday;
     private EditText _adress;
     private EditText _phoneNumber;
     private EditText _description;
@@ -94,7 +94,7 @@ public class SignupActivity extends AppCompatActivity {
 
         _name = (EditText) findViewById(R.id.activity_signup_input_name);
         _emailText = (EditText) findViewById(R.id.activity_signup_input_email);
-        _birthday = (EditText) findViewById(R.id.activity_signup_input_birthday);
+        _birthday = (TextView) findViewById(R.id.activity_signup_input_birthday);
         _adress = (EditText) findViewById(R.id.activity_signup_input_adress);
         _phoneNumber = (EditText) findViewById(R.id.activity_signup_input_phonenumber);
         _description = (EditText) findViewById(R.id.activity_signup_input_description);

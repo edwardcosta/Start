@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="2dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="8dp"
     app:cardElevation="3dp"
     app:cardPreventCornerOverlap="true"
     app:cardMaxElevation="3dp"
@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.facebook.drawee.view.SimpleDraweeView
+            <ImageView
                 android:id="@+id/card_project_img"
                 android:maxWidth="140dp"
                 android:minWidth="140dp"

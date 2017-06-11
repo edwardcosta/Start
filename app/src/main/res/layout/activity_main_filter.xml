@@ -146,8 +146,8 @@
 
                 <TextView
                     android:id="@+id/activity_main_btn_filter_open"
-                    android:paddingLeft="8dp"
-                    android:layout_weight="1"
+                    android:paddingLeft="12dp"
+                    android:layout_weight="0.57"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15.6sp"

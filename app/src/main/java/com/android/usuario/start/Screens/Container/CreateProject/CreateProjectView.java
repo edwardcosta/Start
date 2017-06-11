@@ -57,14 +57,14 @@ public class CreateProjectView extends Fragment {
     private int dificuldade;
 
     private EditText _hashtags;
-    private EditText projectName;
-    private EditText description;
-    private EditText duration;
-    private TextView dateInit;
-    private EditText nHackersInput;
-    private EditText nHippiesInput;
-    private EditText nHustlersInput;
-    private Spinner difficulty_spinner;
+    private EditText _projectName;
+    private EditText _description;
+    private EditText _duration;
+    private TextView _dateInit;
+    private EditText _nHackersInput;
+    private EditText _nHippiesInput;
+    private EditText _nHustlersInput;
+    private Spinner _difficulty_spinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,24 +87,24 @@ public class CreateProjectView extends Fragment {
         pYear = today.get(Calendar.YEAR);
 
         _hashtags = (EditText) view.findViewById(R.id.fragment_create_project_hashtags);
-        projectName = (EditText) view.findViewById(R.id.projectName);
-        description = (EditText) view.findViewById(R.id.description);
-        duration = (EditText) view.findViewById(R.id.duration);
-        dateInit = (TextView) view.findViewById(R.id.dateInit);
-        nHackersInput = (EditText) view.findViewById(R.id.nHackers);
-        nHippiesInput = (EditText) view.findViewById(R.id.nHippies);
-        nHustlersInput = (EditText) view.findViewById(R.id.nHustlers);
+        _projectName = (EditText) view.findViewById(R.id.projectName);
+        _description = (EditText) view.findViewById(R.id.description);
+        _duration = (EditText) view.findViewById(R.id.duration);
+        _dateInit = (TextView) view.findViewById(R.id.dateInit);
+        _nHackersInput = (EditText) view.findViewById(R.id.nHackers);
+        _nHippiesInput = (EditText) view.findViewById(R.id.nHippies);
+        _nHustlersInput = (EditText) view.findViewById(R.id.nHustlers);
 
-        dateInit.setText(pDay + "\\" + (pMonth + 1) + "\\" +  pYear);
+        _dateInit.setText(pDay + "\\" + (pMonth + 1) + "\\" +  pYear);
 
-        dateInit.setOnClickListener(new View.OnClickListener() {
+        _dateInit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog mDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                         //Change date on TextView
                         setDate(selectedday, selectedmonth, selectedyear);
-                        dateInit.setText(selectedday + "\\" + (selectedmonth + 1) + "\\" + selectedyear);
+                        _dateInit.setText(selectedday + "\\" + (selectedmonth + 1) + "\\" + selectedyear);
                     }
                 }, pYear, pMonth, pDay);
                 mDatePicker.setTitle("Início");
@@ -120,13 +120,13 @@ public class CreateProjectView extends Fragment {
             }
         });
 
-        difficulty_spinner = (Spinner) view.findViewById(R.id.difficulty_spinner);
+        _difficulty_spinner = (Spinner) view.findViewById(R.id.difficulty_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.difficulty_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        difficulty_spinner.setAdapter(adapter);
+        _difficulty_spinner.setAdapter(adapter);
 
     }
 
@@ -147,17 +147,33 @@ public class CreateProjectView extends Fragment {
         String[] hashtags = hashtagsAux.split(" ");
         Collections.addAll(hs,hashtags);
 
-        mProject.setName(projectName.getText().toString());
+        mProject.setName(_projectName.getText().toString());
         //TODO get User name
-        mProject.setDescription(description.getText().toString());
+        mProject.setDescription(_description.getText().toString());
         mProject.setStartDay(pDay);
         mProject.setStartMonth(pMonth);
         mProject.setStartYear(pYear);
-        mProject.setDuration(Integer.parseInt(duration.getText().toString()));
-        mProject.setMaxHackers(Integer.parseInt(nHackersInput.getText().toString()));
-        mProject.setMaxHippies(Integer.parseInt(nHippiesInput.getText().toString()));
-        mProject.setMaxHustlers(Integer.parseInt(nHustlersInput.getText().toString()));
-        mProject.setDifficulty(difficulty_spinner.getSelectedItemPosition());
+        if (_duration.getText().toString().equals("")) {
+            mProject.setDuration(0);
+        } else {
+            mProject.setDuration(Integer.parseInt(_duration.getText().toString()));
+        }
+        if (_nHackersInput.getText().toString().equals("")) {
+            mProject.setMaxHackers(0);
+        } else {
+            mProject.setMaxHackers(Integer.parseInt(_nHackersInput.getText().toString()));
+        }
+        if (_nHippiesInput.getText().toString().equals("")) {
+            mProject.setMaxHippies(0);
+        } else {
+            mProject.setMaxHippies(Integer.parseInt(_nHippiesInput.getText().toString()));
+        }
+        if (_nHustlersInput.getText().toString().equals("")) {
+            mProject.setMaxHustlers(0);
+        } else {
+            mProject.setMaxHustlers(Integer.parseInt(_nHustlersInput.getText().toString()));
+        }
+        mProject.setDifficulty(_difficulty_spinner.getSelectedItemPosition());
         mProject.setHashtags(hs);
         //TODO difficulty (int) to string
         //Send to Firebase

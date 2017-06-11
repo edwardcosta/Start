@@ -7,7 +7,6 @@
     tools:context="com.android.usuario.start.Screens.Container.MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="56dp"
         android:id="@+id/projectListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

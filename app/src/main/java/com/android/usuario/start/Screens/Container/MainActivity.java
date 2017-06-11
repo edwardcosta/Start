@@ -8,13 +8,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.usuario.start.R;
 import com.android.usuario.start.Screens.Container.CreateProject.CreateProjectView;
@@ -28,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private Toolbar toolbar;
+
+    private EditText _searchBar;
 
     private TextView _filterButton;
     private LinearLayout _filterLayout;
@@ -94,6 +101,36 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle("");
 
+        _searchBar = (EditText) findViewById(R.id.activity_main_searchBar);
+        _searchBar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (_searchBar.getRight() - _searchBar.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        performSearch();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        _searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    performSearch();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         _filterButton = (TextView) findViewById(R.id.activity_main_btn_filter_open);
         _filterLayout = (LinearLayout) findViewById(R.id.activity_main_filter);
 
@@ -128,5 +165,9 @@ public class MainActivity extends AppCompatActivity {
 
         navigation.setSelectedItemId(R.id.navigation_search);
 
+    }
+
+    private void performSearch(){
+        Toast.makeText(this,"Pesquisa",Toast.LENGTH_SHORT).show();
     }
 }

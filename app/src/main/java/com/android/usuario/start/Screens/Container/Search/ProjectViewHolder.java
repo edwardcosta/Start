@@ -102,7 +102,7 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
             }
             _projectName.setText(project.getName());
             _duration.setText(project.getDuration() + " dias");
-            _date.setText(project.getStartDay() + "/" + (project.getStartMonth() + 1) + "/" + project.getStartYear());
+            _date.setText(project.getStartDay() + "/" + (project.getStartMonth() + 1));
             _difficulty.setText(String.valueOf(project.getDifficulty()));
             _hustler.setText(project.getnHustlers() + "/" + project.getMaxHustlers());
             _hacker.setText(project.getnHackers() + "/" + project.getMaxHackers());

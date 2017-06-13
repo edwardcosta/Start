@@ -59,6 +59,7 @@
                 android:textSize="15.6sp"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
+                android:maxLines="4"
                 android:text="@string/lorem_ipsum"/>
 
             <TextView

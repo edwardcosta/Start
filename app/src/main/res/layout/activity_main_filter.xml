@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toogleLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorAccentLight">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/activity_main_filter"
@@ -13,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:padding="8dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorAccent">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -103,8 +103,10 @@
 
             <Button
                 android:layout_gravity="end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="24dp"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
                 android:text="OK"
                 android:background="@drawable/white_rounded"/>
 

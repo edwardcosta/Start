@@ -1,10 +1,13 @@
 package com.android.usuario.start.Screens.Container.CreateProject;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +15,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.usuario.start.R;
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.RequestManager.Database;
+import com.android.usuario.start.RequestManager.Storage;
 import com.android.usuario.start.Screens.Container.Search.SearchView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,6 +30,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,15 +41,26 @@ import java.util.UUID;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import static android.app.Activity.RESULT_OK;
+import static android.content.Context.PRINT_SERVICE;
+
 /**
  * Created by eduar on 15/05/2017.
  */
 
 public class CreateProjectView extends Fragment {
 
+    private static final int PHOTO_PICKER_1 = 1;
+    private static final int PHOTO_PICKER_2 = 2;
+    private static final int PHOTO_PICKER_3 = 3;
+    private static final int PHOTO_PICKER_4 = 4;
+    private static final int PHOTO_PICKER_5 = 5;
+    private static final int PHOTO_PICKER_6 = 6;
+
     private View view;
 
     private DatabaseReference mProjectsDatabaseReference;
+    private StorageReference mProjectPhotosStorageReference;
 
     private int tries;
     private int tries2;
@@ -55,6 +73,14 @@ public class CreateProjectView extends Fragment {
     private int pMonth;
     private Calendar today = Calendar.getInstance();
     private int dificuldade;
+    private ArrayList<Uri> projectPhotos = new ArrayList<>();
+
+    private Uri image1 = null;
+    private Uri image2 = null;
+    private Uri image3 = null;
+    private Uri image4 = null;
+    private Uri image5 = null;
+    private Uri image6 = null;
 
     private EditText _hashtags;
     private EditText _projectName;
@@ -65,6 +91,18 @@ public class CreateProjectView extends Fragment {
     private EditText _nHippiesInput;
     private EditText _nHustlersInput;
     private Spinner _difficulty_spinner;
+    private ImageView _image1;
+    private ImageView _image2;
+    private ImageView _image3;
+    private ImageView _image4;
+    private ImageView _image5;
+    private ImageView _image6;
+    private ImageView _clearImage1;
+    private ImageView _clearImage2;
+    private ImageView _clearImage3;
+    private ImageView _clearImage4;
+    private ImageView _clearImage5;
+    private ImageView _clearImage6;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,6 +119,7 @@ public class CreateProjectView extends Fragment {
         view = getView();
 
         mProjectsDatabaseReference = Database.getProjectsReference();
+        //mProjectPhotosStorageReference = Storage.getProjectImagesReference();
 
         pDay = today.get(Calendar.DAY_OF_MONTH);
         pMonth = today.get(Calendar.MONTH);
@@ -94,6 +133,26 @@ public class CreateProjectView extends Fragment {
         _nHackersInput = (EditText) view.findViewById(R.id.nHackers);
         _nHippiesInput = (EditText) view.findViewById(R.id.nHippies);
         _nHustlersInput = (EditText) view.findViewById(R.id.nHustlers);
+        _image1 = (ImageView) view.findViewById(R.id.project_image_1);
+        _image2 = (ImageView) view.findViewById(R.id.project_image_2);
+        _image3 = (ImageView) view.findViewById(R.id.project_image_3);
+        _image4 = (ImageView) view.findViewById(R.id.project_image_4);
+        _image5 = (ImageView) view.findViewById(R.id.project_image_5);
+        _image6 = (ImageView) view.findViewById(R.id.project_image_6);
+        _clearImage1 = (ImageView) view.findViewById(R.id.project_image_clear_1);
+        _clearImage2 = (ImageView) view.findViewById(R.id.project_image_clear_2);
+        _clearImage3 = (ImageView) view.findViewById(R.id.project_image_clear_3);
+        _clearImage4 = (ImageView) view.findViewById(R.id.project_image_clear_4);
+        _clearImage5 = (ImageView) view.findViewById(R.id.project_image_clear_5);
+        _clearImage6 = (ImageView) view.findViewById(R.id.project_image_clear_6);
+        _clearImage1.setVisibility(View.INVISIBLE);
+        _clearImage2.setVisibility(View.INVISIBLE);
+        _clearImage3.setVisibility(View.INVISIBLE);
+        _clearImage4.setVisibility(View.INVISIBLE);
+        _clearImage5.setVisibility(View.INVISIBLE);
+        _clearImage6.setVisibility(View.INVISIBLE);
+
+        createImageListeners();
 
         _dateInit.setText(pDay + "\\" + (pMonth + 1) + "\\" +  pYear);
 
@@ -290,5 +349,193 @@ public class CreateProjectView extends Fragment {
                 }
             }
         });
+    }
+
+    private void createImageListeners() {
+        _image1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (image1 != null) {
+                    projectPhotos.remove(image1);
+                    image1 = null;
+                }
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete a ação usando:"), PHOTO_PICKER_1);
+            }
+        });
+        _image2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (image2 != null) {
+                    projectPhotos.remove(image2);
+                    image2 = null;
+                }
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete a ação usando:"), PHOTO_PICKER_2);
+            }
+        });
+        _image3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (image3 != null) {
+                    projectPhotos.remove(image3);
+                    image3 = null;
+                }
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete a ação usando:"), PHOTO_PICKER_3);
+            }
+        });
+        _image4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (image4 != null) {
+                    projectPhotos.remove(image4);
+                    image4 = null;
+                }
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete a ação usando:"), PHOTO_PICKER_4);
+            }
+        });
+        _image5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (image5 != null) {
+                    projectPhotos.remove(image5);
+                    image5 = null;
+                }
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete a ação usando:"), PHOTO_PICKER_5);
+            }
+        });
+        _image6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (image6 != null) {
+                    projectPhotos.remove(image6);
+                    image6 = null;
+                }
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete a ação usando:"), PHOTO_PICKER_6);
+            }
+        });
+        _clearImage1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _image1.setImageResource(R.drawable.empty_image);
+                _clearImage1.setVisibility(View.INVISIBLE);
+                projectPhotos.remove(image1);
+                image1 = null;
+            }
+        });
+        _clearImage2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _image2.setImageResource(R.drawable.empty_image);
+                _clearImage2.setVisibility(View.INVISIBLE);
+                projectPhotos.remove(image2);
+                image2 = null;
+            }
+        });
+        _clearImage3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _image3.setImageResource(R.drawable.empty_image);
+                _clearImage3.setVisibility(View.INVISIBLE);
+                projectPhotos.remove(image3);
+                image3 = null;
+            }
+        });
+        _clearImage4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _image4.setImageResource(R.drawable.empty_image);
+                _clearImage4.setVisibility(View.INVISIBLE);
+                projectPhotos.remove(image4);
+                image4 = null;
+            }
+        });
+        _clearImage5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _image5.setImageResource(R.drawable.empty_image);
+                _clearImage5.setVisibility(View.INVISIBLE);
+                projectPhotos.remove(image5);
+                image5 = null;
+            }
+        });
+        _clearImage6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _image6.setImageResource(R.drawable.empty_image);
+                _clearImage6.setVisibility(View.INVISIBLE);
+                projectPhotos.remove(image6);
+                image6 = null;
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PHOTO_PICKER_1:
+                    image1 = data.getData();
+                    projectPhotos.add(image1);
+                    _image1.setImageURI(image1);
+                    _clearImage1.setVisibility(View.VISIBLE);
+                    Log.d("Photos", projectPhotos.toString());
+                    break;
+                case PHOTO_PICKER_2:
+                    image2 = data.getData();
+                    projectPhotos.add(image2);
+                    _image2.setImageURI(image2);
+                    _clearImage2.setVisibility(View.VISIBLE);
+                    Log.d("Photos", projectPhotos.toString());
+                    break;
+                case PHOTO_PICKER_3:
+                    image3 = data.getData();
+                    projectPhotos.add(image3);
+                    _image3.setImageURI(image3);
+                    _clearImage3.setVisibility(View.VISIBLE);
+                    Log.d("Photos", projectPhotos.toString());
+                    break;
+                case PHOTO_PICKER_4:
+                    image4 = data.getData();
+                    projectPhotos.add(image4);
+                    _image4.setImageURI(image4);
+                    _clearImage4.setVisibility(View.VISIBLE);
+                    Log.d("Photos", projectPhotos.toString());
+                    break;
+                case PHOTO_PICKER_5:
+                    image5 = data.getData();
+                    projectPhotos.add(image5);
+                    _image5.setImageURI(image5);
+                    _clearImage5.setVisibility(View.VISIBLE);
+                    Log.d("Photos", projectPhotos.toString());
+                    break;
+                case PHOTO_PICKER_6:
+                    image6 = data.getData();
+                    projectPhotos.add(image6);
+                    _image6.setImageURI(image6);
+                    _clearImage6.setVisibility(View.VISIBLE);
+                    Log.d("Photos", projectPhotos.toString());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

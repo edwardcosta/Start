@@ -1,31 +1,16 @@
-package com.android.usuario.start.Screens.Container.Search;
+package com.android.usuario.start.Util;
 
-import android.app.Activity;
-import android.content.Context;
-import android.media.Image;
-import android.print.PrintJob;
-import android.support.annotation.IntegerRes;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.R;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by tulio on 15/05/2017.
@@ -33,14 +18,14 @@ import static java.security.AccessController.getContext;
 
 public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter {
 
-    Profile userProfile;
-    List<Project> projects;
-    SearchView fragment;
+    private Profile userProfile;
+    private List<Project> projects;
+    private Fragment fragment;
 
 
     public ProjectRecyclerViewAdapter(Fragment fragment, List<Project> objects, Profile userProfile) {
         this.projects = objects;
-        this.fragment = (SearchView) fragment;
+        this.fragment = fragment;
         this.userProfile = userProfile;
     }
 

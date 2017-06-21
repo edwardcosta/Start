@@ -1,4 +1,4 @@
-package com.android.usuario.start.Screens.Container.Search;
+package com.android.usuario.start.Util;
 
 
 import android.os.Bundle;
@@ -20,28 +20,28 @@ import java.util.Random;
 
 public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    Profile userProfile;
+    private Profile userProfile;
 
-    TextView _projectName;
-    TextView _hashtags;
-    TextView _duration;
-    TextView _date;
-    TextView _difficulty;
-    TextView _hustler;
-    TextView _hacker;
+    private TextView _projectName;
+    private TextView _hashtags;
+    private TextView _duration;
+    private TextView _date;
+    private TextView _difficulty;
+    private TextView _hustler;
+    private TextView _hacker;
     TextView _hippie;
-    ProgressBar _hustlerProgresbar;
-    ProgressBar _hackerProgresbar;
-    ProgressBar _hippieProgresbar;
-    ImageView _favoriteProject;
-    SimpleDraweeView _imagCard;
+    private ProgressBar _hustlerProgresbar;
+    private ProgressBar _hackerProgresbar;
+    private ProgressBar _hippieProgresbar;
+    private ImageView _favoriteProject;
+    private SimpleDraweeView _imagCard;
 
     private Project project;
-    SearchView fragment;
+    private Fragment fragment;
 
     public ProjectViewHolder(View convertView, Fragment fragment, Profile userProfile) {
         super(convertView);
-        this.fragment = (SearchView) fragment;
+        this.fragment = fragment;
         this.userProfile = userProfile;
 
         _favoriteProject = (ImageView) convertView.findViewById(R.id.card_project_favorit_heart);

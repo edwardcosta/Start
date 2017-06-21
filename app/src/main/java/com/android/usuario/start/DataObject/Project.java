@@ -28,7 +28,7 @@ public class Project implements Serializable{
     private int maxHippies;
 
     private List<String> wantToParticipate = new ArrayList<>();
-    private List<String> participants = new ArrayList<>();
+    private List<String> participating = new ArrayList<>();
 
     private List<String> images = Arrays.asList("","","","","","");
 

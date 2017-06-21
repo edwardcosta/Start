@@ -18,31 +18,38 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.RequestManager.Database;
 import com.android.usuario.start.RequestManager.Storage;
 import com.android.usuario.start.Screens.Container.Search.SearchView;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.PRINT_SERVICE;
 
 /**
  * Created by eduar on 15/05/2017.
@@ -59,11 +66,15 @@ public class CreateProjectView extends Fragment {
 
     private View view;
 
+    private Profile userProfile;
+
+    private DatabaseReference mUsersDatabaseReference;
     private DatabaseReference mProjectsDatabaseReference;
     private StorageReference mProjectPhotosStorageReference;
 
     private int tries;
     private int tries2;
+    private int tries3;
 
     private SweetAlertDialog creatingProject;
 
@@ -104,6 +115,12 @@ public class CreateProjectView extends Fragment {
     private ImageView _clearImage5;
     private ImageView _clearImage6;
 
+    /* no image = 0
+     * has image to send = 1
+     * image sent = 2
+     */
+    private List<Integer> isImageSent = Arrays.asList(0,0,0,0,0,0);
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -118,6 +135,9 @@ public class CreateProjectView extends Fragment {
 
         view = getView();
 
+        userProfile = (Profile) getArguments().getSerializable("userProfile");
+
+        mUsersDatabaseReference = Database.getUsersReference();
         mProjectsDatabaseReference = Database.getProjectsReference();
         //mProjectPhotosStorageReference = Storage.getProjectImagesReference();
 
@@ -206,6 +226,9 @@ public class CreateProjectView extends Fragment {
         String[] hashtags = hashtagsAux.split(" ");
         Collections.addAll(hs,hashtags);
 
+        mProject.setAuthor(userProfile.getId());
+        userProfile.addMyProject(mProject.getId());
+
         mProject.setName(_projectName.getText().toString());
         //TODO get User name
         mProject.setDescription(_description.getText().toString());
@@ -236,32 +259,106 @@ public class CreateProjectView extends Fragment {
         mProject.setHashtags(hs);
         //TODO difficulty (int) to string
         //Send to Firebase
-        sendToFirebase();
+        sendImagesToFirebase();
+    }
+
+    private void sendImagesToFirebase(){
+        StorageReference saveImage1 = Storage.getProjectImagesReference(mProject.getId()).child("image1.jpg");
+        StorageReference saveImage2 = Storage.getProjectImagesReference(mProject.getId()).child("image2.jpg");
+        StorageReference saveImage3 = Storage.getProjectImagesReference(mProject.getId()).child("image3.jpg");
+        StorageReference saveImage4 = Storage.getProjectImagesReference(mProject.getId()).child("image4.jpg");
+        StorageReference saveImage5 = Storage.getProjectImagesReference(mProject.getId()).child("image5.jpg");
+        StorageReference saveImage6 = Storage.getProjectImagesReference(mProject.getId()).child("image6.jpg");
+
+        if(isImageSent.get(0) != 0){
+            sendImagesToFirebase(saveImage1,_image1,0);
+        }
+        if(isImageSent.get(1) != 0){
+            sendImagesToFirebase(saveImage2,_image2,1);
+        }
+        if(isImageSent.get(2) != 0){
+            sendImagesToFirebase(saveImage3,_image3,2);
+        }
+        if(isImageSent.get(3) != 0){
+            sendImagesToFirebase(saveImage4,_image4,3);
+        }
+        if(isImageSent.get(4) != 0){
+            sendImagesToFirebase(saveImage5,_image5,4);
+        }
+        if(isImageSent.get(5) != 0){
+            sendImagesToFirebase(saveImage6,_image6,5);
+        }
+    }
+
+    private void sendImagesToFirebase(final StorageReference storageReference, final ImageView imageView, final int imgNumber){
+
+        Storage.uploadFromImageView(imageView, storageReference, new Storage.UploadImageCallBack() {
+            @Override
+            public void uploadImageCallBack(Uri uri) {
+                if(uri == null){
+                    isImageSent.set(imgNumber,1);
+                    tries3++;
+                    if(tries3 < 5) {
+                        sendImagesToFirebase(storageReference, imageView, imgNumber);
+                    }else{
+                        creatingProject.dismiss();
+                        new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Erro")
+                                .setContentText("Falha ao conectar com o servidor. " +
+                                        "Tente novamente mais tarde.")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+
+                                    }
+                                }).show();
+                    }
+                }else{
+                    isImageSent.set(imgNumber,2);
+                    mProject.getImages().set(imgNumber,uri.toString());
+                }
+                verifyImages();
+            }
+        });
+    }
+
+    private void verifyImages(){
+        if(!isImageSent.contains(1)){
+            sendToFirebase();
+        }
     }
 
     private void sendToFirebase(){
         mProjectsDatabaseReference.child(mProject.getId()).setValue(mProject).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                creatingProject.dismiss();
-                new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
-                        .setTitleText("Tudo Certo")
-                        .setContentText("Projeto Criado com Sucesso")
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismissWithAnimation();
-                                getFragmentManager().beginTransaction()
-                                        .replace(R.id.content, new SearchView())
-                                        .commit();
-                            }
-                        })
-                        .show();
+                mUsersDatabaseReference.child(userProfile.getId()).setValue(userProfile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        mUsersDatabaseReference.child(userProfile.getId()).setValue(userProfile);
+                        creatingProject.dismiss();
+                        new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Tudo Certo")
+                                .setContentText("Projeto Criado com Sucesso")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismissWithAnimation();
+                                        getFragmentManager().beginTransaction()
+                                                .replace(R.id.content, new SearchView())
+                                                .commit();
+                                    }
+                                })
+                                .show();
+                    }
+                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 tries2++;
+                creatingProject.dismiss();
                 if(tries2 < 5){
                     new SweetAlertDialog(getContext(),SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Falha ao tentar criar o projeto!")
@@ -277,7 +374,6 @@ public class CreateProjectView extends Fragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
-                                    creatingProject.dismiss();
                                     getFragmentManager().beginTransaction()
                                             .replace(R.id.content, new SearchView())
                                             .commit();
@@ -292,8 +388,6 @@ public class CreateProjectView extends Fragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
-                                    creatingProject.dismiss();
-
                                 }
                             }).show();
                 }
@@ -359,6 +453,7 @@ public class CreateProjectView extends Fragment {
                     projectPhotos.remove(image1);
                     image1 = null;
                 }
+                isImageSent.set(0,1);
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/jpeg");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
@@ -372,6 +467,7 @@ public class CreateProjectView extends Fragment {
                     projectPhotos.remove(image2);
                     image2 = null;
                 }
+                isImageSent.set(1,1);
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/jpeg");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
@@ -385,6 +481,7 @@ public class CreateProjectView extends Fragment {
                     projectPhotos.remove(image3);
                     image3 = null;
                 }
+                isImageSent.set(2,1);
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/jpeg");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
@@ -398,6 +495,7 @@ public class CreateProjectView extends Fragment {
                     projectPhotos.remove(image4);
                     image4 = null;
                 }
+                isImageSent.set(3,1);
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/jpeg");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
@@ -411,6 +509,7 @@ public class CreateProjectView extends Fragment {
                     projectPhotos.remove(image5);
                     image5 = null;
                 }
+                isImageSent.set(4,1);
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/jpeg");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
@@ -424,6 +523,7 @@ public class CreateProjectView extends Fragment {
                     projectPhotos.remove(image6);
                     image6 = null;
                 }
+                isImageSent.set(5,1);
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/jpeg");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
@@ -433,7 +533,8 @@ public class CreateProjectView extends Fragment {
         _clearImage1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _image1.setImageResource(R.drawable.empty_image);
+                isImageSent.set(0,0);
+                _image1.setImageResource(R.drawable.img_empty_image);
                 _clearImage1.setVisibility(View.INVISIBLE);
                 projectPhotos.remove(image1);
                 image1 = null;
@@ -442,7 +543,8 @@ public class CreateProjectView extends Fragment {
         _clearImage2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _image2.setImageResource(R.drawable.empty_image);
+                isImageSent.set(1,0);
+                _image2.setImageResource(R.drawable.img_empty_image);
                 _clearImage2.setVisibility(View.INVISIBLE);
                 projectPhotos.remove(image2);
                 image2 = null;
@@ -451,7 +553,8 @@ public class CreateProjectView extends Fragment {
         _clearImage3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _image3.setImageResource(R.drawable.empty_image);
+                isImageSent.set(2,0);
+                _image3.setImageResource(R.drawable.img_empty_image);
                 _clearImage3.setVisibility(View.INVISIBLE);
                 projectPhotos.remove(image3);
                 image3 = null;
@@ -460,7 +563,8 @@ public class CreateProjectView extends Fragment {
         _clearImage4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _image4.setImageResource(R.drawable.empty_image);
+                isImageSent.set(3,0);
+                _image4.setImageResource(R.drawable.img_empty_image);
                 _clearImage4.setVisibility(View.INVISIBLE);
                 projectPhotos.remove(image4);
                 image4 = null;
@@ -469,7 +573,8 @@ public class CreateProjectView extends Fragment {
         _clearImage5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _image5.setImageResource(R.drawable.empty_image);
+                isImageSent.set(4,0);
+                _image5.setImageResource(R.drawable.img_empty_image);
                 _clearImage5.setVisibility(View.INVISIBLE);
                 projectPhotos.remove(image5);
                 image5 = null;
@@ -478,7 +583,8 @@ public class CreateProjectView extends Fragment {
         _clearImage6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _image6.setImageResource(R.drawable.empty_image);
+                isImageSent.set(5,0);
+                _image6.setImageResource(R.drawable.img_empty_image);
                 _clearImage6.setVisibility(View.INVISIBLE);
                 projectPhotos.remove(image6);
                 image6 = null;

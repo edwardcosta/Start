@@ -8,7 +8,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
+import com.android.usuario.start.Screens.ProfileChooser.Hacker.HackerView;
+import com.android.usuario.start.Screens.ProfileChooser.Hipster.HipsterView;
+import com.android.usuario.start.Screens.ProfileChooser.Hustler.HustlerView;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -27,7 +31,7 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
      * and next wizard steps.
      */
     private ViewPager mPager;
-
+    private Profile userProfile;
     /**
      * The pager adapter, which provides the pages to the view pager widget.
      */
@@ -37,6 +41,8 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
+
+        userProfile = (Profile) getIntent().getExtras().getSerializable("userProfile");
 
         // Instantiate a ViewPager and a MyPagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -71,7 +77,24 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new ScreenSlidePageFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("userProfile",userProfile);
+            Fragment fragment = new Fragment();
+            switch (position){
+                case 0:
+                    fragment = new HackerView();
+                    fragment.setArguments(bundle);
+                    break;
+                case 1:
+                    fragment = new HipsterView();
+                    fragment.setArguments(bundle);
+                    break;
+                case 2:
+                    fragment = new HustlerView();
+                    fragment.setArguments(bundle);
+                    break;
+            }
+            return fragment;
         }
 
         @Override

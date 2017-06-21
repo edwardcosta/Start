@@ -21,7 +21,9 @@ import com.android.usuario.start.R;
 import com.android.usuario.start.RequestManager.Database;
 import com.android.usuario.start.Screens.Auth.LoginActivity;
 import com.android.usuario.start.Screens.Auth.SignupActivity;
+import com.android.usuario.start.Screens.Container.MainActivity;
 import com.android.usuario.start.Screens.ProfileChooser.ScreenSlidePagerActivity;
+import com.android.usuario.start.Screens.Splash.SplashActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.google.android.gms.auth.api.Auth;
@@ -106,7 +108,7 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    onLoginSuccess();
+                    checkIfEmailVerified(user);
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
@@ -298,10 +300,29 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
         }
     }
 
-    public void onLoginSuccess() {
-        Intent intent = new Intent(getContext(), ScreenSlidePagerActivity.class);
-        startActivity(intent);
-        getActivity().finish();
+    public void onLoginSuccess(FirebaseUser user) {
+        Database.getUsersReference().child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Profile userProfile = dataSnapshot.getValue(Profile.class);
+                if(userProfile.getProfileType() == 0){
+                    Intent intent = new Intent(getContext(), ScreenSlidePagerActivity.class);
+                    intent.putExtra("userProfile",userProfile);
+                    startActivity(intent);
+                    getActivity().finish();
+                }else{
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    intent.putExtra("userProfile",userProfile);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                onLoginFailed();
+            }
+        });
     }
 
     public void onLoginFailed() {
@@ -316,7 +337,7 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
         String password = _passwordText.getText().toString();
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("");
+            _emailText.setError("email inválido");
             valid = false;
         } else {
             _emailText.setError(null);
@@ -331,6 +352,23 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
 
         return valid;
     }
+
+    private void checkIfEmailVerified(FirebaseUser user) {
+
+        if (user.isEmailVerified()) {
+            // user is verified, so you can finish this activity or send user to activity which you want.
+            onLoginSuccess(user);
+        } else {
+            // email is not verified, so just prompt the message to the user and restart this activity.
+            // NOTE: don't forget to log out the user.
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(getContext(),"Email não verificado! Verifique seu email",Toast.LENGTH_LONG).show();
+            onLoginFailed();
+            //restart this activity
+
+        }
+    }
+
 
     @Override
     public void onStart() {

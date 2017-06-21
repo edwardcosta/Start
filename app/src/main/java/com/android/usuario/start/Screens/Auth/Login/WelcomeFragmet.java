@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.android.usuario.start.R;
@@ -24,6 +25,8 @@ public class WelcomeFragmet extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         parentView = inflater.inflate(R.layout.fragment_welcome_screen,container,false);
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         TextView _logo = (TextView) parentView.findViewById(R.id.fragment_welcome_screen_logo);
 

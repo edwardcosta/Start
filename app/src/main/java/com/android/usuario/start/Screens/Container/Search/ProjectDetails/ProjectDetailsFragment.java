@@ -36,7 +36,13 @@ public class ProjectDetailsFragment extends Fragment {
         Bundle bundle = getArguments();
         Project project = (Project) bundle.getSerializable("project");
 
+        int numberParticipants = project.getMaxHackers() + project.getMaxHippies() + project.getMaxHustlers();
+
         projectTitle.setText(project.getName());
+        projectPeriod.setText(String.valueOf(project.getDuration())+ " dias");
+        projectStartDate.setText(project.getStartDay() + "/" + project.getStartMonth());
+        projectParticipantsNumber.setText(String.valueOf(numberParticipants));
+        projectDescription.setText(project.getDescription());
 
         return view;
     }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.RequestManager.Database;
 import com.android.usuario.start.R;
@@ -27,6 +28,8 @@ import java.util.List;
 
 public class SearchView extends Fragment {
 
+    private Profile userProfile;
+
     private RecyclerView mRecyclerView;
     private ProjectRecyclerViewAdapter mProjectAdapter;
     private Project mProject;
@@ -37,6 +40,12 @@ public class SearchView extends Fragment {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mProjectsDatabaseReference;
     private ChildEventListener mChildEventListener;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        userProfile = (Profile) getArguments().getSerializable("userProfile");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +71,7 @@ public class SearchView extends Fragment {
 
         // Initialize message ListView and its adapter
         projects = new ArrayList<>();
-        mProjectAdapter = new ProjectRecyclerViewAdapter(this, projects);
+        mProjectAdapter = new ProjectRecyclerViewAdapter(this, projects,userProfile);
         mRecyclerView.setAdapter(mProjectAdapter);
 
         //Populando com projetos ficticios

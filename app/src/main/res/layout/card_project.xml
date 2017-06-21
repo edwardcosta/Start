@@ -22,13 +22,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/card_project_img"
-                android:maxWidth="140dp"
-                android:minWidth="140dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="209dp" />
 
             <ImageView
@@ -39,8 +37,7 @@
                 android:layout_alignParentLeft="true"
                 android:paddingTop="16dp"
                 android:paddingStart="16dp"
-                android:paddingLeft="16dp"
-                android:src="@drawable/ic_favorite_card" />
+                android:paddingLeft="16dp" />
 
         </RelativeLayout>
 

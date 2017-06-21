@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -21,15 +22,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.Screens.Container.CreateProject.CreateProjectView;
 import com.android.usuario.start.Screens.Container.MyProjects.MyProjectsView;
 import com.android.usuario.start.Screens.Container.Profile.ProfileFragment;
 import com.android.usuario.start.Screens.Container.Search.SearchView;
-import com.android.usuario.start.Screens.Container.Star.FavoriteView;
+import com.android.usuario.start.Screens.Container.Favorite.FavoriteView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Profile userProfile;
 
     private FragmentManager fragmentManager;
     private Toolbar toolbar;
@@ -63,25 +67,33 @@ public class MainActivity extends AppCompatActivity {
 
             lastSelected = item.getItemId();
 
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("userProfile",userProfile);
+
             switch (item.getItemId()) {
                 case R.id.navigation_search:
                     fragment = new SearchView();
+                    fragment.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
                 case R.id.navigation_star:
                     fragment = new FavoriteView();
+                    fragment.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
                 case R.id.navigation_create:
                     fragment = new CreateProjectView();
+                    fragment.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
                 case R.id.navigation_my_projects:
                     fragment = new MyProjectsView();
+                    fragment.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
                 case R.id.navigation_profile:
                     fragment = new ProfileFragment();
+                    fragment.setArguments(bundle);
                     fragmentTransaction.add(R.id.content, fragment).commit();
                     return true;
             }
@@ -95,7 +107,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         Fresco.initialize(this);
+
+        userProfile = (Profile) getIntent().getExtras().getSerializable("userProfile");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

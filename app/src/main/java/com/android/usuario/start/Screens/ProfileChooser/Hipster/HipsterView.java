@@ -1,4 +1,4 @@
-package com.android.usuario.start.Screens.ProfileChooser;
+package com.android.usuario.start.Screens.ProfileChooser.Hipster;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,18 +7,23 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
+import com.android.usuario.start.RequestManager.Database;
 import com.android.usuario.start.Screens.Container.MainActivity;
 
 /**
- * Created by tulio on 19/05/2017.
+ * Created by eduar on 21/06/2017.
  */
 
-public class ScreenSlidePageFragment extends Fragment {
+public class HipsterView extends Fragment {
 
-    LinearLayout content;
+    private LinearLayout content;
+    private Profile userProfile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,6 +31,13 @@ public class ScreenSlidePageFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_screen_slide_page, container, false);
 
+        userProfile = (Profile) getArguments().getSerializable("userProfile");
+
+        ImageView _img = (ImageView) rootView.findViewById(R.id.fragment_profile_chooser_img);
+        TextView _txt = (TextView) rootView.findViewById(R.id.fragment_profile_chooser_text);
+
+        _img.setImageResource(R.color.material_purple_a700);
+        _txt.setText("Hipster");
 
         return rootView;
     }
@@ -38,8 +50,12 @@ public class ScreenSlidePageFragment extends Fragment {
         content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userProfile.setProfileType(2);
+                Database.getUsersReference().child(userProfile.getId()).setValue(userProfile);
                 Intent intent = new Intent(getActivity(),MainActivity.class);
+                intent.putExtra("userProfile",userProfile);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.android.usuario.start.Screens.Container.Star;
+package com.android.usuario.start.Screens.Container.Favorite;
 
 import android.support.v4.app.Fragment;
 

@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    android:orientation="vertical">
 
-    <TextView style="?android:textAppearanceMedium"
+    <ImageView
+        android:id="@+id/fragment_profile_chooser_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <TextView
+        android:id="@+id/fragment_profile_chooser_text"
+        style="?android:textAppearanceMedium"
         android:padding="16dp"
         android:lineSpacingMultiplier="1.2"
         android:layout_width="match_parent"

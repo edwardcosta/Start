@@ -34,14 +34,14 @@
                         android:maxWidth="48dp"
                         android:minWidth="48dp"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/empty_image" />
+                        app:srcCompat="@drawable/img_empty_image" />
                     <ImageView
                         android:id="@+id/project_image_clear_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignEnd="@+id/project_image_1"
                         android:layout_alignRight="@+id/project_image_1"
-                        android:src="@drawable/clear_image" />
+                        android:src="@drawable/img_clear_image" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -56,14 +56,14 @@
                         android:layout_marginLeft="8dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/empty_image" />
+                        app:srcCompat="@drawable/img_empty_image" />
                     <ImageView
                         android:id="@+id/project_image_clear_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignEnd="@+id/project_image_2"
                         android:layout_alignRight="@+id/project_image_2"
-                        android:src="@drawable/clear_image" />
+                        android:src="@drawable/img_clear_image" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -78,14 +78,14 @@
                         android:layout_marginLeft="8dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/empty_image"/>
+                        app:srcCompat="@drawable/img_empty_image"/>
                     <ImageView
                         android:id="@+id/project_image_clear_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignEnd="@+id/project_image_3"
                         android:layout_alignRight="@+id/project_image_3"
-                        android:src="@drawable/clear_image" />
+                        android:src="@drawable/img_clear_image" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -100,14 +100,14 @@
                         android:layout_marginLeft="8dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/empty_image" />
+                        app:srcCompat="@drawable/img_empty_image" />
                     <ImageView
                         android:id="@+id/project_image_clear_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignEnd="@+id/project_image_4"
                         android:layout_alignRight="@+id/project_image_4"
-                        android:src="@drawable/clear_image" />
+                        android:src="@drawable/img_clear_image" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -122,14 +122,14 @@
                         android:layout_marginLeft="8dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/empty_image" />
+                        app:srcCompat="@drawable/img_empty_image" />
                     <ImageView
                         android:id="@+id/project_image_clear_5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignEnd="@+id/project_image_5"
                         android:layout_alignRight="@+id/project_image_5"
-                        android:src="@drawable/clear_image" />
+                        android:src="@drawable/img_clear_image" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -144,14 +144,14 @@
                         android:layout_marginLeft="8dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/empty_image" />
+                        app:srcCompat="@drawable/img_empty_image" />
                     <ImageView
                         android:id="@+id/project_image_clear_6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignEnd="@+id/project_image_6"
                         android:layout_alignRight="@+id/project_image_6"
-                        android:src="@drawable/clear_image" />
+                        android:src="@drawable/img_clear_image" />
                 </RelativeLayout>
 
             </LinearLayout>

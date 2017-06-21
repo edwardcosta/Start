@@ -1,6 +1,7 @@
 package com.android.usuario.start.Screens.Auth;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by eduar on 04/05/2017.
  */
@@ -38,6 +41,7 @@ public class SignupActivity extends AppCompatActivity {
     private DatabaseReference userDatabaseReference;
     private FirebaseAnalytics mFirebaseAnalytics;
 
+    private TextView _logo;
     private EditText _name;
     private EditText _emailText;
     private TextView _birthday;
@@ -66,7 +70,7 @@ public class SignupActivity extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     String name = _name.getText().toString();
-                    String email = _emailText.getText().toString();
+                    String email = _emailText.getText().toString().trim();
                     String birthday = _birthday.getText().toString();
                     String adress = _adress.getText().toString();
                     String phoneNumber = _phoneNumber.getText().toString();
@@ -83,7 +87,7 @@ public class SignupActivity extends AppCompatActivity {
 
                     userDatabaseReference.child(user.getUid()).setValue(userProfile);
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    onSignupSuccess();
+                    sendVerificationEmail(user);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -92,6 +96,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         };
 
+        _logo = (TextView) findViewById(R.id.activity_signup_logo);
         _name = (EditText) findViewById(R.id.activity_signup_input_name);
         _emailText = (EditText) findViewById(R.id.activity_signup_input_email);
         _birthday = (TextView) findViewById(R.id.activity_signup_input_birthday);
@@ -102,6 +107,9 @@ public class SignupActivity extends AppCompatActivity {
         _rPasswordText = (EditText) findViewById(R.id.activity_signup_input_retype_password);
         _signupButton = (TextView) findViewById(R.id.activity_signup_btn_signup);
         _loginLink = (TextView) findViewById(R.id.activity_signup_link_login);
+
+        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/BebasNeue-Bold.ttf");
+        _logo.setTypeface(type);
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,8 +139,8 @@ public class SignupActivity extends AppCompatActivity {
 
         progressDialog = ProgressDialog.show(this,null,"Criando Conta...",true,false);
 
-        final String email = _emailText.getText().toString();
-        final String password = _passwordText.getText().toString();
+        final String email = _emailText.getText().toString().trim();
+        final String password = _passwordText.getText().toString().trim();
 
         // TODO: Implement your own signup logic here.
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -154,12 +162,15 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void onSignupSuccess() {
+        progressDialog.dismiss();
+        Toast.makeText(SignupActivity.this,"Verifique seu email", Toast.LENGTH_LONG).show();
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
         finish();
     }
 
     public void onSignupFailed() {
+        progressDialog.dismiss();
         Toast.makeText(getBaseContext(), "Falha ao tentar criar conta...", Toast.LENGTH_LONG).show();
         _signupButton.setEnabled(true);
     }
@@ -218,8 +229,8 @@ public class SignupActivity extends AppCompatActivity {
             _description.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 ) {
-            _passwordText.setError("senha tem que ter mais do que 4 carateres");
+        if (password.isEmpty() || password.length() < 6 ) {
+            _passwordText.setError("senha tem que ter mais do que 6 carateres");
             valid = false;
         } else {
             _passwordText.setError(null);
@@ -233,6 +244,28 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    private void sendVerificationEmail(final FirebaseUser user) {
+        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    // email sent
+                    // after email is sent just logout the user and finish this activity
+                    FirebaseAuth.getInstance().signOut();
+                    onSignupSuccess();
+                } else {
+                    // email not sent, so display message and restart the activity or do whatever you wish to do
+
+                    //restart this activity
+                    overridePendingTransition(0, 0);
+                    onSignupFailed();
+
+                }
+            }
+        });
+
     }
 
     @Override

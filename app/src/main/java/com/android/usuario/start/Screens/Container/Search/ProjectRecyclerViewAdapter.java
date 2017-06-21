@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.R;
 
@@ -32,13 +33,15 @@ import static java.security.AccessController.getContext;
 
 public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter {
 
+    Profile userProfile;
     List<Project> projects;
     SearchView fragment;
 
 
-    public ProjectRecyclerViewAdapter(Fragment fragment, List<Project> objects) {
+    public ProjectRecyclerViewAdapter(Fragment fragment, List<Project> objects, Profile userProfile) {
         this.projects = objects;
         this.fragment = (SearchView) fragment;
+        this.userProfile = userProfile;
     }
 
     @Override
@@ -62,7 +65,7 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter {
         View view = LayoutInflater.from(fragment.getActivity())
                 .inflate(R.layout.card_project, parent, false);
 
-        ProjectViewHolder holder = new ProjectViewHolder(view, fragment);
+        ProjectViewHolder holder = new ProjectViewHolder(view, fragment, userProfile);
 
         return holder;
     }

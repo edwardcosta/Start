@@ -3,6 +3,7 @@ package com.android.usuario.start.DataObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +27,10 @@ public class Project implements Serializable{
     private int maxHustlers;
     private int maxHippies;
 
-    private List<String> images;
+    private List<String> wantToParticipate = new ArrayList<>();
+    private List<String> participants = new ArrayList<>();
+
+    private List<String> images = Arrays.asList("","","","","","");
 
     public Project() {}
 

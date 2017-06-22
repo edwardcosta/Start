@@ -11,11 +11,16 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Database {
 
     public static DatabaseReference getUsersReference(){
-        return FirebaseDatabase.getInstance().getReference().child(Singleton.DATABASE_USERS_REFERENCE);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
+                .child(Singleton.DATABASE_USER_REFERENCE).child(Singleton.DATABASE_USER_REFERENCE);
+        databaseReference.keepSynced(true);
+        return databaseReference;
     }
 
     public static DatabaseReference getProjectsReference(){
-        return FirebaseDatabase.getInstance().getReference()
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
                 .child(Singleton.DATABASE_PROJECT_REFERENCE).child(Singleton.DATABASE_PROJECTS_REFERENCE);
+        databaseReference.keepSynced(true);
+        return databaseReference;
     }
 }

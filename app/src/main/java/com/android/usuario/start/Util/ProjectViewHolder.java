@@ -122,7 +122,7 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
             _hacker.setText(project.getnHackers() + "/" + project.getMaxHackers());
             _hippie.setText(project.getnHippies() + "/" + project.getMaxHippies());
 
-            if (project.getImages().isEmpty() && project.getImages().get(0).isEmpty()) {
+            if (project.getImages().isEmpty() || project.getImages().get(0).isEmpty()) {
 
                 Random random = new Random();
                 int i1 = (random.nextInt(5));

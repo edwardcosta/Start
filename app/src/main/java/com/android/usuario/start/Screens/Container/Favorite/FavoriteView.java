@@ -3,6 +3,7 @@ package com.android.usuario.start.Screens.Container.Favorite;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,9 +34,10 @@ public class FavoriteView extends Fragment {
 
     private View parentView;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private ProjectRecyclerViewAdapter mProjectAdapter;
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
 
     // Firebase instance variables
     private DatabaseReference mProjectsDatabaseReference;
@@ -53,6 +55,7 @@ public class FavoriteView extends Fragment {
         // Inflate the layout for this fragment
         parentView = inflater.inflate(R.layout.fragment_search, container, false);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) parentView.findViewById(R.id.fragment_search_swipetorefresh);
         mRecyclerView = (RecyclerView) parentView.findViewById(R.id.projectListView);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
@@ -63,15 +66,26 @@ public class FavoriteView extends Fragment {
         attachDatabaseReadListener();
 
         // Initialize message ListView and its adapter
-        projects = new ArrayList<>();
-        mProjectAdapter = new ProjectRecyclerViewAdapter(this, projects,userProfile);
-        mRecyclerView.setAdapter(mProjectAdapter);
-
-        //Populando com projetos ficticios
-        //databasePopulate();
-
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshContent();
+            }
+        });
 
         return parentView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        refreshContent();
+    }
+
+    private void refreshContent(){
+        mProjectAdapter = new ProjectRecyclerViewAdapter(this, projects,userProfile);
+        mRecyclerView.setAdapter(mProjectAdapter);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void attachDatabaseReadListener() {

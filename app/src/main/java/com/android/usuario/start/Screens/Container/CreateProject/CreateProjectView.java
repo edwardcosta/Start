@@ -270,23 +270,34 @@ public class CreateProjectView extends Fragment {
         StorageReference saveImage5 = Storage.getProjectImagesReference(mProject.getId()).child("image5.jpg");
         StorageReference saveImage6 = Storage.getProjectImagesReference(mProject.getId()).child("image6.jpg");
 
+        boolean hasImageToSend = false;
+
         if(isImageSent.get(0) != 0){
             sendImagesToFirebase(saveImage1,_image1,0);
+            hasImageToSend = true;
         }
         if(isImageSent.get(1) != 0){
             sendImagesToFirebase(saveImage2,_image2,1);
+            hasImageToSend = true;
         }
         if(isImageSent.get(2) != 0){
             sendImagesToFirebase(saveImage3,_image3,2);
+            hasImageToSend = true;
         }
         if(isImageSent.get(3) != 0){
             sendImagesToFirebase(saveImage4,_image4,3);
+            hasImageToSend = true;
         }
         if(isImageSent.get(4) != 0){
             sendImagesToFirebase(saveImage5,_image5,4);
+            hasImageToSend = true;
         }
         if(isImageSent.get(5) != 0){
             sendImagesToFirebase(saveImage6,_image6,5);
+            hasImageToSend = true;
+        }
+        if(!hasImageToSend){
+            sendToFirebase();
         }
     }
 
@@ -345,8 +356,12 @@ public class CreateProjectView extends Fragment {
                                     @Override
                                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                                         sweetAlertDialog.dismissWithAnimation();
+                                        Fragment fragment = new SearchView();
+                                        Bundle bundle = new Bundle();
+                                        bundle.putSerializable("userProfile",userProfile);
+                                        fragment.setArguments(bundle);
                                         getFragmentManager().beginTransaction()
-                                                .replace(R.id.content, new SearchView())
+                                                .replace(R.id.content, fragment)
                                                 .commit();
                                     }
                                 })
@@ -374,8 +389,12 @@ public class CreateProjectView extends Fragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
+                                    Fragment fragment = new SearchView();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("userProfile",userProfile);
+                                    fragment.setArguments(bundle);
                                     getFragmentManager().beginTransaction()
-                                            .replace(R.id.content, new SearchView())
+                                            .replace(R.id.content, fragment)
                                             .commit();
                                 }
                     }).show();
@@ -435,8 +454,12 @@ public class CreateProjectView extends Fragment {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                                     sweetAlertDialog.dismiss();
+                                    Fragment fragment = new SearchView();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("userProfile",userProfile);
+                                    fragment.setArguments(bundle);
                                     getFragmentManager().beginTransaction()
-                                            .replace(R.id.content, new SearchView())
+                                            .replace(R.id.content, fragment)
                                             .commit();
                                     }
                     }).show();

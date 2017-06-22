@@ -75,14 +75,20 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Profile userProfile = dataSnapshot.getValue(Profile.class);
-                if(userProfile.getProfileType() == 0){
-                    Intent intent = new Intent(SplashActivity.this, ScreenSlidePagerActivity.class);
-                    intent.putExtra("userProfile",userProfile);
-                    startActivity(intent);
-                    finish();
+                if(userProfile != null) {
+                    if (userProfile.getProfileType() == 0) {
+                        Intent intent = new Intent(SplashActivity.this, ScreenSlidePagerActivity.class);
+                        intent.putExtra("userProfile", userProfile);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        intent.putExtra("userProfile", userProfile);
+                        startActivity(intent);
+                        finish();
+                    }
                 }else{
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    intent.putExtra("userProfile",userProfile);
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

@@ -305,16 +305,18 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Profile userProfile = dataSnapshot.getValue(Profile.class);
-                if(userProfile.getProfileType() == 0){
-                    Intent intent = new Intent(getContext(), ScreenSlidePagerActivity.class);
-                    intent.putExtra("userProfile",userProfile);
-                    startActivity(intent);
-                    getActivity().finish();
-                }else{
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    intent.putExtra("userProfile",userProfile);
-                    startActivity(intent);
-                    getActivity().finish();
+                if(userProfile != null) {
+                    if (userProfile.getProfileType() == 0) {
+                        Intent intent = new Intent(getContext(), ScreenSlidePagerActivity.class);
+                        intent.putExtra("userProfile", userProfile);
+                        startActivity(intent);
+                        getActivity().finish();
+                    } else {
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        intent.putExtra("userProfile", userProfile);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
                 }
             }
 

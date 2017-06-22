@@ -16,6 +16,8 @@ import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.RequestManager.Database;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
@@ -24,6 +26,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 import org.w3c.dom.Text;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by eduar on 04/05/2017.
@@ -66,7 +70,7 @@ public class SignupActivity extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
                     String name = _name.getText().toString();
@@ -85,9 +89,20 @@ public class SignupActivity extends AppCompatActivity {
                     userProfile.setPhoneNumber(phoneNumber);
                     userProfile.setDescription(description);
 
-                    userDatabaseReference.child(user.getUid()).setValue(userProfile);
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    sendVerificationEmail(user);
+                    userDatabaseReference.child(user.getUid()).setValue(userProfile)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            sendVerificationEmail(user);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            user.delete();
+                            onSignupFailed();
+                        }
+                    });
+
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -163,16 +178,33 @@ public class SignupActivity extends AppCompatActivity {
 
     public void onSignupSuccess() {
         progressDialog.dismiss();
-        Toast.makeText(SignupActivity.this,"Verifique seu email", Toast.LENGTH_LONG).show();
-        _signupButton.setEnabled(true);
-        setResult(RESULT_OK, null);
-        finish();
+        new SweetAlertDialog(this,SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("Conta criada com sucesso!")
+                .setContentText("Por Favor, verifique seu email para a validação da conta.")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                        _signupButton.setEnabled(true);
+                        setResult(RESULT_OK, null);
+                        finish();
+                    }
+                }).show();
     }
 
     public void onSignupFailed() {
-        progressDialog.dismiss();
-        Toast.makeText(getBaseContext(), "Falha ao tentar criar conta...", Toast.LENGTH_LONG).show();
-        _signupButton.setEnabled(true);
+        if(progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Falha ao criar conta.")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            sweetAlertDialog.dismissWithAnimation();
+                            _signupButton.setEnabled(true);
+                        }
+                    }).show();
+        }
     }
 
     public boolean validate() {

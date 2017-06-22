@@ -5,6 +5,7 @@ package com.android.usuario.start.Util;
  */
 
 public class Singleton {
+    public static final String DATABASE_USER_REFERENCE = "users";
     public static final String DATABASE_USERS_REFERENCE = "users";
 
     public static final String DATABASE_PROJECT_REFERENCE = "project";

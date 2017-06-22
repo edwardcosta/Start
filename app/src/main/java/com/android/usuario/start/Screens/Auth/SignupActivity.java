@@ -130,14 +130,14 @@ public class SignupActivity extends AppCompatActivity {
     public void signup() {
         Log.d(TAG, "Signup");
 
+        _signupButton.setEnabled(false);
+
+        progressDialog = ProgressDialog.show(this,null,"Criando Conta...",true,false);
+
         if (!validate()) {
             onSignupFailed();
             return;
         }
-
-        _signupButton.setEnabled(false);
-
-        progressDialog = ProgressDialog.show(this,null,"Criando Conta...",true,false);
 
         final String email = _emailText.getText().toString().trim();
         final String password = _passwordText.getText().toString().trim();

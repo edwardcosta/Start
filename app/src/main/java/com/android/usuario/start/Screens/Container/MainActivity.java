@@ -27,16 +27,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.usuario.start.DataObject.Profile;
+import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.R;
 import com.android.usuario.start.Screens.Auth.SignupActivity;
 import com.android.usuario.start.Screens.Container.CreateProject.CreateProjectView;
 import com.android.usuario.start.Screens.Container.MyProjects.MyProjectsView;
 import com.android.usuario.start.Screens.Container.Profile.ProfileFragment;
+import com.android.usuario.start.Screens.Container.Search.ProjectDetails.ProjectDetailsFragment;
 import com.android.usuario.start.Screens.Container.Search.SearchView;
 import com.android.usuario.start.Screens.Container.Favorite.FavoriteView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean filterOpen = false;
 
+    Fragment fragment;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -71,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             }
             FragmentTransaction fragmentTransaction;
             fragmentTransaction = fragmentManager.beginTransaction();
-            Fragment fragment = fragmentManager.findFragmentById(R.id.content);
+            fragment = fragmentManager.findFragmentById(R.id.content);
 
             if (fragment != null) {
                 fragmentTransaction.remove(fragment);
@@ -226,6 +232,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performSearch(){
-        Toast.makeText(this,"Pesquisa",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Pesquisa por: " + _searchBar.getText().toString(),Toast.LENGTH_SHORT).show();
+        if (fragment instanceof SearchView) {
+
+            SearchView fragment = (SearchView) this.fragment;
+
+            String searchString = _searchBar.getText().toString();
+            List<Project> foundProjects = new ArrayList();
+
+            if (searchString.isEmpty()) {
+                fragment.getAllProjectsFromFirebase();
+                return;
+            }
+
+            for (Project project : fragment.projects) {
+                if (project.getName().contains(searchString)) {
+                    foundProjects.add(project);
+                }
+            }
+
+            fragment.projects = foundProjects;
+            fragment.refreshContent();
+        }
     }
 }

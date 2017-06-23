@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.DataObject.Project;
@@ -19,6 +21,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +35,12 @@ public class SearchView extends Fragment {
     private Profile userProfile;
 
     private View parentView;
+    private EditText searchView;
 
     private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView mRecyclerView;
-    private ProjectRecyclerViewAdapter mProjectAdapter;
-    List<Project> projects = new ArrayList<>();
+    public RecyclerView mRecyclerView;
+    public ProjectRecyclerViewAdapter mProjectAdapter;
+    public List<Project> projects = new ArrayList<>();
 
     // Firebase instance variables
     private DatabaseReference mProjectsDatabaseReference;
@@ -71,6 +75,8 @@ public class SearchView extends Fragment {
             }
         });
 
+        searchView = (EditText) parentView.findViewById(R.id.activity_main_searchBar);
+
         return parentView;
     }
 
@@ -80,9 +86,9 @@ public class SearchView extends Fragment {
         refreshContent();
     }
 
-    private void refreshContent(){
+    public void refreshContent(){
         // Initialize message ListView and its adapter
-        mProjectAdapter = new ProjectRecyclerViewAdapter(this, projects,userProfile);
+        mProjectAdapter = new ProjectRecyclerViewAdapter(this, projects, userProfile);
         mRecyclerView.setAdapter(mProjectAdapter);
         swipeRefreshLayout.setRefreshing(false);
     }
@@ -108,5 +114,27 @@ public class SearchView extends Fragment {
             };
             mProjectsDatabaseReference.addChildEventListener(mChildEventListener);
         }
+    }
+
+    public void getAllProjectsFromFirebase() {
+        ValueEventListener projectListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                projects.clear();
+                for (DataSnapshot projectSnapshot: dataSnapshot.getChildren()) {
+                    Project project = projectSnapshot.getValue(Project.class);
+                    projects.add(project);
+                }
+                mProjectAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("SearchFragment", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        };
+        mProjectsDatabaseReference.addListenerForSingleValueEvent(projectListener);
     }
 }

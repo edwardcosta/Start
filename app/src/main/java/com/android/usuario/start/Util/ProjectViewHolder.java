@@ -71,6 +71,7 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
     public void onClick(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("project", project);
+        bundle.putSerializable("userProfile",userProfile);
 
         ProjectDetailsFragment detailsFragment = new ProjectDetailsFragment();
         detailsFragment.setArguments(bundle);

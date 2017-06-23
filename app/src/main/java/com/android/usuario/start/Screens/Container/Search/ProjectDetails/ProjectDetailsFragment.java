@@ -2,6 +2,7 @@ package com.android.usuario.start.Screens.Container.Search.ProjectDetails;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,12 +12,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.DataObject.Project;
+import com.android.usuario.start.RequestManager.Database;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ProjectDetailsFragment extends Fragment {
+
+    private Project project;
+    private Profile userProfile;
 
     @Nullable
     @Override
@@ -34,7 +42,8 @@ public class ProjectDetailsFragment extends Fragment {
         projectIn.setOnClickListener(signInOnClickListener);
 
         Bundle bundle = getArguments();
-        Project project = (Project) bundle.getSerializable("project");
+        project = (Project) bundle.getSerializable("project");
+        userProfile = (Profile) bundle.get("userProfile");
 
         int numberParticipants = project.getMaxHackers() + project.getMaxHippies() + project.getMaxHustlers();
 
@@ -50,17 +59,54 @@ public class ProjectDetailsFragment extends Fragment {
     View.OnClickListener signInOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
-                    .setTitleText("Good job!")
-                    .setContentText("You clicked the button!")
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            sweetAlertDialog.dismiss();
-                            getFragmentManager().popBackStack();
-                        }
-                    })
-                    .show();
+            final SweetAlertDialog progress = new SweetAlertDialog(getContext(), SweetAlertDialog.PROGRESS_TYPE);
+            progress.setTitleText("Solicitando Participação").show();
+            if(!project.getWantToParticipate().contains(userProfile.getId())) {
+                project.addWantToParticipateOsProject(userProfile.getId());
+                Database.getProjectsReference().child(project.getId()).setValue(project)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                progress.dismiss();
+                                new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                                        .setTitleText("Solicitação enviada com sucesso!")
+                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                sweetAlertDialog.dismiss();
+                                                getFragmentManager().popBackStack();
+                                            }
+                                        }).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progress.dismiss();
+                        new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Erro ao fazer solicitação")
+                                .setContentText("Por favor, tente mais tarde")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+                                    }
+                                })
+                                .show();
+                    }
+                });
+            }else{
+                progress.dismiss();
+                new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Atenção!")
+                        .setContentText("Você já fez a solicitação de partipação no projeto," +
+                                " por favor agauarde a confirmação do administrador.")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismissWithAnimation();
+                            }
+                        }).show();
+            }
         }
     };
 }

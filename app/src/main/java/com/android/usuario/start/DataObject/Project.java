@@ -49,6 +49,14 @@ public class Project implements Serializable{
         this.nHustlers = nHustlers;
     }
 
+    public void addWantToParticipateOsProject(String userId){
+        wantToParticipate.add(userId);
+    }
+
+    public void addParticipants(String userId){
+        participating.add(userId);
+    }
+
     public String getName() {
         return name;
     }
@@ -183,5 +191,13 @@ public class Project implements Serializable{
 
     public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    public List<String> getWantToParticipate() {
+        return wantToParticipate;
+    }
+
+    public List<String> getParticipating() {
+        return participating;
     }
 }

@@ -1,6 +1,7 @@
 package com.android.usuario.start.Screens.Container.Search.ProjectDetails;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -18,6 +20,9 @@ import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.RequestManager.Database;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.squareup.picasso.Picasso;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -26,17 +31,21 @@ public class ProjectDetailsFragment extends Fragment {
     private Project project;
     private Profile userProfile;
 
+    private CarouselView carouselView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_details, container, false);
 
-        VideoView videoView = (VideoView) view.findViewById(R.id.proj_details_video_view);
+        carouselView = (CarouselView) view.findViewById(R.id.proj_details_image_view);
+        carouselView.setPageCount(3);
+        carouselView.setImageListener(imageListener);
         TextView projectTitle = (TextView) view.findViewById(R.id.proj_details_proj_title);
-        TextView projectPeriod = (TextView) view.findViewById(R.id.proj_details_period_duration);
+        /*TextView projectPeriod = (TextView) view.findViewById(R.id.proj_details_period_duration);
         TextView projectStartDate = (TextView) view.findViewById(R.id.proj_details_start_date);
         TextView projectParticipantsNumber = (TextView) view.findViewById(R.id.proj_details_participants);
-        TextView projectDescription = (TextView) view.findViewById(R.id.proj_details_description);
+        TextView projectDescription = (TextView) view.findViewById(R.id.proj_details_description);*/
 
         Button projectIn = (Button) view.findViewById(R.id.proj_details_button);
         projectIn.setOnClickListener(signInOnClickListener);
@@ -47,15 +56,23 @@ public class ProjectDetailsFragment extends Fragment {
 
         int numberParticipants = project.getMaxHackers() + project.getMaxHippies() + project.getMaxHustlers();
 
-        projectTitle.setText(project.getName());
+        /*projectTitle.setText(project.getName());
         projectPeriod.setText(String.valueOf(project.getDuration())+ " dias");
         projectStartDate.setText(project.getStartDay() + "/" + project.getStartMonth());
         projectParticipantsNumber.setText(String.valueOf(numberParticipants));
-        projectDescription.setText(project.getDescription());
+        projectDescription.setText(project.getDescription());*/
 
         return view;
     }
 
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            Picasso.with(getActivity()).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+        }
+    };
+
+    /* ON Clicks */
     View.OnClickListener signInOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {

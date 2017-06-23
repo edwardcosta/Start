@@ -8,6 +8,8 @@
     <color name="colorAccentDark">#90618f</color>
     <color name="colorAccentLight">#f4c0f2</color>
 
+    <color name="strokeColor">#ffffff</color>
+
     <color name="colorTextSecondary">#d0d0d0</color>
     <color name="colorTextWelcomeScreen">#98a6c4</color>
 

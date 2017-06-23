@@ -77,19 +77,28 @@
             </android.support.design.widget.TextInputLayout>
 
             <!-- Birthday Label -->
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:counterEnabled="true"
-                app:counterMaxLength="35"
+                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/activity_signup_input_birthday"
-                    android:layout_width="match_parent"
+
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="Data de nascimento" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_weight="1"
+                    android:text="Data de nascimento"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/activity_signup_input_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="02/06/17"/>
+            </LinearLayout>
+
 
             <!-- Adress Label -->
             <android.support.design.widget.TextInputLayout

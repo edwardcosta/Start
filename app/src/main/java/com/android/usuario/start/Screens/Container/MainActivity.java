@@ -1,5 +1,6 @@
 package com.android.usuario.start.Screens.Container;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,21 +16,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
+import com.android.usuario.start.Screens.Auth.SignupActivity;
 import com.android.usuario.start.Screens.Container.CreateProject.CreateProjectView;
 import com.android.usuario.start.Screens.Container.MyProjects.MyProjectsView;
 import com.android.usuario.start.Screens.Container.Profile.ProfileFragment;
 import com.android.usuario.start.Screens.Container.Search.SearchView;
 import com.android.usuario.start.Screens.Container.Favorite.FavoriteView;
 import com.facebook.drawee.backends.pipeline.Fresco;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,9 +49,14 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView _filterButton;
     private LinearLayout _filterLayout;
+    private TextView _initDate;
+    private Spinner _difficulty_spinner;
     private RelativeLayout.LayoutParams layoutParams;
 
     private int lastSelected;
+    private int iDay;
+    private int iMonth;
+    private int iYear;
 
     private boolean filterOpen = false;
 
@@ -149,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
         _filterButton = (TextView) findViewById(R.id.activity_main_btn_filter_open);
         _filterLayout = (LinearLayout) findViewById(R.id.activity_main_filter);
+        _initDate = (TextView) findViewById(R.id.activity_main_filter_initDate);
 
         final int toolbarHeight = toolbar.getHeight();
 
@@ -173,6 +186,35 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        iDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        iMonth = Calendar.getInstance().get(Calendar.MONTH);
+        iYear = Calendar.getInstance().get(Calendar.YEAR);
+
+        _initDate.setText(iDay + "\\" + (iMonth + 1) + "\\" + iYear);
+
+        _initDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog mDatePicker = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                        //Change date on TextView
+                        _initDate.setText(selectedday + "\\" + (selectedmonth + 1) + "\\" + selectedyear);
+                    }
+                }, iYear, iMonth, iDay);
+                mDatePicker.setTitle("Nascimento");
+                mDatePicker.show();
+            }
+        });
+
+
+        _difficulty_spinner = (Spinner) findViewById(R.id.activity_main_filter_difficulty_spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.difficulty_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        _difficulty_spinner.setAdapter(adapter);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

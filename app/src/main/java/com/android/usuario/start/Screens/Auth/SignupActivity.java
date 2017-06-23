@@ -1,5 +1,6 @@
 package com.android.usuario.start.Screens.Auth;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +28,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 import org.w3c.dom.Text;
+
+import java.util.Calendar;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -57,6 +61,10 @@ public class SignupActivity extends AppCompatActivity {
     private TextView _signupButton;
     private TextView _loginLink;
     private ProgressDialog progressDialog;
+
+    private int bDay;
+    private int bMonth;
+    private int bYear;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -122,6 +130,26 @@ public class SignupActivity extends AppCompatActivity {
         _rPasswordText = (EditText) findViewById(R.id.activity_signup_input_retype_password);
         _signupButton = (TextView) findViewById(R.id.activity_signup_btn_signup);
         _loginLink = (TextView) findViewById(R.id.activity_signup_link_login);
+
+        bDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        bMonth = Calendar.getInstance().get(Calendar.MONTH);
+        bYear = Calendar.getInstance().get(Calendar.YEAR);
+
+        _birthday.setText(bDay + "\\" + (bMonth + 1) + "\\" + bYear);
+
+        _birthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog mDatePicker = new DatePickerDialog(SignupActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                        //Change date on TextView
+                        _birthday.setText(selectedday + "\\" + (selectedmonth + 1) + "\\" + selectedyear);
+                    }
+                }, bYear, bMonth, bDay);
+                mDatePicker.setTitle("Nascimento");
+                mDatePicker.show();
+            }
+        });
 
         Typeface type = Typeface.createFromAsset(getAssets(),"fonts/BebasNeue-Bold.ttf");
         _logo.setTypeface(type);

@@ -165,7 +165,7 @@
                     android:padding="8dp"
                     android:layout_weight="10"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:drawableEnd="@drawable/ic_search"
                     android:background="@drawable/white_rounded"
                     android:hint="Pesquise por tema"

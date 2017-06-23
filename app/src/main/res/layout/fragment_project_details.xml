@@ -31,7 +31,7 @@
 
             <TextView
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dpdp"
+                android:layout_marginRight="16dp"
                 android:layout_alignParentTop="true"
                 android:id="@+id/proj_details_proj_title"
                 android:layout_width="match_parent"

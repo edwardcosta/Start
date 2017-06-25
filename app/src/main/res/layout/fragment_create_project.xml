@@ -170,6 +170,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:textSize="15.6sp"
                 android:hint="Nome do projeto"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -188,6 +189,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:textSize="15.6sp"
                 android:hint="#Hashtags" />
         </android.support.design.widget.TextInputLayout>
 
@@ -195,8 +197,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="4dp"
             android:layout_marginBottom="16dp">
 
             <TextView
@@ -205,8 +207,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Dificuldade"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                android:textSize="15.6sp" />
 
             <Spinner
                 android:id="@+id/difficulty_spinner"
@@ -218,8 +219,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
             android:layout_marginBottom="8dp">
 
             <TextView
@@ -228,8 +229,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Data de Início"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                android:textSize="15.6sp" />
 
             <TextView
                 android:id="@+id/dateInit"
@@ -243,9 +243,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp">
 
             <TextView
                 android:id="@+id/textView2"
@@ -253,16 +252,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Duração"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                android:textSize="15.6sp" />
 
             <EditText
                 android:id="@+id/duration"
-                android:layout_width="50dp"
+                android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:hint="0"
                 android:inputType="number"
-                android:text="0"
                 android:textSize="15sp"
                 android:textAlignment="textEnd"
                 android:gravity="end"/>
@@ -272,7 +269,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="dias"
-                android:textColor="@color/colorPrimary"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -280,9 +276,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp">
 
             <TextView
                 android:id="@+id/textView4"
@@ -290,31 +285,36 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Nº participantes"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                android:textSize="15.6sp" />
 
             <EditText
                 android:id="@+id/nHackers"
-                android:layout_width="50dp"
+                android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="0"
+                android:textAlignment="textEnd"
+                android:gravity="end"
                 android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/nHustlers"
-                android:layout_width="50dp"
+                android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="0"
+                android:textAlignment="textEnd"
+                android:gravity="end"
                 android:textSize="15sp"/>
 
             <EditText
                 android:id="@+id/nHippies"
-                android:layout_width="50dp"
+                android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:hint="0"
+                android:textAlignment="textEnd"
+                android:gravity="end"
                 android:textSize="15sp"/>
         </LinearLayout>
 
@@ -329,18 +329,20 @@
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
+                android:textSize="15.6sp"
                 android:hint="Descreva seu projeto"/>
         </android.support.design.widget.TextInputLayout>
 
         <Button
-        android:id="@+id/create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FINALIZAR"
-        android:textSize="14sp"
-        android:layout_gravity="end"
-        android:layout_marginRight="16dp"/>
+            android:id="@+id/create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FINALIZAR"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:layout_gravity="end"
+            android:background="@null"
+            android:layout_marginRight="8dp"/>
 
     </LinearLayout>
 </ScrollView>

@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.android.usuario.start.DataObject.Profile;
@@ -33,6 +35,9 @@ public class ProjectDetailsFragment extends Fragment {
 
     private CarouselView carouselView;
 
+    private TextView _projectTitle;
+    private TextView _hashtags;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,7 +46,8 @@ public class ProjectDetailsFragment extends Fragment {
         carouselView = (CarouselView) view.findViewById(R.id.proj_details_image_view);
         carouselView.setPageCount(3);
         carouselView.setImageListener(imageListener);
-        TextView projectTitle = (TextView) view.findViewById(R.id.proj_details_proj_title);
+        _projectTitle = (TextView) view.findViewById(R.id.proj_details_proj_title);
+        _hashtags = (TextView) view.findViewById(R.id.proj_details_proj_hashtag);
         /*TextView projectPeriod = (TextView) view.findViewById(R.id.proj_details_period_duration);
         TextView projectStartDate = (TextView) view.findViewById(R.id.proj_details_start_date);
         TextView projectParticipantsNumber = (TextView) view.findViewById(R.id.proj_details_participants);
@@ -56,7 +62,7 @@ public class ProjectDetailsFragment extends Fragment {
 
         int numberParticipants = project.getMaxHackers() + project.getMaxHippies() + project.getMaxHustlers();
 
-        projectTitle.setText(project.getName());
+        _projectTitle.setText(project.getName());
         /*projectPeriod.setText(String.valueOf(project.getDuration())+ " dias");
         projectStartDate.setText(project.getStartDay() + "/" + project.getStartMonth());
         projectParticipantsNumber.setText(String.valueOf(numberParticipants));

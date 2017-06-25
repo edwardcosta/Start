@@ -52,7 +52,6 @@ public class SignupActivity extends AppCompatActivity {
     private TextView _logo;
     private EditText _name;
     private EditText _emailText;
-    private TextView _birthday;
     private EditText _adress;
     private EditText _phoneNumber;
     private EditText _description;
@@ -83,7 +82,6 @@ public class SignupActivity extends AppCompatActivity {
                     // User is signed in
                     String name = _name.getText().toString();
                     String email = _emailText.getText().toString().trim();
-                    String birthday = _birthday.getText().toString();
                     String adress = _adress.getText().toString();
                     String phoneNumber = _phoneNumber.getText().toString();
                     String description = _description.getText().toString();
@@ -92,7 +90,6 @@ public class SignupActivity extends AppCompatActivity {
                     userProfile.setId(user.getUid());
                     userProfile.setName(name);
                     userProfile.setEmail(email);
-                    userProfile.setBirthday(birthday);
                     userProfile.setAdress(adress);
                     userProfile.setPhoneNumber(phoneNumber);
                     userProfile.setDescription(description);
@@ -122,7 +119,6 @@ public class SignupActivity extends AppCompatActivity {
         _logo = (TextView) findViewById(R.id.activity_signup_logo);
         _name = (EditText) findViewById(R.id.activity_signup_input_name);
         _emailText = (EditText) findViewById(R.id.activity_signup_input_email);
-        _birthday = (TextView) findViewById(R.id.activity_signup_input_birthday);
         _adress = (EditText) findViewById(R.id.activity_signup_input_adress);
         _phoneNumber = (EditText) findViewById(R.id.activity_signup_input_phonenumber);
         _description = (EditText) findViewById(R.id.activity_signup_input_description);
@@ -134,22 +130,6 @@ public class SignupActivity extends AppCompatActivity {
         bDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         bMonth = Calendar.getInstance().get(Calendar.MONTH);
         bYear = Calendar.getInstance().get(Calendar.YEAR);
-
-        _birthday.setText(bDay + "\\" + (bMonth + 1) + "\\" + bYear);
-
-        _birthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog mDatePicker = new DatePickerDialog(SignupActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                        //Change date on TextView
-                        _birthday.setText(selectedday + "\\" + (selectedmonth + 1) + "\\" + selectedyear);
-                    }
-                }, bYear, bMonth, bDay);
-                mDatePicker.setTitle("Nascimento");
-                mDatePicker.show();
-            }
-        });
 
         Typeface type = Typeface.createFromAsset(getAssets(),"fonts/BebasNeue-Bold.ttf");
         _logo.setTypeface(type);
@@ -240,7 +220,6 @@ public class SignupActivity extends AppCompatActivity {
 
         String name = _name.getText().toString();
         String email = _emailText.getText().toString();
-        String birthday = _birthday.getText().toString();
         String adress = _adress.getText().toString();
         String phoneNumber = _phoneNumber.getText().toString();
         String description = _description.getText().toString();
@@ -259,13 +238,6 @@ public class SignupActivity extends AppCompatActivity {
             valid = false;
         } else {
             _emailText.setError(null);
-        }
-
-        if(birthday.isEmpty()){
-            _birthday.setError("campo vazio");
-            valid = false;
-        }else{
-            _birthday.setError(null);
         }
 
         if(adress.isEmpty()){

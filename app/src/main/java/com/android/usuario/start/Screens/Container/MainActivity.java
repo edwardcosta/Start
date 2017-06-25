@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        // Spinner to select projects difficulty.
         _difficulty_spinner = (Spinner) findViewById(R.id.activity_main_filter_difficulty_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.difficulty_array, android.R.layout.simple_spinner_item);

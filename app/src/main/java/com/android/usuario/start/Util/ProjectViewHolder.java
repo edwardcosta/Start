@@ -6,16 +6,20 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.R;
 import com.android.usuario.start.RequestManager.Database;
+import com.android.usuario.start.Screens.Container.MyProjects.MyProjectsView;
 import com.android.usuario.start.Screens.Container.Search.ProjectDetails.ProjectDetailsFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.util.List;
 import java.util.Random;
 
 public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -35,6 +39,7 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
     private ProgressBar _hippieProgresbar;
     private ImageView _favoriteProject;
     private SimpleDraweeView _imagCard;
+    private LinearLayout _parentLayout;
 
     private Project project;
     private Fragment fragment;
@@ -46,6 +51,7 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
 
         _favoriteProject = (ImageView) convertView.findViewById(R.id.card_project_favorit_heart);
         _imagCard = (SimpleDraweeView) convertView.findViewById(R.id.card_project_img);
+        _parentLayout = (LinearLayout) convertView.findViewById(R.id.card_project_linearLayout);
 
         _projectName = (TextView) convertView.findViewById(R.id.card_project_title);
         _hashtags = (TextView) convertView.findViewById(R.id.card_project_hashtag);
@@ -173,6 +179,14 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
                 }
             }
         });
+
+        if(fragment.getClass().equals(MyProjectsView.class)) {
+            List<String> requisitions = project.getWantToParticipate();
+            for (String user : requisitions) {
+                View userRequest = View.inflate(fragment.getContext(), R.layout.content_requisition_notification, _parentLayout);
+
+            }
+        }
     }
 
 }

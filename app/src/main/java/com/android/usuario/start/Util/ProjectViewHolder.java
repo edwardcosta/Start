@@ -245,6 +245,7 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
 
                                                     userRequisitionProfile.addProjectParticipating(project.getId());
                                                     Database.getProjectsReference().child(project.getId()).setValue(project);
+                                                    Database.getUsersReference().child(userRequisitionProfile.getId()).setValue(userRequisitionProfile);
                                                 }
                                             }
                                         })

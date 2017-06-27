@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -50,12 +51,19 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseAnalytics mFirebaseAnalytics;
 
     private TextView _logo;
+    private TextInputLayout _inputName;
     private EditText _name;
+    private TextInputLayout _inputEmail;
     private EditText _emailText;
+    private TextInputLayout _inputAdress;
     private EditText _adress;
+    private TextInputLayout _inputPhoneNumber;
     private EditText _phoneNumber;
+    private TextInputLayout _inputDescription;
     private EditText _description;
+    private TextInputLayout _inputPassword;
     private EditText _passwordText;
+    private TextInputLayout _inputRPassword;
     private EditText _rPasswordText;
     private TextView _signupButton;
     private TextView _loginLink;
@@ -117,12 +125,19 @@ public class SignupActivity extends AppCompatActivity {
         };
 
         _logo = (TextView) findViewById(R.id.activity_signup_logo);
+        _inputName = (TextInputLayout) findViewById(R.id.activity_signup_textinput_name);
         _name = (EditText) findViewById(R.id.activity_signup_input_name);
+        _inputEmail = (TextInputLayout) findViewById(R.id.activity_signup_textinput_email);
         _emailText = (EditText) findViewById(R.id.activity_signup_input_email);
+        _inputAdress = (TextInputLayout) findViewById(R.id.activity_signup_textinput_adress);
         _adress = (EditText) findViewById(R.id.activity_signup_input_adress);
+        _inputPhoneNumber = (TextInputLayout) findViewById(R.id.activity_signup_textinput_phonenumber);
         _phoneNumber = (EditText) findViewById(R.id.activity_signup_input_phonenumber);
+        _inputDescription = (TextInputLayout) findViewById(R.id.activity_signup_textinput_description);
         _description = (EditText) findViewById(R.id.activity_signup_input_description);
+        _inputPassword = (TextInputLayout) findViewById(R.id.activity_signup_textinput_password);
         _passwordText = (EditText) findViewById(R.id.activity_signup_input_password);
+        _inputRPassword = (TextInputLayout) findViewById(R.id.activity_signup_textinput_retype_password);
         _rPasswordText = (EditText) findViewById(R.id.activity_signup_input_retype_password);
         _signupButton = (TextView) findViewById(R.id.activity_signup_btn_signup);
         _loginLink = (TextView) findViewById(R.id.activity_signup_link_login);
@@ -133,6 +148,22 @@ public class SignupActivity extends AppCompatActivity {
 
         Typeface type = Typeface.createFromAsset(getAssets(),"fonts/BebasNeue-Bold.ttf");
         _logo.setTypeface(type);
+        type = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
+        _inputName.setTypeface(type);
+        _name.setTypeface(type);
+        _inputEmail.setTypeface(type);
+        _emailText.setTypeface(type);
+        _inputAdress.setTypeface(type);
+        _adress.setTypeface(type);
+        _inputPhoneNumber.setTypeface(type);
+        _phoneNumber.setTypeface(type);
+        _inputDescription.setTypeface(type);
+        _description.setTypeface(type);
+        _inputPassword.setTypeface(type);
+        _passwordText.setTypeface(type);
+        _inputRPassword.setTypeface(type);
+        _signupButton.setTypeface(type);
+        _loginLink.setTypeface(type);
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -57,6 +57,9 @@
 
             <!-- Name Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_name"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
@@ -66,11 +69,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords"
+                    android:textColor="@color/warm_grey"
                     android:hint="Nome" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Email Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_email"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
@@ -78,12 +85,16 @@
                 <EditText android:id="@+id/activity_signup_input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="textEmailAddress"
                     android:hint="E-mail" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Adress Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_adress"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
@@ -91,12 +102,16 @@
                 <EditText android:id="@+id/activity_signup_input_adress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="textCapWords"
                     android:hint="Cidade / Estado" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Phonenumber Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_phonenumber"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
@@ -104,12 +119,16 @@
                 <EditText android:id="@+id/activity_signup_input_phonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="phone"
                     android:hint="Telefone" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Description Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_description"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
@@ -117,6 +136,7 @@
                 <EditText android:id="@+id/activity_signup_input_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="textCapSentences|textMultiLine"
                     android:hint="Descrição" />
             </android.support.design.widget.TextInputLayout>
@@ -124,6 +144,9 @@
 
             <!-- Password Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_password"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true"
@@ -132,12 +155,16 @@
                 <EditText android:id="@+id/activity_signup_input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="textPassword"
                     android:hint="@string/prompt_signup_password"/>
             </android.support.design.widget.TextInputLayout>
 
             <!-- Retype Password Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_retype_password"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true"
@@ -147,6 +174,7 @@
                 <EditText android:id="@+id/activity_signup_input_retype_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="textPassword"
                     android:hint="@string/prompt_retype_password_signup"/>
             </android.support.design.widget.TextInputLayout>

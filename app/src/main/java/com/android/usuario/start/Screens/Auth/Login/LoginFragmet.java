@@ -137,6 +137,15 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
 
         Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/BebasNeue-Bold.ttf");
         _logo.setTypeface(type);
+        type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/OpenSans-Semibold.ttf");
+        _inputEmail.setTypeface(type);
+        _emailText.setTypeface(type);
+        _inputPassword.setTypeface(type);
+        _passwordText.setTypeface(type);
+        _signupLink.setTypeface(type);
+        type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/OpenSans-Regular.ttf");
+        _passwordForgot.setTypeface(type);
+        _loginButton.setTypeface(type);
 
         mCallbackManager = CallbackManager.Factory.create();
         //_loginFacebookButton.setReadPermissions("email", "public_profile");

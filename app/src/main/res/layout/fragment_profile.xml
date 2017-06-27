@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="11dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,7 +14,6 @@
 
         <TextView
             android:id="@+id/fragment_profile_edit"
-            android:layout_marginTop="11dp"
             android:layout_marginRight="9dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -169,12 +169,24 @@
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/signup_btn_logout"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Logout"/>
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/signup_btn_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="15.6sp"
+                android:background="@null"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Logout"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

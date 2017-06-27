@@ -1,10 +1,13 @@
 package com.android.usuario.start.Util;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -18,9 +21,15 @@ import com.android.usuario.start.RequestManager.Database;
 import com.android.usuario.start.Screens.Container.MyProjects.MyProjectsView;
 import com.android.usuario.start.Screens.Container.Search.ProjectDetails.ProjectDetailsFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 import java.util.Random;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -182,9 +191,92 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
 
         if(fragment.getClass().equals(MyProjectsView.class)) {
             List<String> requisitions = project.getWantToParticipate();
-            for (String user : requisitions) {
-                View userRequest = View.inflate(fragment.getContext(), R.layout.content_requisition_notification, _parentLayout);
+            for (final String user : requisitions) {
+                final View userRequest = LayoutInflater.from(fragment.getContext())
+                        .inflate(R.layout.content_requisition_notification,_parentLayout,false);
+                final TextView userName = (TextView) userRequest.findViewById(R.id.card_project_user);
+                final TextView profileType = (TextView) userRequest.findViewById(R.id.card_project_profile_type);
+                final TextView accept = (TextView) userRequest.findViewById(R.id.card_project_accept);
+                final TextView decline = (TextView) userRequest.findViewById(R.id.card_project_decline);
 
+                Database.getUsersReference().child(user).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        final Profile userRequisitionProfile = dataSnapshot.getValue(Profile.class);
+                        String[] names = userRequisitionProfile.getName().split(" ");
+                        final String firstName = names[0];
+                        userName.setText(firstName);
+                        profileType.setText(Singleton.getStringProfileType(userRequisitionProfile.getProfileType()));
+                        userName.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(fragment.getContext(), com.android.usuario.start.Screens.Profile.Profile.class);
+                                intent.putExtra("userProfile",userRequisitionProfile);
+                                fragment.getActivity().startActivity(intent);
+                            }
+                        });
+
+                        accept.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                new SweetAlertDialog(fragment.getContext(),SweetAlertDialog.NORMAL_TYPE)
+                                        .setTitleText("Atenção")
+                                        .setContentText("Confirma "+ firstName + " como novo integrante da equipe?")
+                                        .setConfirmText("Sim")
+                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                sweetAlertDialog.dismissWithAnimation();
+                                                project.removeWantToParticipateUser(user);
+                                                project.addParticipants(user);
+                                                userRequisitionProfile.addProjectParticipating(project.getId());
+                                                Database.getProjectsReference().child(project.getId()).setValue(project);
+                                            }
+                                        })
+                                        .setCancelText("Não")
+                                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                sweetAlertDialog.dismissWithAnimation();
+                                            }
+                                        }).show();
+                            }
+                        });
+
+                        decline.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                new SweetAlertDialog(fragment.getContext(),SweetAlertDialog.NORMAL_TYPE)
+                                        .setTitleText("Atenção")
+                                        .setContentText("Desejar recusar o pedido de "+ firstName + " como novo integrante da equipe?")
+                                        .setConfirmText("Sim")
+                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                sweetAlertDialog.dismissWithAnimation();
+                                                project.removeWantToParticipateUser(user);
+                                                Database.getProjectsReference().child(project.getId()).setValue(project);
+                                            }
+                                        })
+                                        .setCancelText("Não")
+                                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                sweetAlertDialog.dismissWithAnimation();
+                                            }
+                                        })
+                                        .show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                userRequest.setOnClickListener(null);
+                _parentLayout.addView(userRequest);
             }
         }
     }

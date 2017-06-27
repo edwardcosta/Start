@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="0dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="false">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/card_project_userRequest_height"
@@ -16,6 +18,7 @@
             android:layout_marginLeft="8dp">
 
             <TextView
+                android:id="@+id/card_project_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12.5sp"
@@ -27,7 +30,14 @@
                 android:layout_height="wrap_content"
                 android:textSize="12.5sp"
                 android:textColor="#f4c1fc"
-                android:text=" deseja participar como Hacker"/>
+                android:text=" deseja participar como "/>
+
+            <TextView
+                android:id="@+id/card_project_profile_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12.5sp"
+                android:textColor="#f4c1fc"/>
         </LinearLayout>
 
         <LinearLayout
@@ -46,7 +56,7 @@
                 android:text="Aceitar"/>
 
             <TextView
-                android:id="@+id/card_project_refuse"
+                android:id="@+id/card_project_decline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
@@ -56,8 +66,9 @@
                 android:text="Recusar"/>
         </LinearLayout>
     </RelativeLayout>
-    <LinearLayout
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#f8f8f8"></LinearLayout>
+        android:background="#f8f8f8"/>
 </LinearLayout>

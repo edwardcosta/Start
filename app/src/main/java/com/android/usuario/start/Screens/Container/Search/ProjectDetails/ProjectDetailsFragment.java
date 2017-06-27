@@ -38,6 +38,13 @@ public class ProjectDetailsFragment extends Fragment {
     private TextView _projectTitle;
     private TextView _hashtags;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        project = (Project) getArguments().getSerializable("project");
+        userProfile = (Profile) getArguments().get("userProfile");
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,11 +61,11 @@ public class ProjectDetailsFragment extends Fragment {
         TextView projectDescription = (TextView) view.findViewById(R.id.proj_details_description);*/
 
         Button projectIn = (Button) view.findViewById(R.id.proj_details_button);
-        projectIn.setOnClickListener(signInOnClickListener);
-
-        Bundle bundle = getArguments();
-        project = (Project) bundle.getSerializable("project");
-        userProfile = (Profile) bundle.get("userProfile");
+        if(!project.getAuthor().equals(userProfile.getId())) {
+            projectIn.setOnClickListener(signInOnClickListener);
+        }else {
+            projectIn.setVisibility(View.GONE);
+        }
 
         int numberParticipants = project.getMaxHackers() + project.getMaxHippies() + project.getMaxHustlers();
 

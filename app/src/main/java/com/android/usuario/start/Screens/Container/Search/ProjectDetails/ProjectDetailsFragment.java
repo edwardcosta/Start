@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -20,6 +21,7 @@ import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.RequestManager.Database;
+import com.android.usuario.start.Util.Singleton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Picasso;
@@ -37,6 +39,16 @@ public class ProjectDetailsFragment extends Fragment {
 
     private TextView _projectTitle;
     private TextView _hashtags;
+    private TextView _duration;
+    private TextView _date;
+    private TextView _difficulty;
+    private TextView _hustler;
+    private TextView _hacker;
+    private TextView _hipster;
+    private ProgressBar _hustlerProgresbar;
+    private ProgressBar _hackerProgresbar;
+    private ProgressBar _hipsterProgresbar;
+    private TextView _description;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,10 +67,55 @@ public class ProjectDetailsFragment extends Fragment {
         carouselView.setImageListener(imageListener);
         _projectTitle = (TextView) view.findViewById(R.id.proj_details_proj_title);
         _hashtags = (TextView) view.findViewById(R.id.proj_details_proj_hashtag);
-        /*TextView projectPeriod = (TextView) view.findViewById(R.id.proj_details_period_duration);
-        TextView projectStartDate = (TextView) view.findViewById(R.id.proj_details_start_date);
-        TextView projectParticipantsNumber = (TextView) view.findViewById(R.id.proj_details_participants);
-        TextView projectDescription = (TextView) view.findViewById(R.id.proj_details_description);*/
+        _difficulty = (TextView) view.findViewById(R.id.proj_details_proj_difficulty);
+        _date = (TextView) view.findViewById(R.id.proj_details_proj_date);
+        _duration = (TextView) view.findViewById(R.id.proj_details_proj_hustler_duration);
+        _hustler = (TextView) view.findViewById(R.id.proj_details_proj_hustler);
+        _hacker = (TextView) view.findViewById(R.id.proj_details_proj_hacker);
+        _hipster = (TextView) view.findViewById(R.id.proj_details_proj_hipster);
+        _hustlerProgresbar = (ProgressBar) view.findViewById(R.id.proj_details_proj_hustler_progressbar);
+        _hackerProgresbar = (ProgressBar) view.findViewById(R.id.proj_details_proj_hacker_progressbar);
+        _hipsterProgresbar = (ProgressBar) view.findViewById(R.id.proj_details_proj_hipster_progressbar);
+        _description = (TextView) view.findViewById(R.id.proj_details_description);
+
+        _hackerProgresbar.setIndeterminate(false);
+        _hipsterProgresbar.setIndeterminate(false);
+        _hustlerProgresbar.setIndeterminate(false);
+
+        _projectTitle.setText(project.getName());
+
+        String hashtags = "";
+        for(String hs : project.getHashtags()){
+            hashtags = hashtags.concat(hs + " ");
+        }
+        _hashtags.setText(hashtags);
+
+        if (project.getMaxHustlers() == 0) {
+            _hustlerProgresbar.setProgress(100);
+        } else {
+            _hustlerProgresbar.setMax(project.getMaxHustlers());
+            _hustlerProgresbar.setProgress(project.getnHustlers());
+        }
+
+        if (project.getMaxHackers() == 0) {
+            _hackerProgresbar.setProgress(100);
+        } else {
+            _hackerProgresbar.setMax(project.getMaxHackers());
+            _hackerProgresbar.setProgress(project.getnHackers());
+        }
+        if (project.getMaxHippies() == 0) {
+            _hipsterProgresbar.setProgress(100);
+        } else {
+            _hipsterProgresbar.setMax(project.getMaxHippies());
+            _hipsterProgresbar.setProgress(project.getnHippies());
+        }
+
+        _date.setText(project.getStartDay() + "/" + (project.getStartMonth()));
+        _difficulty.setText(Singleton.getStringProjectDifficulty(project.getDifficulty()));
+        _hustler.setText(project.getnHustlers() + "/" + project.getMaxHustlers());
+        _hacker.setText(project.getnHackers() + "/" + project.getMaxHackers());
+        _hipster.setText(project.getnHippies() + "/" + project.getMaxHippies());
+        _description.setText(project.getDescription());
 
         Button projectIn = (Button) view.findViewById(R.id.proj_details_button);
         if(!project.getAuthor().equals(userProfile.getId())) {
@@ -68,12 +125,6 @@ public class ProjectDetailsFragment extends Fragment {
         }
 
         int numberParticipants = project.getMaxHackers() + project.getMaxHippies() + project.getMaxHustlers();
-
-        _projectTitle.setText(project.getName());
-        /*projectPeriod.setText(String.valueOf(project.getDuration())+ " dias");
-        projectStartDate.setText(project.getStartDay() + "/" + project.getStartMonth());
-        projectParticipantsNumber.setText(String.valueOf(numberParticipants));
-        projectDescription.setText(project.getDescription());*/
 
         return view;
     }

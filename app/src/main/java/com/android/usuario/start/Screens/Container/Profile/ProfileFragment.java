@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class ProfileFragment extends Fragment {
     private TextView _profileTextType;
     private TextView _name;
     private TextView _description;
-    private ListView _projects;
+    private LinearLayout _projects;
     private TextView _email;
     private TextView _phoneNumber;
 
@@ -55,7 +56,7 @@ public class ProfileFragment extends Fragment {
         _profileTextType = (TextView) parentView.findViewById(R.id.fragment_profile_user_profile);
         _name = (TextView) parentView.findViewById(R.id.fragment_profile_user_name);
         _description = (TextView) parentView.findViewById(R.id.fragment_profile_description);
-        _projects = (ListView) parentView.findViewById(R.id.fragment_profile_projects);
+        _projects = (LinearLayout) parentView.findViewById(R.id.fragment_profile_projects);
         _email = (TextView) parentView.findViewById(R.id.fragment_profile_user_email);
         _phoneNumber = (TextView) parentView.findViewById(R.id.fragment_profile_user_phone);
 

@@ -42,7 +42,7 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
     private TextView _difficulty;
     private TextView _hustler;
     private TextView _hacker;
-    TextView _hippie;
+    private TextView _hippie;
     private ProgressBar _hustlerProgresbar;
     private ProgressBar _hackerProgresbar;
     private ProgressBar _hippieProgresbar;
@@ -133,7 +133,7 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
             _hashtags.setText(hashtags);
             _duration.setText(project.getDuration() + " dias");
             _date.setText(project.getStartDay() + "/" + (project.getStartMonth()));
-            _difficulty.setText(String.valueOf(project.getDifficulty()));
+            _difficulty.setText(Singleton.getStringProjectDifficulty(project.getDifficulty()));
             _hustler.setText(project.getnHustlers() + "/" + project.getMaxHustlers());
             _hacker.setText(project.getnHackers() + "/" + project.getMaxHackers());
             _hippie.setText(project.getnHippies() + "/" + project.getMaxHippies());
@@ -227,10 +227,25 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
                                             @Override
                                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                                 sweetAlertDialog.dismissWithAnimation();
-                                                project.removeWantToParticipateUser(user);
-                                                project.addParticipants(user);
-                                                userRequisitionProfile.addProjectParticipating(project.getId());
-                                                Database.getProjectsReference().child(project.getId()).setValue(project);
+                                                if (userRequisitionProfile.getProfileType() != 0){
+                                                    project.removeWantToParticipateUser(user);
+                                                    project.addParticipants(user);
+
+                                                    switch (userRequisitionProfile.getProfileType()){
+                                                        case 1:
+                                                            project.setnHackers(project.getnHackers()+1);
+                                                            break;
+                                                        case 2:
+                                                            project.setnHippies(project.getnHippies()+1);
+                                                            break;
+                                                        case 3:
+                                                            project.setnHustlers(project.getnHustlers()+1);
+                                                            break;
+                                                    }
+
+                                                    userRequisitionProfile.addProjectParticipating(project.getId());
+                                                    Database.getProjectsReference().child(project.getId()).setValue(project);
+                                                }
                                             }
                                         })
                                         .setCancelText("Não")

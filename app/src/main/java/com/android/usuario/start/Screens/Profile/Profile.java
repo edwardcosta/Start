@@ -7,10 +7,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.usuario.start.R;
+import com.android.usuario.start.Util.Singleton;
 
 /**
  * Created by eduar on 26/06/2017.
@@ -25,7 +27,7 @@ public class Profile extends AppCompatActivity{
     private TextView _profileTextType;
     private TextView _name;
     private TextView _description;
-    private ListView _projects;
+    private LinearLayout _projects;
     private TextView _email;
     private TextView _phoneNumber;
     private Button _logout;
@@ -44,32 +46,15 @@ public class Profile extends AppCompatActivity{
         _profileTextType = (TextView) findViewById(R.id.fragment_profile_user_profile);
         _name = (TextView) findViewById(R.id.fragment_profile_user_name);
         _description = (TextView) findViewById(R.id.fragment_profile_description);
-        _projects = (ListView) findViewById(R.id.fragment_profile_projects);
+        _projects = (LinearLayout) findViewById(R.id.fragment_profile_projects);
         _email = (TextView) findViewById(R.id.fragment_profile_user_email);
         _phoneNumber = (TextView) findViewById(R.id.fragment_profile_user_phone);
         _logout = (Button) findViewById(R.id.signup_btn_logout);
+        _profileTextType.setText(Singleton.getStringProfileType(userProfile.getProfileType()));
+        _profileImgType.setImageResource(Singleton.getImageProfileType(userProfile.getProfileType()));
 
 
         _edit.setVisibility(View.GONE);
-
-        switch (userProfile.getProfileType()){
-            case 0:
-                _profileTextType.setText("");
-                _profileImgType.setImageResource(R.drawable.img_profile_placeholder);
-                break;
-            case 1:
-                _profileTextType.setText("Hacker");
-                _profileImgType.setImageResource(R.drawable.img_profile_placeholder);
-                break;
-            case 2:
-                _profileTextType.setText("Hipster");
-                _profileImgType.setImageResource(R.drawable.img_profile_placeholder);
-                break;
-            case 3:
-                _profileTextType.setText("Hustler");
-                _profileImgType.setImageResource(R.drawable.img_profile_placeholder);
-                break;
-        }
 
         _name.setText(userProfile.getName());
         _description.setText(userProfile.getDescription());

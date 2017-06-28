@@ -12,10 +12,12 @@ public class Fonts {
     public final Typeface OPEN_SANS_BOLD;
     public final Typeface OPEN_SANS_ITALIC;
     public final Typeface OPEN_SANS_SEMIBOLD;
+    public final Typeface BEBAS_NEUE_BOLD;
     public Fonts(Context context) {
         OPEN_SANS_REGULAR = Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Regular.ttf");
         OPEN_SANS_BOLD = Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Bold.ttf");
         OPEN_SANS_ITALIC = Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Italic.ttf");
         OPEN_SANS_SEMIBOLD = Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Semibold.ttf");
+        BEBAS_NEUE_BOLD = Typeface.createFromAsset(context.getAssets(), "fonts/BebasNeue-Bold.ttf");
     }
 }

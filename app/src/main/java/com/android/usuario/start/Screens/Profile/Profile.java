@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.usuario.start.R;
+import com.android.usuario.start.Util.Fonts;
 import com.android.usuario.start.Util.Singleton;
 
 /**
@@ -28,6 +29,8 @@ public class Profile extends AppCompatActivity{
     private TextView _name;
     private TextView _description;
     private LinearLayout _projects;
+    private TextView _projectsTitle;
+    private TextView _contactTitle;
     private TextView _email;
     private TextView _phoneNumber;
     private Button _logout;
@@ -47,12 +50,13 @@ public class Profile extends AppCompatActivity{
         _name = (TextView) findViewById(R.id.fragment_profile_user_name);
         _description = (TextView) findViewById(R.id.fragment_profile_description);
         _projects = (LinearLayout) findViewById(R.id.fragment_profile_projects);
+        _projectsTitle = (TextView) findViewById(R.id.fragment_profile_projects_title);
+        _contactTitle = (TextView) findViewById(R.id.fragment_contact_title);
         _email = (TextView) findViewById(R.id.fragment_profile_user_email);
         _phoneNumber = (TextView) findViewById(R.id.fragment_profile_user_phone);
-        _logout = (Button) findViewById(R.id.signup_btn_logout);
+        _logout = (Button) findViewById(R.id.fragment_profile_signup_btn_logout);
         _profileTextType.setText(Singleton.getStringProfileType(userProfile.getProfileType()));
         _profileImgType.setImageResource(Singleton.getImageProfileType(userProfile.getProfileType()));
-
 
         _edit.setVisibility(View.GONE);
 
@@ -63,6 +67,18 @@ public class Profile extends AppCompatActivity{
         _phoneNumber.setText(userProfile.getPhoneNumber());
 
         _logout.setVisibility(View.GONE);
+
+        //Setting fonts
+        Fonts fonts = new Fonts(this);
+        _name.setTypeface(fonts.BEBAS_NEUE_BOLD);
+        _description.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _profileTextType.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _email.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _phoneNumber.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _contactTitle.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _projectsTitle.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _edit.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _logout.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
     }
 
     @Override

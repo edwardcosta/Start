@@ -24,6 +24,7 @@ import com.android.usuario.start.Screens.Auth.SignupActivity;
 import com.android.usuario.start.Screens.Container.MainActivity;
 import com.android.usuario.start.Screens.ProfileChooser.ScreenSlidePagerActivity;
 import com.android.usuario.start.Screens.Splash.SplashActivity;
+import com.android.usuario.start.Util.Fonts;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.google.android.gms.auth.api.Auth;
@@ -134,18 +135,16 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
         _passwordForgot = (TextView) parentView.findViewById(R.id.activity_login_btn_password_forgot);
         _signupLink = (TextView) parentView.findViewById(R.id.activity_login_link_signup);
 
-
-        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/BebasNeue-Bold.ttf");
-        _logo.setTypeface(type);
-        type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/OpenSans-Semibold.ttf");
-        _inputEmail.setTypeface(type);
-        _emailText.setTypeface(type);
-        _inputPassword.setTypeface(type);
-        _passwordText.setTypeface(type);
-        _signupLink.setTypeface(type);
-        type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/OpenSans-Regular.ttf");
-        _passwordForgot.setTypeface(type);
-        _loginButton.setTypeface(type);
+        //Setting fonts
+        Fonts fonts = new Fonts(getContext());
+        _logo.setTypeface(fonts.BEBAS_NEUE_BOLD);
+        _inputEmail.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _emailText.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _inputPassword.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _passwordText.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _signupLink.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _passwordForgot.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _loginButton.setTypeface(fonts.OPEN_SANS_REGULAR);
 
         mCallbackManager = CallbackManager.Factory.create();
         //_loginFacebookButton.setReadPermissions("email", "public_profile");

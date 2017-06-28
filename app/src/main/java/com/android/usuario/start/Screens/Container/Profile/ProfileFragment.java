@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.Screens.Auth.LoginActivity;
+import com.android.usuario.start.Util.Fonts;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
@@ -36,6 +37,8 @@ public class ProfileFragment extends Fragment {
     private TextView _name;
     private TextView _description;
     private LinearLayout _projects;
+    private TextView _projectsTitle;
+    private TextView _contactTitle;
     private TextView _email;
     private TextView _phoneNumber;
 
@@ -57,6 +60,8 @@ public class ProfileFragment extends Fragment {
         _name = (TextView) parentView.findViewById(R.id.fragment_profile_user_name);
         _description = (TextView) parentView.findViewById(R.id.fragment_profile_description);
         _projects = (LinearLayout) parentView.findViewById(R.id.fragment_profile_projects);
+        _projectsTitle = (TextView) parentView.findViewById(R.id.fragment_profile_projects_title);
+        _contactTitle = (TextView) parentView.findViewById(R.id.fragment_contact_title);
         _email = (TextView) parentView.findViewById(R.id.fragment_profile_user_email);
         _phoneNumber = (TextView) parentView.findViewById(R.id.fragment_profile_user_phone);
 
@@ -86,7 +91,7 @@ public class ProfileFragment extends Fragment {
         _phoneNumber.setText(userProfile.getPhoneNumber());
 
 
-        Button logout = (Button) parentView.findViewById(R.id.signup_btn_logout);
+        Button logout = (Button) parentView.findViewById(R.id.fragment_profile_signup_btn_logout);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +103,18 @@ public class ProfileFragment extends Fragment {
                 getActivity().finish();
             }
         });
+
+        //Setting fonts
+        Fonts fonts = new Fonts(getContext());
+        _name.setTypeface(fonts.OPEN_SANS_BOLD);
+        _description.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _profileTextType.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _email.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _phoneNumber.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _contactTitle.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _projectsTitle.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _edit.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        logout.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
 
         return parentView;
     }

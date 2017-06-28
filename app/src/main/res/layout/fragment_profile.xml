@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="11dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:layout_marginTop="14dp"
             android:textSize="15sp"
             android:textColor="@color/colorPrimary"
             android:text="Editar"/>
@@ -71,13 +71,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_gravity="center_horizontal"
                 android:id="@+id/fragment_profile_user_name"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
                 android:text="Nome do Fulano" />
 
             <TextView
@@ -90,13 +89,13 @@
                 android:text="@string/lorem_ipsum"/>
 
             <TextView
+                android:id="@+id/fragment_contact_title"
                 android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contato"
                 android:textSize="15sp"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"/>
+                android:textColor="@color/colorPrimary"/>
 
             <LinearLayout
                 android:layout_marginTop="8dp"
@@ -105,8 +104,8 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_weight="1"
                     android:id="@+id/fragment_profile_user_email"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="lorem@ipsum.com"
@@ -114,8 +113,8 @@
                     android:textColor="#747474"/>
 
                 <TextView
-                    android:layout_weight="1"
                     android:id="@+id/fragment_profile_user_phone"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(11) 4002 8922"
@@ -126,17 +125,17 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/fragment_profile_projects_title"
                 android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Projetos"
                 android:textSize="15sp"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"/>
+                android:textColor="@color/colorPrimary"/>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:id="@+id/fragment_profile_projects"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"/>
@@ -149,7 +148,7 @@
             android:gravity="end">
 
             <Button
-                android:id="@+id/signup_btn_logout"
+                android:id="@+id/fragment_profile_signup_btn_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

@@ -51,6 +51,8 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
     private SimpleDraweeView _imagCard;
     private LinearLayout _parentLayout;
 
+    private Fonts fonts;
+
     private Project project;
     private Fragment fragment;
 
@@ -83,7 +85,7 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
         itemView.setOnClickListener(this);
 
         //Setting fonts
-        Fonts fonts = new Fonts(fragment.getContext());
+        fonts = new Fonts(fragment.getContext());
         _date.setTypeface(fonts.OPEN_SANS_REGULAR);
         _difficulty.setTypeface(fonts.OPEN_SANS_REGULAR);
         _duration.setTypeface(fonts.OPEN_SANS_REGULAR);
@@ -204,12 +206,18 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
         if(fragment.getClass().equals(MyProjectsView.class)) {
             List<String> requisitions = project.getWantToParticipate();
             for (final String user : requisitions) {
-                final View userRequest = LayoutInflater.from(fragment.getContext())
+                final View _userRequest = LayoutInflater.from(fragment.getContext())
                         .inflate(R.layout.content_requisition_notification,_parentLayout,false);
-                final TextView userName = (TextView) userRequest.findViewById(R.id.card_project_user);
-                final TextView profileType = (TextView) userRequest.findViewById(R.id.card_project_profile_type);
-                final TextView accept = (TextView) userRequest.findViewById(R.id.card_project_accept);
-                final TextView decline = (TextView) userRequest.findViewById(R.id.card_project_decline);
+                final TextView userName = (TextView) _userRequest.findViewById(R.id.card_project_user);
+                userName.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+                final TextView profileType = (TextView) _userRequest.findViewById(R.id.card_project_profile_type);
+                profileType.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+                final TextView accept = (TextView) _userRequest.findViewById(R.id.card_project_accept);
+                accept.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+                final TextView decline = (TextView) _userRequest.findViewById(R.id.card_project_decline);
+                decline.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+                final TextView requestText = (TextView) _userRequest.findViewById(R.id.card_project_request_text);
+                requestText.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
 
                 Database.getUsersReference().child(user).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -303,8 +311,8 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
 
                     }
                 });
-                userRequest.setOnClickListener(null);
-                _parentLayout.addView(userRequest);
+                _userRequest.setOnClickListener(null);
+                _parentLayout.addView(_userRequest);
             }
         }
     }

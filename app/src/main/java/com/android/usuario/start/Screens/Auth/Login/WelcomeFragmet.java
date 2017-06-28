@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.android.usuario.start.R;
+import com.android.usuario.start.Util.Fonts;
 
 /**
  * Created by eduar on 08/06/2017.
@@ -30,8 +31,9 @@ public class WelcomeFragmet extends Fragment {
 
         TextView _logo = (TextView) parentView.findViewById(R.id.fragment_welcome_screen_logo);
 
-        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/BebasNeue-Bold.ttf");
-        _logo.setTypeface(type);
+        //Setting fonts
+        Fonts fonts = new Fonts(getContext());
+        _logo.setTypeface(fonts.BEBAS_NEUE_BOLD);
 
         return parentView;
     }

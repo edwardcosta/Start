@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.RequestManager.Database;
+import com.android.usuario.start.Util.Fonts;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -146,24 +147,24 @@ public class SignupActivity extends AppCompatActivity {
         bMonth = Calendar.getInstance().get(Calendar.MONTH);
         bYear = Calendar.getInstance().get(Calendar.YEAR);
 
-        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/BebasNeue-Bold.ttf");
-        _logo.setTypeface(type);
-        type = Typeface.createFromAsset(getAssets(),"fonts/OpenSans-Regular.ttf");
-        _inputName.setTypeface(type);
-        _name.setTypeface(type);
-        _inputEmail.setTypeface(type);
-        _emailText.setTypeface(type);
-        _inputAdress.setTypeface(type);
-        _adress.setTypeface(type);
-        _inputPhoneNumber.setTypeface(type);
-        _phoneNumber.setTypeface(type);
-        _inputDescription.setTypeface(type);
-        _description.setTypeface(type);
-        _inputPassword.setTypeface(type);
-        _passwordText.setTypeface(type);
-        _inputRPassword.setTypeface(type);
-        _signupButton.setTypeface(type);
-        _loginLink.setTypeface(type);
+        //Setting fonts
+        Fonts fonts = new Fonts(this);
+        _logo.setTypeface(fonts.BEBAS_NEUE_BOLD);
+        _inputName.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _name.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputEmail.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _emailText.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputAdress.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _adress.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputPhoneNumber.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _phoneNumber.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputDescription.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _description.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputPassword.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _passwordText.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputRPassword.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _signupButton.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _loginLink.setTypeface(fonts.OPEN_SANS_REGULAR);
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override

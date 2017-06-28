@@ -31,29 +31,26 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/proj_details_proj_title"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="8dp"
-                android:id="@+id/proj_details_proj_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15.6sp"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
                 android:maxLines="4"
                 android:text="Project Title"/>
 
             <TextView
+                android:id="@+id/proj_details_proj_hashtag"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="4dp"
-                android:id="@+id/proj_details_proj_hashtag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
                 android:textSize="12.5sp"
-                android:fontFamily="sans-serif"
                 android:text="#hashtag #app #starty"/>
 
             <LinearLayout
@@ -79,8 +76,8 @@
                         android:text="Fácil"/>
 
                     <ProgressBar
-                        android:layout_marginTop="18dp"
                         android:id="@+id/proj_details_proj_hacker_progressbar"
+                        android:layout_marginTop="18dp"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:max="100"
@@ -95,7 +92,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="11sp"
-                        android:textStyle="italic"
                         android:textColor="#6f6f6f"
                         android:text="2/2"/>
 
@@ -118,8 +114,8 @@
                         android:text="30/06"/>
 
                     <ProgressBar
-                        android:layout_marginTop="18dp"
                         android:id="@+id/proj_details_proj_hipster_progressbar"
+                        android:layout_marginTop="18dp"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:max="100"
@@ -134,7 +130,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="11sp"
-                        android:textStyle="italic"
                         android:textColor="#6f6f6f"
                         android:text="2/2"/>
 
@@ -157,8 +152,8 @@
                         android:text="4 dias"/>
 
                     <ProgressBar
-                        android:layout_marginTop="18dp"
                         android:id="@+id/proj_details_proj_hustler_progressbar"
+                        android:layout_marginTop="18dp"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:max="100"
@@ -173,7 +168,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="11sp"
-                        android:textStyle="italic"
                         android:textColor="#6f6f6f"
                         android:text="2/2"/>
 
@@ -199,14 +193,14 @@
 
         <Button
             android:id="@+id/proj_details_button"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
             android:layout_marginRight="4dp"
             android:layout_marginBottom="8dp"
             android:background="@null"
             android:textColor="@color/colorPrimary"
             android:text="Solicitar Participação"
-            android:textSize="12sp"
-            android:layout_width="200dp"
-            android:layout_height="40dp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 

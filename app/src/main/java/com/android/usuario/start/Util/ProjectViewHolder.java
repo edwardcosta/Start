@@ -2,6 +2,7 @@ package com.android.usuario.start.Util;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -80,6 +81,17 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
 
         /* makes all the cell be clickable */
         itemView.setOnClickListener(this);
+
+        //Setting fonts
+        Fonts fonts = new Fonts(fragment.getContext());
+        _date.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _difficulty.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _duration.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _projectName.setTypeface(fonts.OPEN_SANS_BOLD);
+        _hashtags.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _hacker.setTypeface(fonts.OPEN_SANS_ITALIC);
+        _hippie.setTypeface(fonts.OPEN_SANS_ITALIC);
+        _hustler.setTypeface(fonts.OPEN_SANS_ITALIC);
     }
 
     @Override

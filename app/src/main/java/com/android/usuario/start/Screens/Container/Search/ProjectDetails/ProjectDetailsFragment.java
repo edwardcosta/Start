@@ -1,7 +1,6 @@
 package com.android.usuario.start.Screens.Container.Search.ProjectDetails;
 
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,17 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.RequestManager.Database;
+import com.android.usuario.start.Util.Fonts;
 import com.android.usuario.start.Util.Singleton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -125,6 +122,18 @@ public class ProjectDetailsFragment extends Fragment {
         }
 
         int numberParticipants = project.getMaxHackers() + project.getMaxHippies() + project.getMaxHustlers();
+
+        //Setting fonts
+        Fonts fonts = new Fonts(getContext());
+        _projectTitle.setTypeface(fonts.OPEN_SANS_BOLD);
+        _hashtags.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        projectIn.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _date.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _difficulty.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _duration.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _hacker.setTypeface(fonts.OPEN_SANS_ITALIC);
+        _hipster.setTypeface(fonts.OPEN_SANS_ITALIC);
+        _hustler.setTypeface(fonts.OPEN_SANS_ITALIC);
 
         return view;
     }

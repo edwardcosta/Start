@@ -86,17 +86,32 @@
                         android:textColor="#6e6e6e"
                         android:text="Fácil"/>
 
-                    <ProgressBar
-                        android:id="@+id/proj_details_proj_hacker_progressbar"
-                        android:layout_marginTop="18dp"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:max="100"
-                        android:progress="0"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:progressDrawable="@drawable/circular_progress_bar"
-                        android:background="@drawable/circle_shape"
-                        android:indeterminate="false"/>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ProgressBar
+                            android:id="@+id/proj_details_proj_hacker_progressbar"
+                            android:layout_marginTop="18dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:max="100"
+                            android:progress="0"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:progressDrawable="@drawable/circular_progress_bar"
+                            android:background="@drawable/circle_shape"
+                            android:indeterminate="false"/>
+
+                        <ImageView
+                            android:layout_marginTop="22dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/img_hacker"/>
+
+
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/proj_details_proj_hacker"
@@ -124,17 +139,31 @@
                         android:textColor="#6e6e6e"
                         android:text="30/06"/>
 
-                    <ProgressBar
-                        android:id="@+id/proj_details_proj_hipster_progressbar"
-                        android:layout_marginTop="18dp"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:max="100"
-                        android:progress="0"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:progressDrawable="@drawable/circular_progress_bar"
-                        android:background="@drawable/circle_shape"
-                        android:indeterminate="false"/>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ProgressBar
+                            android:id="@+id/proj_details_proj_hipster_progressbar"
+                            android:layout_marginTop="18dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:max="100"
+                            android:progress="0"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:progressDrawable="@drawable/circular_progress_bar"
+                            android:background="@drawable/circle_shape"
+                            android:indeterminate="false"/>
+
+
+                        <ImageView
+                            android:layout_marginTop="22dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/img_hipster"/>
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/proj_details_proj_hipster"
@@ -162,17 +191,30 @@
                         android:textColor="#6e6e6e"
                         android:text="4 dias"/>
 
-                    <ProgressBar
-                        android:id="@+id/proj_details_proj_hustler_progressbar"
-                        android:layout_marginTop="18dp"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:max="100"
-                        android:progress="0"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:progressDrawable="@drawable/circular_progress_bar"
-                        android:background="@drawable/circle_shape"
-                        android:indeterminate="false"/>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ProgressBar
+                            android:id="@+id/proj_details_proj_hustler_progressbar"
+                            android:layout_marginTop="18dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:max="100"
+                            android:progress="0"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:progressDrawable="@drawable/circular_progress_bar"
+                            android:background="@drawable/circle_shape"
+                            android:indeterminate="false"/>
+
+
+                        <ImageView
+                            android:layout_marginTop="22dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/img_hustler"/>
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/proj_details_proj_hustler"

@@ -42,7 +42,7 @@ public class HustlerView extends Fragment {
         contentContent.setBackgroundResource(R.drawable.img_hustler_background);
         _img.setImageResource(R.drawable.img_hustler);
         _profileType.setText("Hustler");
-        _profileDescription.setText("Gosto de empreendedorismo,n\"" +
+        _profileDescription.setText("Gosto de empreendedorismo,\n" +
                 "comunicação, estratégia, marketing,\n" +
                 "administração e coisas do tipo");
 

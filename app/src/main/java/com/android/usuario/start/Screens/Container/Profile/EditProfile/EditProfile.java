@@ -1,6 +1,7 @@
 package com.android.usuario.start.Screens.Container.Profile.EditProfile;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.RequestManager.Database;
+import com.android.usuario.start.Screens.ProfileChooser.ScreenSlidePagerActivity;
 import com.android.usuario.start.Util.Fonts;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -111,6 +113,12 @@ public class EditProfile extends AppCompatActivity {
         _description.setText(userProfile.getDescription());
 
         //TODO create edit profile logic
+        _signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signup();
+            }
+        });
     }
 
     public void signup() {
@@ -129,7 +137,6 @@ public class EditProfile extends AppCompatActivity {
         String phoneNumber = _phoneNumber.getText().toString();
         String description = _description.getText().toString();
 
-        userProfile = new Profile();
         userProfile.setName(name);
         userProfile.setAdress(adress);
         userProfile.setPhoneNumber(phoneNumber);
@@ -159,6 +166,9 @@ public class EditProfile extends AppCompatActivity {
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         sweetAlertDialog.dismissWithAnimation();
                         _signupButton.setEnabled(true);
+                        Intent intent = new Intent(EditProfile.this, ScreenSlidePagerActivity.class);
+                        intent.putExtra("userProfile",userProfile);
+                        startActivity(intent);
                         finish();
                     }
                 }).show();

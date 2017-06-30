@@ -24,6 +24,7 @@
 
     <style name="TextInputStyle">
         <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="colorControlNormal">@color/teal</item>
         <item name="colorControlActivated">@color/teal</item>

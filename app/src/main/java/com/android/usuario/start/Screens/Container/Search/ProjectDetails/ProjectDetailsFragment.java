@@ -1,6 +1,7 @@
 package com.android.usuario.start.Screens.Container.Search.ProjectDetails;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.DataObject.Project;
 import com.android.usuario.start.RequestManager.Database;
+import com.android.usuario.start.Screens.Container.Search.ProjectDetails.EditProject.EditProject;
 import com.android.usuario.start.Util.Fonts;
 import com.android.usuario.start.Util.Singleton;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -46,6 +48,7 @@ public class ProjectDetailsFragment extends Fragment {
     private ProgressBar _hackerProgresbar;
     private ProgressBar _hipsterProgresbar;
     private TextView _description;
+    private TextView _edit;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,6 +83,21 @@ public class ProjectDetailsFragment extends Fragment {
         _hackerProgresbar = (ProgressBar) view.findViewById(R.id.proj_details_proj_hacker_progressbar);
         _hipsterProgresbar = (ProgressBar) view.findViewById(R.id.proj_details_proj_hipster_progressbar);
         _description = (TextView) view.findViewById(R.id.proj_details_description);
+        _edit = (TextView) view.findViewById(R.id.proj_details_edit);
+
+        if(!project.getAuthor().equals(userProfile.getId())){
+            _edit.setVisibility(View.GONE);
+        }else{
+            _edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), EditProject.class);
+                    intent.putExtra("userProfile",userProfile);
+                    intent.putExtra("project",project);
+                    getActivity().startActivity(intent);
+                }
+            });
+        }
 
         _hackerProgresbar.setIndeterminate(false);
         _hipsterProgresbar.setIndeterminate(false);

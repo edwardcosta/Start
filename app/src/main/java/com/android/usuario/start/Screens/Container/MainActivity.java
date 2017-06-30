@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
 
             SearchView fragment = (SearchView) this.fragment;
 
-            String searchString = _searchBar.getText().toString();
+            String searchString = _searchBar.getText().toString().toLowerCase();
             List<Project> foundProjects = new ArrayList();
 
             if (searchString.isEmpty()) {
@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             for (Project project : fragment.projects) {
-                if (project.getName().contains(searchString)) {
+                if (project.getName().toLowerCase().contains(searchString)) {
                     foundProjects.add(project);
                 }
             }

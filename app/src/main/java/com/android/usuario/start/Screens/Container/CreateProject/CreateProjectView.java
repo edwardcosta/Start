@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
@@ -30,8 +29,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,9 +39,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -96,12 +91,12 @@ public class CreateProjectView extends Fragment {
     private EditText _hashtags;
     private EditText _projectName;
     private EditText _description;
-    private EditText _duration;
     private TextView _dateInit;
-    private EditText _nHackersInput;
-    private EditText _nHippiesInput;
-    private EditText _nHustlersInput;
-    private Spinner _difficulty_spinner;
+    private Spinner _durationSpinner;
+    private Spinner _nHackersSpinner;
+    private Spinner _nHipstersSpinner;
+    private Spinner _nHustlersSpinner;
+    private Spinner _difficultySpinner;
     private ImageView _image1;
     private ImageView _image2;
     private ImageView _image3;
@@ -148,11 +143,12 @@ public class CreateProjectView extends Fragment {
         _hashtags = (EditText) view.findViewById(R.id.fragment_create_project_hashtags);
         _projectName = (EditText) view.findViewById(R.id.projectName);
         _description = (EditText) view.findViewById(R.id.description);
-        _duration = (EditText) view.findViewById(R.id.duration);
         _dateInit = (TextView) view.findViewById(R.id.dateInit);
-        _nHackersInput = (EditText) view.findViewById(R.id.nHackers);
-        _nHippiesInput = (EditText) view.findViewById(R.id.nHippies);
-        _nHustlersInput = (EditText) view.findViewById(R.id.nHustlers);
+        _durationSpinner = (Spinner) view.findViewById(R.id.duration_spinner);
+        _difficultySpinner = (Spinner) view.findViewById(R.id.difficulty_spinner);
+        _nHackersSpinner = (Spinner) view.findViewById(R.id.nHackers_spinner);
+        _nHipstersSpinner = (Spinner) view.findViewById(R.id.nHipsters_spinner);
+        _nHustlersSpinner = (Spinner) view.findViewById(R.id.nHustlers_spinner);
         _image1 = (ImageView) view.findViewById(R.id.project_image_1);
         _image2 = (ImageView) view.findViewById(R.id.project_image_2);
         _image3 = (ImageView) view.findViewById(R.id.project_image_3);
@@ -199,14 +195,40 @@ public class CreateProjectView extends Fragment {
             }
         });
 
-        _difficulty_spinner = (Spinner) view.findViewById(R.id.difficulty_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.difficulty_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> difficultyAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.difficulty_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        _difficulty_spinner.setAdapter(adapter);
+        _difficultySpinner.setAdapter(difficultyAdapter);
 
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> nHackersAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.quantity_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        nHackersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        _nHackersSpinner.setAdapter(nHackersAdapter);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> durationAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.quantity_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        _durationSpinner.setAdapter(durationAdapter);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> nHipstersAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.quantity_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        nHipstersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        _nHipstersSpinner.setAdapter(nHipstersAdapter);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> nHustlersAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.quantity_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        nHustlersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        _nHustlersSpinner.setAdapter(nHustlersAdapter);
     }
 
     private void setDate (int day, int month, int year) {
@@ -235,30 +257,12 @@ public class CreateProjectView extends Fragment {
         mProject.setStartDay(pDay);
         mProject.setStartMonth(pMonth);
         mProject.setStartYear(pYear);
-        if (_duration.getText().toString().equals("")) {
-            mProject.setDuration(0);
-        } else {
-            mProject.setDuration(Integer.parseInt(_duration.getText().toString()));
-        }
-        if (_nHackersInput.getText().toString().equals("")) {
-            mProject.setMaxHackers(0);
-        } else {
-            mProject.setMaxHackers(Integer.parseInt(_nHackersInput.getText().toString()));
-        }
-        if (_nHippiesInput.getText().toString().equals("")) {
-            mProject.setMaxHippies(0);
-        } else {
-            mProject.setMaxHippies(Integer.parseInt(_nHippiesInput.getText().toString()));
-        }
-        if (_nHustlersInput.getText().toString().equals("")) {
-            mProject.setMaxHustlers(0);
-        } else {
-            mProject.setMaxHustlers(Integer.parseInt(_nHustlersInput.getText().toString()));
-        }
-        mProject.setDifficulty(_difficulty_spinner.getSelectedItemPosition());
+        mProject.setDuration(Integer.parseInt(_durationSpinner.getSelectedItem().toString()));
+        mProject.setMaxHackers(Integer.parseInt(_nHackersSpinner.getSelectedItem().toString()));
+        mProject.setMaxHippies(Integer.parseInt(_nHipstersSpinner.getSelectedItem().toString()));
+        mProject.setMaxHustlers(Integer.parseInt(_nHustlersSpinner.getSelectedItem().toString()));
+        mProject.setDifficulty(_difficultySpinner.getSelectedItemPosition());
         mProject.setHashtags(hs);
-        //TODO difficulty (int) to string
-        //Send to Firebase
         sendImagesToFirebase();
     }
 

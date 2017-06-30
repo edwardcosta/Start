@@ -84,11 +84,11 @@ public class EditProject extends AppCompatActivity {
     private EditText _hashtags;
     private EditText _projectName;
     private EditText _description;
-    private EditText _duration;
+    private Spinner _duration;
     private TextView _dateInit;
-    private EditText _nHackersInput;
-    private EditText _nHippiesInput;
-    private EditText _nHustlersInput;
+    private Spinner _nHackersInput;
+    private Spinner _nHippiesInput;
+    private Spinner _nHustlersInput;
     private Spinner _difficulty_spinner;
     private ImageView _image1;
     private ImageView _image2;
@@ -127,11 +127,11 @@ public class EditProject extends AppCompatActivity {
         _hashtags = (EditText) findViewById(R.id.fragment_create_project_hashtags);
         _projectName = (EditText) findViewById(R.id.projectName);
         _description = (EditText) findViewById(R.id.description);
-        _duration = (EditText) findViewById(R.id.duration);
+        _duration = (Spinner) findViewById(R.id.duration_spinner);
         _dateInit = (TextView) findViewById(R.id.dateInit);
-        _nHackersInput = (EditText) findViewById(R.id.nHackers);
-        _nHippiesInput = (EditText) findViewById(R.id.nHippies);
-        _nHustlersInput = (EditText) findViewById(R.id.nHustlers);
+        _nHackersInput = (Spinner) findViewById(R.id.nHackers_spinner);
+        _nHippiesInput = (Spinner) findViewById(R.id.nHipsters_spinner);
+        _nHustlersInput = (Spinner) findViewById(R.id.nHustlers_spinner);
 
         String hashtags = "";
         for(String hs : project.getHashtags()){
@@ -140,11 +140,11 @@ public class EditProject extends AppCompatActivity {
         _hashtags.setText(hashtags);
         _projectName.setText(project.getName());
         _description.setText(project.getDescription());
-        _duration.setText(project.getDuration());
+        _duration.setSelection(project.getDuration()-1);
         _dateInit.setText(project.getStartDay() + "/" + (project.getStartMonth()) + "/" + project.getStartYear());
-        _nHackersInput.setText(project.getnHackers());
-        _nHippiesInput.setText(project.getnHippies());
-        _nHustlersInput.setText(project.getnHustlers());
+        _nHackersInput.setSelection(project.getnHackers());
+        _nHippiesInput.setSelection(project.getnHippies());
+        _nHustlersInput.setSelection(project.getnHustlers());
 
         _image1 = (ImageView) findViewById(R.id.project_image_1);
         _image2 = (ImageView) findViewById(R.id.project_image_2);
@@ -175,7 +175,7 @@ public class EditProject extends AppCompatActivity {
 
         createImageListeners();
 
-        _dateInit.setText(pDay + "\\" + (pMonth + 1) + "\\" +  pYear);
+        _dateInit.setText(pDay + "/" + (pMonth + 1) + "/" +  pYear);
 
         _dateInit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,7 +184,7 @@ public class EditProject extends AppCompatActivity {
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                         //Change date on TextView
                         setDate(selectedday, selectedmonth, selectedyear);
-                        _dateInit.setText(selectedday + "\\" + (selectedmonth + 1) + "\\" + selectedyear);
+                        _dateInit.setText(selectedday + "/" + (selectedmonth + 1) + "/" + selectedyear);
                     }
                 }, pYear, pMonth, pDay);
                 mDatePicker.setTitle("Início");
@@ -231,26 +231,7 @@ public class EditProject extends AppCompatActivity {
         project.setStartDay(pDay);
         project.setStartMonth(pMonth);
         project.setStartYear(pYear);
-        if (_duration.getText().toString().equals("")) {
-            project.setDuration(0);
-        } else {
-            project.setDuration(Integer.parseInt(_duration.getText().toString()));
-        }
-        if (_nHackersInput.getText().toString().equals("")) {
-            project.setMaxHackers(0);
-        } else {
-            project.setMaxHackers(Integer.parseInt(_nHackersInput.getText().toString()));
-        }
-        if (_nHippiesInput.getText().toString().equals("")) {
-            project.setMaxHippies(0);
-        } else {
-            project.setMaxHippies(Integer.parseInt(_nHippiesInput.getText().toString()));
-        }
-        if (_nHustlersInput.getText().toString().equals("")) {
-            project.setMaxHustlers(0);
-        } else {
-            project.setMaxHustlers(Integer.parseInt(_nHustlersInput.getText().toString()));
-        }
+
         project.setDifficulty(_difficulty_spinner.getSelectedItemPosition());
         project.setHashtags(hs);
         //Send to Firebase

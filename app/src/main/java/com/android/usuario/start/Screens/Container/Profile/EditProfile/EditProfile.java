@@ -2,9 +2,11 @@ package com.android.usuario.start.Screens.Container.Profile.EditProfile;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,7 +15,14 @@ import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.RequestManager.Database;
 import com.android.usuario.start.Util.Fonts;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.DatabaseReference;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by eduar on 30/06/2017.
@@ -102,5 +111,110 @@ public class EditProfile extends AppCompatActivity {
         _description.setText(userProfile.getDescription());
 
         //TODO create edit profile logic
+    }
+
+    public void signup() {
+
+        _signupButton.setEnabled(false);
+
+        progressDialog = ProgressDialog.show(this,null,"Criando Conta...",true,false);
+
+        if (!validate()) {
+            onSignupFailed();
+            return;
+        }
+
+        String name = _name.getText().toString();
+        String adress = _adress.getText().toString();
+        String phoneNumber = _phoneNumber.getText().toString();
+        String description = _description.getText().toString();
+
+        userProfile = new Profile();
+        userProfile.setName(name);
+        userProfile.setAdress(adress);
+        userProfile.setPhoneNumber(phoneNumber);
+        userProfile.setDescription(description);
+
+        userDatabaseReference.child(userProfile.getId()).setValue(userProfile)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        onSignupSuccess();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                onSignupFailed();
+            }
+        });
+    }
+
+    public void onSignupSuccess() {
+        progressDialog.dismiss();
+        new SweetAlertDialog(this,SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("Tudo Certo!")
+                .setContentText("Perfil atualizado com sucesso.")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                        _signupButton.setEnabled(true);
+                        finish();
+                    }
+                }).show();
+    }
+
+    public void onSignupFailed() {
+        if(progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Falha ao atualizar conta.")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            sweetAlertDialog.dismissWithAnimation();
+                            _signupButton.setEnabled(true);
+                        }
+                    }).show();
+        }
+    }
+
+    public boolean validate() {
+        boolean valid = true;
+
+        String name = _name.getText().toString();
+        String adress = _adress.getText().toString();
+        String phoneNumber = _phoneNumber.getText().toString();
+        String description = _description.getText().toString();
+
+        if(name.isEmpty()){
+            _name.setError("campo vazio");
+            valid = false;
+        }else{
+            _name.setError(null);
+        }
+
+        if(adress.isEmpty()){
+            _adress.setError("campo vazio");
+            valid = false;
+        }else{
+            _adress.setError(null);
+        }
+
+        if(phoneNumber.isEmpty()){
+            _phoneNumber.setError("campo vazio");
+            valid = false;
+        }else{
+            _phoneNumber.setError(null);
+        }
+
+        if(description.isEmpty()){
+            _description.setError("campo vazio");
+            valid = false;
+        }else{
+            _description.setError(null);
+        }
+
+        return valid;
     }
 }

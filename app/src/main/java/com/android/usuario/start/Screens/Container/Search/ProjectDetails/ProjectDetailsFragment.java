@@ -60,7 +60,13 @@ public class ProjectDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_project_details, container, false);
 
         carouselView = (CarouselView) view.findViewById(R.id.proj_details_image_view);
-        carouselView.setPageCount(3);
+        int imageCounter = 0;
+        for (String imageUrl : project.getImages()) {
+            if (!imageUrl.isEmpty()) {
+                imageCounter++;
+            }
+        }
+        carouselView.setPageCount(imageCounter);
         carouselView.setImageListener(imageListener);
         _projectTitle = (TextView) view.findViewById(R.id.proj_details_proj_title);
         _hashtags = (TextView) view.findViewById(R.id.proj_details_proj_hashtag);
@@ -141,7 +147,10 @@ public class ProjectDetailsFragment extends Fragment {
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
-            Picasso.with(getActivity()).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+            String imageUrl = project.getImages().get(position).toString();
+            if (!imageUrl.isEmpty()) {
+                Picasso.with(getActivity()).load(imageUrl).into(imageView);
+            }
         }
     };
 

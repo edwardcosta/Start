@@ -235,14 +235,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="20dp">
 
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Data de Início"
+                        android:text="Início"
                         android:textSize="15.6sp"
                         android:textColor="@color/colorPrimary" />
 
@@ -264,25 +264,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Duração"
+                        android:text="Duração (dias)"
                         android:textSize="15.6sp"
                         android:textColor="@color/colorPrimary" />
 
-                    <EditText
-                        android:id="@+id/duration"
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:hint="0"
-                        android:inputType="number"
-                        android:textSize="16sp"
-                        android:gravity="center_horizontal"/>
-
-                    <TextView
-                        android:id="@+id/textView6"
+                    <Spinner
+                        android:id="@+id/duration_spinner"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="dias"
-                        android:textSize="16sp"/>
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -296,7 +285,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
 
                     <TextView
                         android:id="@+id/textView5"
@@ -307,20 +297,17 @@
                         android:textSize="15.6sp"
                         android:textColor="@color/colorPrimary" />
 
-                    <EditText
-                        android:id="@+id/nHackers"
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="0"
-                        android:textAlignment="center"
-                        android:textSize="15sp" />
+                    <Spinner
+                        android:id="@+id/nHackers_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
 
                     <TextView
                             android:id="@+id/textView6"
@@ -330,15 +317,11 @@
                             android:text="Hipster"
                             android:textSize="15.6sp"
                             android:textColor="@color/colorPrimary" />
-                    <EditText
-                        android:id="@+id/nHippies"
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="0"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
-                        android:textSize="15sp"/>
+
+                    <Spinner
+                        android:id="@+id/nHipsters_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -354,15 +337,11 @@
                             android:text="Hustler"
                             android:textSize="15.6sp"
                             android:textColor="@color/colorPrimary" />
-                    <EditText
-                        android:id="@+id/nHustlers"
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="0"
-                        android:textAlignment="textEnd"
-                        android:gravity="end"
-                        android:textSize="15sp"/>
+
+                    <Spinner
+                        android:id="@+id/nHustlers_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
 
 

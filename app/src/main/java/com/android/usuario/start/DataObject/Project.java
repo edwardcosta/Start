@@ -57,6 +57,14 @@ public class Project implements Serializable{
         participating.add(userId);
     }
 
+    public boolean removeWantToParticipateUser(String userId){
+        return wantToParticipate.remove(userId);
+    }
+
+    public boolean removeParticipant(String userId){
+        return participating.remove(userId);
+    }
+
     public String getName() {
         return name;
     }

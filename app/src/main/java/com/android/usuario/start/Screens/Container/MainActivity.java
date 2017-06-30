@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         iMonth = Calendar.getInstance().get(Calendar.MONTH);
         iYear = Calendar.getInstance().get(Calendar.YEAR);
 
-        _initDate.setText(iDay + "\\" + (iMonth + 1) + "\\" + iYear);
+        _initDate.setText(iDay + "/" + (iMonth + 1) + "/" + iYear);
 
         _initDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 DatePickerDialog mDatePicker = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                         //Change date on TextView
-                        _initDate.setText(selectedday + "\\" + (selectedmonth + 1) + "\\" + selectedyear);
+                        _initDate.setText(selectedday + "/" + (selectedmonth + 1) + "/" + selectedyear);
                     }
                 }, iYear, iMonth, iDay);
                 mDatePicker.setTitle("Nascimento");
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        // Spinner to select projects difficulty.
         _difficulty_spinner = (Spinner) findViewById(R.id.activity_main_filter_difficulty_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.difficulty_array, android.R.layout.simple_spinner_item);

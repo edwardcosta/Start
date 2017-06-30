@@ -8,29 +8,38 @@
     android:fitsSystemWindows="true">
 
     <LinearLayout
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:paddingTop="5dp"
+        android:orientation="vertical"
         android:gravity="center_horizontal|center_vertical">
 
-        <TextView
-            android:id="@+id/activity_signup_logo"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="26sp"
-            android:textColor="@color/colorTextSecondary"
-            android:text="Starty" />
+            android:gravity="center_horizontal|center_vertical">
+
+            <TextView
+                android:id="@+id/activity_signup_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="26sp"
+                android:textColor="@color/colorTextSecondary"
+                android:text="Starty" />
+
+            <ImageView
+                android:layout_marginLeft="-8dp"
+                android:src="@mipmap/ic_launcher"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp" />
+
+        </LinearLayout>
 
         <View
-            android:layout_width="5dp"
-            android:layout_height="match_parent"/>
-
-        <ImageView
-            android:src="@mipmap/ic_launcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="8dp"/>
 
     </LinearLayout>
 
@@ -48,99 +57,86 @@
 
             <!-- Name Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_name"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
                 app:counterMaxLength="35"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp">
+                android:layout_marginTop="12dp">
                 <EditText android:id="@+id/activity_signup_input_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords"
+                    android:textColor="@color/warm_grey"
                     android:hint="Nome" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Email Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_email"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
-                app:counterMaxLength="35"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
+                app:counterMaxLength="35">
                 <EditText android:id="@+id/activity_signup_input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="textEmailAddress"
-                    android:hint="@string/prompt_signup_email" />
+                    android:hint="E-mail" />
             </android.support.design.widget.TextInputLayout>
-
-            <!-- Birthday Label -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Data de nascimento"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/activity_signup_input_birthday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="02/06/17"/>
-            </LinearLayout>
-
 
             <!-- Adress Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_adress"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
-                app:counterMaxLength="35"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
+                app:counterMaxLength="35">
                 <EditText android:id="@+id/activity_signup_input_adress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="textCapWords"
                     android:hint="Cidade / Estado" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Phonenumber Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_phonenumber"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
-                app:counterMaxLength="35"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
+                app:counterMaxLength="35">
                 <EditText android:id="@+id/activity_signup_input_phonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="phone"
                     android:hint="Telefone" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Description Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_description"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
-                app:counterMaxLength="110"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
+                app:counterMaxLength="110">
                 <EditText android:id="@+id/activity_signup_input_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="textCapSentences|textMultiLine"
                     android:hint="Descrição" />
             </android.support.design.widget.TextInputLayout>
@@ -148,58 +144,68 @@
 
             <!-- Password Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_password"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true"
                 app:counterEnabled="true"
-                app:counterMaxLength="12"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
+                app:counterMaxLength="12">
                 <EditText android:id="@+id/activity_signup_input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="textPassword"
                     android:hint="@string/prompt_signup_password"/>
             </android.support.design.widget.TextInputLayout>
 
             <!-- Retype Password Label -->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/activity_signup_textinput_retype_password"
+                android:theme="@style/TextInputStyle"
+                app:hintTextAppearance="@style/TextInputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true"
                 app:counterEnabled="true"
-                app:counterMaxLength="12"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
+                app:counterMaxLength="12">
 
                 <EditText android:id="@+id/activity_signup_input_retype_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/warm_grey"
                     android:inputType="textPassword"
                     android:hint="@string/prompt_retype_password_signup"/>
             </android.support.design.widget.TextInputLayout>
 
             <!-- Signup Button -->
-            <TextView
-                android:id="@+id/activity_signup_btn_signup"
-                android:layout_gravity="end"
-                android:textAlignment="textEnd"
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:padding="12dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14.6sp"
-                android:text="Pronto!"/>
+                android:orientation="vertical"
+                android:gravity="end">
+
+                <TextView
+                    android:id="@+id/activity_signup_btn_signup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14.6sp"
+                    android:text="Pronto!"/>
+
+            </LinearLayout>
 
             <TextView android:id="@+id/activity_signup_link_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="20dp"
                 android:text="@string/action_login_signup"
                 android:gravity="center"
-                android:textSize="16sp"/>
+                android:textColor="#999999"
+                android:textSize="12sp"/>
 
         </LinearLayout>
 

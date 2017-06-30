@@ -22,4 +22,17 @@
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
+    <style name="TextInputStyle">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/teal</item>
+        <item name="colorControlActivated">@color/teal</item>
+        <item name="colorControlHighlight">@color/teal</item>
+    </style>
+
+    <style name="TextInputStyleLogin">
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textColorHint">@color/colorTextSecondary</item>
+    </style>
+
 </resources>

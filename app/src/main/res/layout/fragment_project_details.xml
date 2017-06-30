@@ -7,7 +7,7 @@
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/proj_details_image_view"
@@ -22,42 +22,39 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/proj_details_proj_title"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_alignParentTop="true"
-                android:id="@+id/proj_details_proj_title"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15.6sp"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
                 android:maxLines="4"
                 android:text="Project Title"/>
 
             <TextView
+                android:id="@+id/proj_details_proj_hashtag"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_below="@+id/card_project_title"
-                android:layout_marginTop="30dp"
-                android:id="@+id/card_project_hashtag"
+                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
                 android:textSize="12.5sp"
-                android:fontFamily="sans-serif"
                 android:text="#hashtag #app #starty"/>
 
             <LinearLayout
-                android:layout_alignParentBottom="true"
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -71,7 +68,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/card_project_difficulty"
+                        android:id="@+id/proj_details_proj_difficulty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15.6sp"
@@ -79,7 +76,8 @@
                         android:text="Fácil"/>
 
                     <ProgressBar
-                        android:id="@+id/card_project_hacker_progressbar"
+                        android:id="@+id/proj_details_proj_hacker_progressbar"
+                        android:layout_marginTop="18dp"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:max="100"
@@ -90,10 +88,10 @@
                         android:indeterminate="false"/>
 
                     <TextView
-                        android:id="@+id/card_project_hacker"
+                        android:id="@+id/proj_details_proj_hacker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12.5sp"
+                        android:textSize="11sp"
                         android:textColor="#6f6f6f"
                         android:text="2/2"/>
 
@@ -108,7 +106,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/card_project_date"
+                        android:id="@+id/proj_details_proj_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15.6sp"
@@ -116,7 +114,8 @@
                         android:text="30/06"/>
 
                     <ProgressBar
-                        android:id="@+id/card_project_hippie_progressbar"
+                        android:id="@+id/proj_details_proj_hipster_progressbar"
+                        android:layout_marginTop="18dp"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:max="100"
@@ -127,10 +126,10 @@
                         android:indeterminate="false"/>
 
                     <TextView
-                        android:id="@+id/card_project_hippie"
+                        android:id="@+id/proj_details_proj_hipster"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12.5sp"
+                        android:textSize="11sp"
                         android:textColor="#6f6f6f"
                         android:text="2/2"/>
 
@@ -145,7 +144,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/card_project_duration"
+                        android:id="@+id/proj_details_proj_hustler_duration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15.6sp"
@@ -153,7 +152,8 @@
                         android:text="4 dias"/>
 
                     <ProgressBar
-                        android:id="@+id/card_project_hustler_progressbar"
+                        android:id="@+id/proj_details_proj_hustler_progressbar"
+                        android:layout_marginTop="18dp"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:max="100"
@@ -164,10 +164,10 @@
                         android:indeterminate="false"/>
 
                     <TextView
-                        android:id="@+id/card_project_hustler"
+                        android:id="@+id/proj_details_proj_hustler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12.5sp"
+                        android:textSize="11sp"
                         android:textColor="#6f6f6f"
                         android:text="2/2"/>
 
@@ -175,7 +175,7 @@
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -186,24 +186,23 @@
         android:layout_margin="16dp"
         android:text="@string/lorem_ipsum"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="end">
 
         <Button
             android:id="@+id/proj_details_button"
-            android:layout_margin="8dp"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="8dp"
             android:background="@null"
             android:textColor="@color/colorPrimary"
             android:text="Solicitar Participação"
-            android:textSize="16sp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"/>
+            android:textSize="12sp" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>
 </ScrollView>

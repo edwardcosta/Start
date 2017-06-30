@@ -159,27 +159,31 @@
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textinput_projectName"
+            android:theme="@style/TextInputStyle"
+            app:hintTextAppearance="@style/TextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorTextSecondary"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp">
             <EditText
                 android:id="@+id/projectName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:textColor="@color/warm_grey"
                 android:inputType="textPersonName"
+                android:textSize="15.6sp"
                 android:hint="Nome do projeto"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textinput_hashtags"
+            android:theme="@style/TextInputStyle"
+            app:hintTextAppearance="@style/TextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorTextSecondary"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:layout_marginBottom="16dp">
 
             <EditText
@@ -188,159 +192,211 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:textColor="@color/warm_grey"
+                android:textSize="15.6sp"
                 android:hint="#Hashtags" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView8"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Dificuldade"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/difficulty_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp">
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Dificuldade"
+                        android:textSize="15.6sp"
+                        android:textColor="@color/colorPrimary"/>
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Data de Início"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                    <Spinner
+                        android:id="@+id/difficulty_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/dateInit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="02/06/17"/>
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp">
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Data de Início"
+                        android:textSize="15.6sp"
+                        android:textColor="@color/colorPrimary" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Duração"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/dateInit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="02/06/17"/>
+                </LinearLayout>
 
-            <EditText
-                android:id="@+id/duration"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:hint="0"
-                android:inputType="number"
-                android:text="0"
-                android:textSize="15sp"
-                android:textAlignment="textEnd"
-                android:gravity="end"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="dias"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp"/>
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Duração"
+                        android:textSize="15.6sp"
+                        android:textColor="@color/colorPrimary" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp">
+                    <EditText
+                        android:id="@+id/duration"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:hint="0"
+                        android:inputType="number"
+                        android:textSize="16sp"
+                        android:gravity="center_horizontal"/>
 
-            <TextView
-                android:id="@+id/textView4"
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="dias"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Nº participantes"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                android:paddingLeft="32dp"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/nHackers"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="0"
-                android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/nHustlers"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="0"
-                android:textSize="15sp"/>
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Hacker"
+                        android:textSize="15.6sp"
+                        android:textColor="@color/colorPrimary" />
 
-            <EditText
-                android:id="@+id/nHippies"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="0"
-                android:textSize="15sp"/>
+                    <EditText
+                        android:id="@+id/nHackers"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="0"
+                        android:textAlignment="center"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Hipster"
+                            android:textSize="15.6sp"
+                            android:textColor="@color/colorPrimary" />
+                    <EditText
+                        android:id="@+id/nHippies"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="0"
+                        android:textAlignment="textEnd"
+                        android:gravity="end"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Hustler"
+                            android:textSize="15.6sp"
+                            android:textColor="@color/colorPrimary" />
+                    <EditText
+                        android:id="@+id/nHustlers"
+                        android:layout_width="25dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="0"
+                        android:textAlignment="textEnd"
+                        android:gravity="end"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
         </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textinput_description"
+            android:theme="@style/TextInputStyle"
+            app:hintTextAppearance="@style/TextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorTextSecondary"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp">
+
             <EditText
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:hint="Descreva seu projeto"/>
+                android:textColor="@color/warm_grey"
+                android:hint="Descrição"
+                android:textSize="15.6sp" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
-        android:id="@+id/create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FINALIZAR"
-        android:textSize="14sp"
-        android:layout_gravity="end"
-        android:layout_marginRight="16dp"/>
+            android:id="@+id/create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FINALIZAR"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:layout_gravity="end"
+            android:background="@null"
+            android:layout_marginRight="8dp"/>
 
     </LinearLayout>
 </ScrollView>

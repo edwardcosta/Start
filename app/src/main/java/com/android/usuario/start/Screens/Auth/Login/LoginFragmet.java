@@ -24,6 +24,7 @@ import com.android.usuario.start.Screens.Auth.SignupActivity;
 import com.android.usuario.start.Screens.Container.MainActivity;
 import com.android.usuario.start.Screens.ProfileChooser.ScreenSlidePagerActivity;
 import com.android.usuario.start.Screens.Splash.SplashActivity;
+import com.android.usuario.start.Util.Fonts;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.google.android.gms.auth.api.Auth;
@@ -46,6 +47,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -73,6 +78,7 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
     private EditText _passwordText;
     private TextView _loginButton;
     private ProgressDialog progressDialog;
+    private TextView _passwordForgot;
     private TextView _signupLink;
     private FirebaseAnalytics mFirebaseAnalytics;
     private CallbackManager mCallbackManager;
@@ -126,11 +132,19 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
         _inputPassword = (TextInputLayout) parentView.findViewById(R.id.fragment_login_textinput_password);
         _passwordText = (EditText) parentView.findViewById(R.id.activity_login_input_password);
         _loginButton = (TextView) parentView.findViewById(R.id.activity_login_btn_login);
+        _passwordForgot = (TextView) parentView.findViewById(R.id.activity_login_btn_password_forgot);
         _signupLink = (TextView) parentView.findViewById(R.id.activity_login_link_signup);
 
-
-        Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/BebasNeue-Bold.ttf");
-        _logo.setTypeface(type);
+        //Setting fonts
+        Fonts fonts = new Fonts(getContext());
+        _logo.setTypeface(fonts.BEBAS_NEUE_BOLD);
+        _inputEmail.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _emailText.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _inputPassword.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _passwordText.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _signupLink.setTypeface(fonts.OPEN_SANS_SEMIBOLD);
+        _passwordForgot.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _loginButton.setTypeface(fonts.OPEN_SANS_REGULAR);
 
         mCallbackManager = CallbackManager.Factory.create();
         //_loginFacebookButton.setReadPermissions("email", "public_profile");
@@ -170,6 +184,41 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
             @Override
             public void onClick(View v) {
                 login();
+            }
+        });
+
+        _passwordForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(validateEmail()) {
+                    String email = _emailText.getText().toString();
+                    mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                new SweetAlertDialog(getContext(),SweetAlertDialog.SUCCESS_TYPE)
+                                        .setTitleText("Email enviado!")
+                                        .setContentText("Verifique seu email para redefinir sua senha")
+                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                sweetAlertDialog.dismissWithAnimation();
+                                            }
+                                        }).show();
+                            }else{
+                                new SweetAlertDialog(getContext(), SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("Erro!")
+                                        .setContentText("Email não encontrado")
+                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                sweetAlertDialog.dismiss();
+                                            }
+                                        }).show();
+                            }
+                        }
+                    });
+                }
             }
         });
 
@@ -353,6 +402,17 @@ public class LoginFragmet extends Fragment implements GoogleApiClient.OnConnecti
         }
 
         return valid;
+    }
+
+    private boolean validateEmail(){
+        String email = _emailText.getText().toString();
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            _emailText.setError("email inválido");
+            return false;
+        } else {
+            _emailText.setError(null);
+            return true;
+        }
     }
 
     private void checkIfEmailVerified(FirebaseUser user) {

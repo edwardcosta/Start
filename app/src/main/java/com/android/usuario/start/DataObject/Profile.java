@@ -20,6 +20,7 @@ public class Profile implements Serializable {
 
     private List<String> myProjects = new ArrayList<>();
     private List<String> favoritesProjects = new ArrayList<>();
+    private List<String> projectsParticipating = new ArrayList<>();
 
     /**********************
      * Profile Type
@@ -38,12 +39,20 @@ public class Profile implements Serializable {
         favoritesProjects.add(projectId);
     }
 
+    public void addProjectParticipating(String projectId){
+        projectsParticipating.add(projectId);
+    }
+
     public boolean removeMyProject(String projectId){
         return myProjects.remove(projectId);
     }
 
     public boolean removeFavoriteProject(String projectId){
         return favoritesProjects.remove(projectId);
+    }
+
+    public boolean removeProjectParticipating(String projectId){
+        return  projectsParticipating.remove(projectId);
     }
 
     public String getId() {

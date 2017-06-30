@@ -24,14 +24,11 @@
             android:textColor="@color/colorTextSecondary"
             android:text="Starty" />
 
-        <View
-            android:layout_width="5dp"
-            android:layout_height="match_parent"/>
-
         <ImageView
+            android:layout_marginLeft="-8dp"
             android:src="@mipmap/ic_launcher"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="32dp" />
 
     </LinearLayout>
 
@@ -69,9 +66,10 @@
         <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/fragment_login_textinput_email"
+            android:theme="@style/TextInputStyleLogin"
+            app:hintTextAppearance="@style/TextInputStyleLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorTextSecondary"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
 
@@ -79,30 +77,32 @@
                 android:id="@+id/activity_login_input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Login"
                 android:inputType="textEmailAddress"
                 android:shadowColor="@color/colorTextSecondary"
                 android:textColor="@color/colorTextSecondary"
                 android:textColorHighlight="@color/colorTextSecondary"
                 android:textColorHint="@color/colorTextSecondary"
-                android:textColorLink="@color/colorPrimary" />
+                android:textColorLink="@color/colorPrimary"
+                android:hint="Login" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/fragment_login_textinput_password"
+            android:theme="@style/TextInputStyleLogin"
+            app:hintTextAppearance="@style/TextInputStyleLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
-            android:textColorHint="@color/colorTextSecondary"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginTop="8dp">
 
             <EditText
                 android:id="@+id/activity_login_input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:shadowColor="@color/colorTextSecondary"
+                android:textColor="@color/colorTextSecondary"
                 android:textColorHint="@color/colorTextSecondary"
                 android:textColorHighlight="@color/colorTextSecondary"
                 android:textColorLink="@color/colorPrimary"
@@ -110,6 +110,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <TextView
+            android:layout_marginTop="4dp"
             android:id="@+id/activity_login_btn_password_forgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,7 +118,7 @@
             android:clickable="true"
             android:textSize="12.5sp"
             android:paddingLeft="5dp"
-            android:text="Esqueceu a Senha"/>
+            android:text="Esqueci a senha"/>
 
         <TextView
             android:id="@+id/activity_login_btn_login"
@@ -141,13 +142,16 @@
     </LinearLayout>
 
     <TextView
-        android:layout_below="@+id/login_rounded_shape"
+        android:layout_marginTop="8dp"
         android:id="@+id/activity_login_link_signup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Cadastre-se"
         android:paddingLeft="32dp"
         android:textSize="17.7sp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:layout_below="@+id/login_rounded_shape"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

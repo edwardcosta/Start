@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.RequestManager.Database;
+import com.android.usuario.start.Util.Fonts;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,13 +52,19 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseAnalytics mFirebaseAnalytics;
 
     private TextView _logo;
+    private TextInputLayout _inputName;
     private EditText _name;
+    private TextInputLayout _inputEmail;
     private EditText _emailText;
-    private TextView _birthday;
+    private TextInputLayout _inputAdress;
     private EditText _adress;
+    private TextInputLayout _inputPhoneNumber;
     private EditText _phoneNumber;
+    private TextInputLayout _inputDescription;
     private EditText _description;
+    private TextInputLayout _inputPassword;
     private EditText _passwordText;
+    private TextInputLayout _inputRPassword;
     private EditText _rPasswordText;
     private TextView _signupButton;
     private TextView _loginLink;
@@ -83,7 +91,6 @@ public class SignupActivity extends AppCompatActivity {
                     // User is signed in
                     String name = _name.getText().toString();
                     String email = _emailText.getText().toString().trim();
-                    String birthday = _birthday.getText().toString();
                     String adress = _adress.getText().toString();
                     String phoneNumber = _phoneNumber.getText().toString();
                     String description = _description.getText().toString();
@@ -92,7 +99,6 @@ public class SignupActivity extends AppCompatActivity {
                     userProfile.setId(user.getUid());
                     userProfile.setName(name);
                     userProfile.setEmail(email);
-                    userProfile.setBirthday(birthday);
                     userProfile.setAdress(adress);
                     userProfile.setPhoneNumber(phoneNumber);
                     userProfile.setDescription(description);
@@ -120,13 +126,19 @@ public class SignupActivity extends AppCompatActivity {
         };
 
         _logo = (TextView) findViewById(R.id.activity_signup_logo);
+        _inputName = (TextInputLayout) findViewById(R.id.activity_signup_textinput_name);
         _name = (EditText) findViewById(R.id.activity_signup_input_name);
+        _inputEmail = (TextInputLayout) findViewById(R.id.activity_signup_textinput_email);
         _emailText = (EditText) findViewById(R.id.activity_signup_input_email);
-        _birthday = (TextView) findViewById(R.id.activity_signup_input_birthday);
+        _inputAdress = (TextInputLayout) findViewById(R.id.activity_signup_textinput_adress);
         _adress = (EditText) findViewById(R.id.activity_signup_input_adress);
+        _inputPhoneNumber = (TextInputLayout) findViewById(R.id.activity_signup_textinput_phonenumber);
         _phoneNumber = (EditText) findViewById(R.id.activity_signup_input_phonenumber);
+        _inputDescription = (TextInputLayout) findViewById(R.id.activity_signup_textinput_description);
         _description = (EditText) findViewById(R.id.activity_signup_input_description);
+        _inputPassword = (TextInputLayout) findViewById(R.id.activity_signup_textinput_password);
         _passwordText = (EditText) findViewById(R.id.activity_signup_input_password);
+        _inputRPassword = (TextInputLayout) findViewById(R.id.activity_signup_textinput_retype_password);
         _rPasswordText = (EditText) findViewById(R.id.activity_signup_input_retype_password);
         _signupButton = (TextView) findViewById(R.id.activity_signup_btn_signup);
         _loginLink = (TextView) findViewById(R.id.activity_signup_link_login);
@@ -135,24 +147,24 @@ public class SignupActivity extends AppCompatActivity {
         bMonth = Calendar.getInstance().get(Calendar.MONTH);
         bYear = Calendar.getInstance().get(Calendar.YEAR);
 
-        _birthday.setText(bDay + "\\" + (bMonth + 1) + "\\" + bYear);
-
-        _birthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog mDatePicker = new DatePickerDialog(SignupActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                        //Change date on TextView
-                        _birthday.setText(selectedday + "\\" + (selectedmonth + 1) + "\\" + selectedyear);
-                    }
-                }, bYear, bMonth, bDay);
-                mDatePicker.setTitle("Nascimento");
-                mDatePicker.show();
-            }
-        });
-
-        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/BebasNeue-Bold.ttf");
-        _logo.setTypeface(type);
+        //Setting fonts
+        Fonts fonts = new Fonts(this);
+        _logo.setTypeface(fonts.BEBAS_NEUE_BOLD);
+        _inputName.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _name.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputEmail.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _emailText.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputAdress.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _adress.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputPhoneNumber.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _phoneNumber.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputDescription.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _description.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputPassword.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _passwordText.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _inputRPassword.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _signupButton.setTypeface(fonts.OPEN_SANS_REGULAR);
+        _loginLink.setTypeface(fonts.OPEN_SANS_REGULAR);
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,7 +252,6 @@ public class SignupActivity extends AppCompatActivity {
 
         String name = _name.getText().toString();
         String email = _emailText.getText().toString();
-        String birthday = _birthday.getText().toString();
         String adress = _adress.getText().toString();
         String phoneNumber = _phoneNumber.getText().toString();
         String description = _description.getText().toString();
@@ -259,13 +270,6 @@ public class SignupActivity extends AppCompatActivity {
             valid = false;
         } else {
             _emailText.setError(null);
-        }
-
-        if(birthday.isEmpty()){
-            _birthday.setError("campo vazio");
-            valid = false;
-        }else{
-            _birthday.setError(null);
         }
 
         if(adress.isEmpty()){

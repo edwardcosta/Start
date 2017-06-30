@@ -20,8 +20,8 @@ public class Singleton {
 
     private static final List<String> PROFILE_TYPES = Arrays.asList("","Hacker","Hipster","Hustler");
     private static final List<Integer> IMAGES_PROFILE = Arrays.asList(
-            R.drawable.img_profile_placeholder,R.drawable.img_profile_placeholder,
-            R.drawable.img_profile_placeholder,R.drawable.img_profile_placeholder);
+            R.drawable.img_profile_placeholder,R.drawable.img_hacker,
+            R.drawable.img_hipster,R.drawable.img_hustler);
 
     public static String getStringProfileType(int profile){
         return PROFILE_TYPES.get(profile);

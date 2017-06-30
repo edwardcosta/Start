@@ -33,11 +33,18 @@ public class HustlerView extends Fragment {
 
         userProfile = (Profile) getArguments().getSerializable("userProfile");
 
-        ImageView _img = (ImageView) rootView.findViewById(R.id.fragment_profile_chooser_img);
-        TextView _txt = (TextView) rootView.findViewById(R.id.fragment_profile_chooser_text);
+        LinearLayout contentContent = (LinearLayout) rootView.findViewById(R.id.fragment_profile_chooser_linearlayout);
 
-        _img.setImageResource(R.color.material_green_a200);
-        _txt.setText("Hustler");
+        ImageView _img = (ImageView) rootView.findViewById(R.id.fragment_profile_chooser_img);
+        TextView _profileType = (TextView) rootView.findViewById(R.id.fragment_profile_chooser_profile);
+        TextView _profileDescription = (TextView) rootView.findViewById(R.id.fragment_profile_chooser_description);
+
+        contentContent.setBackgroundResource(R.drawable.img_hustler_background);
+        _img.setImageResource(R.drawable.img_hustler);
+        _profileType.setText("Hustler");
+        _profileDescription.setText("Gosto de empreendedorismo,n\"" +
+                "comunicação, estratégia, marketing,\n" +
+                "administração e coisas do tipo");
 
         return rootView;
     }

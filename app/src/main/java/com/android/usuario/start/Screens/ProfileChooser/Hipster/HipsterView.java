@@ -33,11 +33,18 @@ public class HipsterView extends Fragment {
 
         userProfile = (Profile) getArguments().getSerializable("userProfile");
 
-        ImageView _img = (ImageView) rootView.findViewById(R.id.fragment_profile_chooser_img);
-        TextView _txt = (TextView) rootView.findViewById(R.id.fragment_profile_chooser_text);
+        LinearLayout contentContent = (LinearLayout) rootView.findViewById(R.id.fragment_profile_chooser_linearlayout);
 
-        _img.setImageResource(R.color.material_purple_a700);
-        _txt.setText("Hipster");
+        ImageView _img = (ImageView) rootView.findViewById(R.id.fragment_profile_chooser_img);
+        TextView _profileType = (TextView) rootView.findViewById(R.id.fragment_profile_chooser_profile);
+        TextView _profileDescription = (TextView) rootView.findViewById(R.id.fragment_profile_chooser_description);
+
+        contentContent.setBackgroundResource(R.drawable.img_hipster_background);
+        _img.setImageResource(R.drawable.img_hipster);
+        _profileType.setText("Hipster");
+        _profileDescription.setText("Gosto de design, projetos gráficos,\n" +
+                "inerfaces, ilustração, artes visuais\n" +
+                "layouts e coisas o tipo");
 
         return rootView;
     }

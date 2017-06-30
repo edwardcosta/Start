@@ -173,7 +173,7 @@
                     android:layout_height="32dp"
                     android:drawableEnd="@drawable/ic_search"
                     android:background="@drawable/white_rounded"
-                    android:hint="Pesquise por tema"
+                    android:hint="Pesquise por título"
                     android:inputType="text"
                     android:textSize="12sp"
                     android:imeOptions="actionSearch"

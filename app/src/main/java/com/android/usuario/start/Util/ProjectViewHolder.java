@@ -2,17 +2,14 @@ package com.android.usuario.start.Util;
 
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.usuario.start.DataObject.Profile;
@@ -24,7 +21,6 @@ import com.android.usuario.start.Screens.Container.Search.ProjectDetails.Project
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
@@ -230,7 +226,7 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.O
                         userName.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(fragment.getContext(), com.android.usuario.start.Screens.Profile.Profile.class);
+                                Intent intent = new Intent(fragment.getContext(), com.android.usuario.start.Screens.Container.MyProjects.Profile.Profile.class);
                                 intent.putExtra("userProfile",userRequisitionProfile);
                                 fragment.getActivity().startActivity(intent);
                             }

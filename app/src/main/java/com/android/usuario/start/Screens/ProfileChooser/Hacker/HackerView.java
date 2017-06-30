@@ -35,11 +35,18 @@ public class HackerView extends Fragment{
 
         userProfile = (Profile) getArguments().getSerializable("userProfile");
 
-        ImageView _img = (ImageView) rootView.findViewById(R.id.fragment_profile_chooser_img);
-        TextView _txt = (TextView) rootView.findViewById(R.id.fragment_profile_chooser_text);
+        LinearLayout contentContent = (LinearLayout) rootView.findViewById(R.id.fragment_profile_chooser_linearlayout);
 
-        _img.setImageResource(R.color.material_green_700);
-        _txt.setText("Hacker");
+        ImageView _img = (ImageView) rootView.findViewById(R.id.fragment_profile_chooser_img);
+        TextView _profileType = (TextView) rootView.findViewById(R.id.fragment_profile_chooser_profile);
+        TextView _profileDescription = (TextView) rootView.findViewById(R.id.fragment_profile_chooser_description);
+
+        contentContent.setBackgroundResource(R.drawable.img_hacker_background);
+        _img.setImageResource(R.drawable.img_hacker);
+        _profileType.setText("Hacker");
+        _profileDescription.setText("Gosto de programação, códigos\n" +
+                "banco de dados e tudo que tem\n" +
+                "a ver com tecnologia da informação");
 
         return rootView;
     }

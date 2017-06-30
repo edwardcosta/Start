@@ -16,7 +16,9 @@ import android.widget.TextView;
 import com.android.usuario.start.DataObject.Profile;
 import com.android.usuario.start.R;
 import com.android.usuario.start.Screens.Auth.LoginActivity;
+import com.android.usuario.start.Screens.Container.Profile.EditProfile.EditProfile;
 import com.android.usuario.start.Util.Fonts;
+import com.android.usuario.start.Util.Singleton;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
@@ -49,7 +51,7 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         parentView = inflater.inflate(R.layout.fragment_profile,container,false);
@@ -64,25 +66,8 @@ public class ProfileFragment extends Fragment {
         _contactTitle = (TextView) parentView.findViewById(R.id.fragment_contact_title);
         _email = (TextView) parentView.findViewById(R.id.fragment_profile_user_email);
         _phoneNumber = (TextView) parentView.findViewById(R.id.fragment_profile_user_phone);
-
-        switch (userProfile.getProfileType()){
-            case 0:
-                _profileTextType.setText("");
-                _profileImgType.setImageResource(R.drawable.img_profile_placeholder);
-                break;
-            case 1:
-                _profileTextType.setText("Hacker");
-                _profileImgType.setImageResource(R.drawable.img_profile_placeholder);
-                break;
-            case 2:
-                _profileTextType.setText("Hipster");
-                _profileImgType.setImageResource(R.drawable.img_profile_placeholder);
-                break;
-            case 3:
-                _profileTextType.setText("Hustler");
-                _profileImgType.setImageResource(R.drawable.img_profile_placeholder);
-                break;
-        }
+        _profileTextType.setText(Singleton.getStringProfileType(userProfile.getProfileType()));
+        _profileImgType.setImageResource(Singleton.getImageProfileType(userProfile.getProfileType()));
 
         _name.setText(userProfile.getName());
         _description.setText(userProfile.getDescription());
@@ -101,6 +86,15 @@ public class ProfileFragment extends Fragment {
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 getActivity().startActivity(intent);
                 getActivity().finish();
+            }
+        });
+
+        _edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EditProfile.class);
+                intent.putExtra("userProfile",userProfile);
+                getActivity().startActivity(intent);
             }
         });
 

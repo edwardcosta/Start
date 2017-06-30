@@ -12,7 +12,7 @@ public class Database {
 
     public static DatabaseReference getUsersReference(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
-                .child(Singleton.DATABASE_USER_REFERENCE).child(Singleton.DATABASE_USER_REFERENCE);
+                .child(Singleton.DATABASE_USER_REFERENCE).child(Singleton.DATABASE_USERS_REFERENCE);
         databaseReference.keepSynced(true);
         return databaseReference;
     }
